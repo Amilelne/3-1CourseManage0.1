@@ -1,8 +1,8 @@
 <!—CheckStudentInfo.wxml-->
 <page>
   <view class="topBoardView">  
-      <image src="背景.jpg" class="topIcon"></image>
-      <image src="头像.png" class="topHead"></image>
+      <image src="../../images/background.jpg" class="topIcon"></image>
+      <image src="../../images/UserIcon.png" class="topHead"></image>
       <span class="topClickHead">点击头像以修改</span>
       <span class="topName">{{userName}}</span>
       <span class="topID">{{userID}}</span>

@@ -3,11 +3,11 @@
   <span class="column0"><image class="seminarimg" src="users.png" /></span>
   <label class='greyword'>请为别的小组展示打分</label>
 </view>
-<block wx:for="{{groups}}" wx:for-item="group">
+<block >
   <view>
-    <label class='text'>{{group.name}}</label>
-    <block wx:for="{{stars}}">
-      <image class='heart' src="{{group.score>item?heart_chosen:heart_empty}}" bindtap='selectHeart' />
+    <label class='text'>A组</label>
+    <block >
+      <image class='heart' src="../.jpg"  />
     </block>   
   </view>
 </block>

@@ -1,8 +1,8 @@
 <!—TeacherMainUI.wxml-->
 <page>
   <view class="topBoardView" bindtap="CheckInfo">  
-      <image src="background.jpg" class="topIcon"></image>
-      <image src="avatar.png" class="topHead"></image>
+      <image src="../../images/background.jpg" class="topIcon"></image>
+      <image src="../../images/UserIcon.png" class="topHead"></image>
       <span class="topName">{{userName}}</span>
       <span class="topID">{{userID}}</span>
    </view>

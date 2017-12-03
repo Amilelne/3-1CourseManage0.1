@@ -1,18 +1,18 @@
 Page({
     data: {},
-    callBox:function(){
+    signup:function(){
       wx.navigateTo({
-        url: '../Seminar/SignUP/signup',
+        url: './SignUP/signup',
       })
     },
-    groupBox: function () {
+    group: function () {
       wx.navigateTo({
-        url: '../Seminar/FixedGroup/UnChooseTopic',
+        url: './FixedGroup/UnChooseTopic',
       })
     },
-    scoreBox: function () {
+    score: function () {
       wx.navigateTo({
-        url: '../Seminar/Grade/grade',
+        url: './Grade/grade',
       })
     },
     onLoad: function (options) {

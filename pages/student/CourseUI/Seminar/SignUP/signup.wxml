@@ -40,10 +40,10 @@
 
   <!--签到按钮-->
   <view>
-    <button  wx:if="{{!clickSignup}}" type="button" class="blueBigBtn" bindtap="buttonSignup">
+    <button  type="button" class="blueBigBtn">
       签到
     </button>
-    <block wx:else>
+    <block >
       <!--签到成功-->
       <view class="successCall">
         <image src="闹钟.png" class='courseInfoIcon'/>

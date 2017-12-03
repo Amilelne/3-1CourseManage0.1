@@ -1,0 +1,18 @@
+<!--pages/student/CourseUI/CourseMain.wxml-->
+<page class="page">
+<view class="head20">
+	  <text class="FONT1"> OOAD</text>
+</view>
+<scroll-view style="position:absolute;background-color: #ffffff;left: 0rpx;width: 100%;height: 86%;margin-top: 0%;" scroll-y="true">
+  <view wx:for="{{seminar_list}}" class="{{item.state==1?'box3':'box4'}}" bindtap='enterSeminar' data-state="{{item.state}}">
+      <text class="FONT12" > 讨论课{{item.NO}}</text>
+	    <text class="FONT2" style="margin-left: 60%;margin-top: 3%" > 
+          {{item.start_month}}月{{item.start_day}}日至{{item.end_month}}月{{item.end_day}}日
+      </text>
+	    <text class="FONT2" style="margin-left: 60%;margin-top: 12%"> {{item.group_type}}</text>
+	    <text class="FONT2" style="margin-left: 60%;margin-top: 21%"> 成绩：{{item.grade}}</text>  
+  </view>
+</scroll-view>
+	
+	
+</page>

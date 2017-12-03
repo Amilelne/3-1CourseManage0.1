@@ -1,6 +1,12 @@
 {
-  "pages":[
+  "pages": [
     "pages/JAVA_Binding_MainUI/Binding/ChooseCharacter",
+    "pages/student/CourseUI/Seminar/seminarHome",
+    "pages/student/CourseUI/Seminar/Grade/grade",
+    "pages/student/CourseUI/Seminar/FixedGroup/UnChooseTopic",
+    "pages/student/CourseUI/Seminar/SignUP/signup",
+    "pages/student/CourseUI/Seminar/ChooseTopic/ChooseTopic",
+    
     "pages/index/index",
     "pages/logs/logs",
     "pages/JAVA_Binding_MainUI/StudentMainUI/StudentMainUI",
@@ -9,12 +15,14 @@
     "pages/JAVA_Binding_MainUI/TeacherMainUI/CheckTeacherInfo",
     "pages/JAVA_Binding_MainUI/Binding/CreateSchool",
     "pages/JAVA_Binding_MainUI/Binding/TeacherBindingUI",
-    "pages/JAVA_Binding_MainUI/Binding/StudentBindingUI"
+    "pages/JAVA_Binding_MainUI/Binding/StudentBindingUI",
+    "pages/student/CourseUI/CourseMain",
+    "pages/student/CourseUI/CourseInfo"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   }
 }

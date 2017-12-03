@@ -6,6 +6,11 @@ Page({
     userName: '',
     userSchool: ''
   },
+  btnToCourse:function(){
+    wx.navigateTo({
+      url: '../../student/CourseUI/CourseMain',
+    })
+  },
   CheckInfo: function () {
     const that = this
     var checkinfo =

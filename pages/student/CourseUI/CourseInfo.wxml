@@ -1,0 +1,27 @@
+<!--pages/student/CourseUI/CourseInfo.wxml-->
+<page class="body">
+
+  <!--上方蓝色块-->
+  <view class="head20">
+    <text class="FONT1"> OOAD</text>
+  </view>
+
+  <!--老师-->
+  <view class='infoView'>
+    <image class="imgView" src="../image/teacher.png" />
+    <text class="textView">老师：邱明</text>
+  </view>
+
+  <!--老师邮箱-->
+  <view class='infoView'>
+    <image class="imgView" src="../image/mail.png" />
+    <text class="textView">邮箱：mingqiu@gmail.com</text>
+  </view>
+
+  <!--课程简介-->
+  <view class='infoView'>
+    <image class="imgView" src="../image/fileIcon.png" />
+    <text class="textView">简介：xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</text>
+  </view>
+
+</page>
