@@ -2,17 +2,17 @@ Page({
     data: {},
     signup:function(){
       wx.navigateTo({
-        url: './SignUP/signup',
+        url: './signup',
       })
     },
     group: function () {
       wx.navigateTo({
-        url: './FixedGroup/UnChooseTopic',
+        url: './UnChooseTopic',
       })
     },
     score: function () {
       wx.navigateTo({
-        url: './Grade/grade',
+        url: './grade',
       })
     },
     onLoad: function (options) {

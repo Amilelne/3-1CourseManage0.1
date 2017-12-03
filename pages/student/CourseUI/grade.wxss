@@ -30,6 +30,10 @@ page{
 	width:50%;
 	border-style: none; 
 }
+.nobtnsubmit
+{
+  display: none;
+}
 .seminarimg{
    height: 3rem;
    width: 3rem;

@@ -1,7 +1,7 @@
 <!--pages/StudentClass/CourseUI/Seminar/Grade/grade.wxml-->
 <view class="seminarblock">	
   <span class="column0"><image class="seminarimg" src="users.png" /></span>
-  <label class='greyword'>请为别的小组展示打分</label>
+  <label class='greyword'>{{showView?'请为别的小组打分':'您的打分结果'}}</label>
 </view>
 <block >
   <view>
@@ -16,5 +16,5 @@
     </block>  
   </view>
 </block>
-<button class="btnsubmit" catchtap="submit">提交</button>
+<button class="{{showView?'btnsubmit':'nobtnsubmit'}}" catchtap="submit">提交</button>
 

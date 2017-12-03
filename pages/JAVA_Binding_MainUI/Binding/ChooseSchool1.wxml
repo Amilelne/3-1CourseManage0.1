@@ -1,0 +1,36 @@
+	
+<page style="background=#000000">
+	<view class="box5"><!-- 背景图的view -->
+		<image class="img7" src="../images/dengpao.png" />  
+		<image class="img8" src="../images/背景图2.jpg" />  
+		<view class="FONT41">请选择您的学校</view> 
+	</view>
+	<view class="box6" style=" background-color: =#66CCFF;">
+	<button class="button1" bindtap='chooseBack' data-info="{{province}}">{{province.text}}</button>
+	<button class="button1" bindtap='chooseBack' data-info="{{city}}">{{city.text}}</button>
+	<button class="button1">{{school}}</button>
+	</view>
+  <scroll-view class="box7" scroll-y="true">
+    <view wx:if="{{state=='none'}}">
+      <view class="box8" wx:for="{{provinces_list}}">
+         <button class="button2" bindtap='chooseItem' data-province="{{item.province}}"> {{item.province}} </button>
+      </view>
+    </view>
+    <view wx:elif="{{state=='province_chosen'}}">
+      <view class="box8" wx:for="{{city_list_displayed}}">
+         <button class="button2" bindtap='chooseItem' data-city="{{item.city}}"> {{item.city}} </button>
+      </view>
+    </view>
+    <view wx:elif="{{state=='city_chosen'}}">
+      <view class="box8" wx:for="{{school_list_displayed}}">
+         <button class="button2" bindtap='chooseItem' data-school="{{item.school}}"> {{item.school}} </button>
+      </view>
+      <view class="box8" >
+         <button class="button2" style="color : #0000FF" bindtap='AddSchool'> 无学校？选择创建 </button>
+         </view>
+    </view>
+      
+  </scroll-view>
+	
+</page>
+	

@@ -75,7 +75,7 @@ Page({
     var $state = e.currentTarget.dataset.state;
     console.info($state);
     if ($state == 1) {
-      wx: wx.navigateTo({ url: './Seminar/seminarHome' });
+      wx: wx.navigateTo({ url: './seminarHome' });
     }
   }
 })

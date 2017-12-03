@@ -1,0 +1,14 @@
+<page>
+	<view class="topView">
+	<span class="title"> OOAD</span>
+		<span class="titleSmall"> 讨论课{{seminarNo}}</span>
+	</view>
+	<view class="ScoreBoxGray">
+    <span class="ButtonText" style="margin-top: 100%">打分</span></view>
+  <view class="CallBoxGray">
+    <span class="ButtonText">签到</span>
+  </view>
+	<view class="GroupBoxBlue" bindtap="groupBox">
+	  <span class="ButtonText">组队和选题</span>
+  </view>
+</page>

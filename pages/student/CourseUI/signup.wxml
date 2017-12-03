@@ -35,22 +35,20 @@
   <view class="lateCall">
         <image src="闹钟.png" class='courseInfoIcon'/>
         <strong>迟到签到成功</strong>
-   </view>   
-  -->
+   </view>   -->
+
 
   <!--签到按钮-->
   <view>
-    <button  type="button" class="blueBigBtn">
+    <button  type="button" class="{{clickSignup?'No':'blueBigBtn'}}" bindtap='buttonSignup'>
       签到
     </button>
-    <block >
+    <block  class="{{clickSignup?'':'No'}}">
       <!--签到成功-->
-      <view class="successCall">
+      <view class="{{clickSignup?'successCall':'No'}}">
         <image src="闹钟.png" class='courseInfoIcon'/>
-        <strong>签到成功</strong>
+      <strong>签到成功</strong>
       </view>   
     </block>
-  </view>
-
-
+  </view>-->
 </page>

@@ -22,7 +22,7 @@ Page({
       key: 'info',
       data: userInfo,
     })
-    wx.navigateTo({
+    wx.redirectTo({
       url:'../StudentMainUI/StudentMainUI',
     })
   },

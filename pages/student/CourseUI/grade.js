@@ -10,7 +10,7 @@ Page({
     { id: 2, name: 'A3', score: 0 },
     { id: 3, name: 'A4', score: 0 },
     { id: 4, name: 'A5', score: 0 }],
-
+    showView:true,
     heart_chosen: "heart_chosen.png",
     heart_empty: "heart_empty.png",
     key: 0, //评分
@@ -38,9 +38,21 @@ Page({
   },
   //提交
   submit:function(){
-    wx.navigateTo({
-      url: '../seminarHome',
-    })
+    const that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确定要打分吗？',
+      success: function (res) {
+        if (res.confirm) {
+          that.setData(
+            {
+              showView:false,
+            }
+          )
+        }
+      }
+    }
+    )
   },
   /**
    * 生命周期函数--监听页面加载
