@@ -1,0 +1,17 @@
+<!—CheckStudentInfo.wxml-->
+<page>
+  <view class="topBoardView">  
+      <image src="背景.jpg" class="topIcon"></image>
+      <image src="头像.png" class="topHead"></image>
+      <span class="topClickHead">点击头像以修改</span>
+      <span class="topName">{{userName}}</span>
+      <span class="topID">{{userID}}</span>
+   </view>
+   <view class="mainView">
+      <span class="phone">{{userNumber}}</span>
+      <span class="ID">{{userID}}</span>
+      <span class="name">{{userName}}</span>
+      <span class="school">{{userSchool}}</span>
+      <button class="confirmButton" bindtap='Unbind'>解绑</button>
+   </view>
+</page>

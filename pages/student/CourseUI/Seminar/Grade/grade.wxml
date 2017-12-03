@@ -1,0 +1,15 @@
+<!--pages/StudentClass/CourseUI/Seminar/Grade/grade.wxml-->
+<view class="seminarblock">	
+  <span class="column0"><image class="seminarimg" src="users.png" /></span>
+  <label class='greyword'>请为别的小组展示打分</label>
+</view>
+<block wx:for="{{groups}}" wx:for-item="group">
+  <view>
+    <label class='text'>{{group.name}}</label>
+    <block wx:for="{{stars}}">
+      <image class='heart' src="{{group.score>item?heart_chosen:heart_empty}}" bindtap='selectHeart' />
+    </block>   
+  </view>
+</block>
+<button class="btnsubmit">提交</button>
+

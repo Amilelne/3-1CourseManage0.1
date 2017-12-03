@@ -1,0 +1,21 @@
+<!--TeacherBindingUI.wxml-->
+<page>
+  <view class="topBoardView">  
+      <image src="background.jpg" class="topIcon"></image>
+      <image src="light.png" class="topLight"></image>
+      <image src="line.png" class="topLine"></image>
+      <span class="topTips">请先绑定您的账号</span>
+   </view>
+   <view class="mainView">
+      <span class="teacherID">教工号：</span>
+      <input class="inputTeacherID" bindinput='inputUserID'></input>
+      <image src="notice.png" class="tipIcon"/>
+      <span class="tipFont">提交后不能再修改</span>
+      <span class="name">姓名：</span>
+      <input class="inputName" bindinput='inputUserName'/>
+      <span class="school">学校：</span>
+      <input class="inputSchool"/>
+      <image src="schoolOptions.png" class="selectSchoolIcon"/>
+      <button class="confirmButton" bindtap='ConfirmButton'>绑定</button>
+   </view>
+</page>

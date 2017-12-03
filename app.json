@@ -1,0 +1,20 @@
+{
+  "pages":[
+    "pages/JAVA_Binding_MainUI/Binding/ChooseCharacter",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/JAVA_Binding_MainUI/StudentMainUI/StudentMainUI",
+    "pages/JAVA_Binding_MainUI/StudentMainUI/CheckStudentInfo",
+    "pages/JAVA_Binding_MainUI/TeacherMainUI/TeacherMainUI",
+    "pages/JAVA_Binding_MainUI/TeacherMainUI/CheckTeacherInfo",
+    "pages/JAVA_Binding_MainUI/Binding/CreateSchool",
+    "pages/JAVA_Binding_MainUI/Binding/TeacherBindingUI",
+    "pages/JAVA_Binding_MainUI/Binding/StudentBindingUI"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  }
+}

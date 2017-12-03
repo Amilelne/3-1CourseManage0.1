@@ -1,0 +1,56 @@
+<!--pages/StudentClass/CourseUI/Seminar/SignUP/signup.wxml-->
+<page>
+  <!--设置左上角的blueBoardIcon-->
+  <view class="blueUsersView">
+    <image src="蓝色板.png" class='blueUsersIcon' />
+    <strong>讨论课信息</strong>
+  </view>
+
+  <!--细线，hr不好设置css，用一个高度很小的view来代替-->
+  <view class="hrView">
+  </view>
+
+  <!--课堂信息，由一个icon和一行文字组成-->
+  <view class="courseInfoView">
+    <image src="老师.png" class='courseInfoIcon' />
+    <strong>邱明</strong>
+  </view>
+  <view class="courseInfoView">
+    <image src="邮箱.png" class='courseInfoIcon' />
+    <strong>mingqiu@gmail.com</strong>
+  </view>
+  <view class="courseInfoView">
+    <image src="日期.png" class='courseInfoIcon' />
+    <strong>2017-11-11</strong>
+  </view>
+  <view class="courseInfoView">
+    <image src="地点.png" class='courseInfoIcon' />
+    <strong>海韵教学楼201</strong>
+  </view>
+
+
+  
+
+  <!--迟到签到成功
+  <view class="lateCall">
+        <image src="闹钟.png" class='courseInfoIcon'/>
+        <strong>迟到签到成功</strong>
+   </view>   
+  -->
+
+  <!--签到按钮-->
+  <view>
+    <button  wx:if="{{!clickSignup}}" type="button" class="blueBigBtn" bindtap="buttonSignup">
+      签到
+    </button>
+    <block wx:else>
+      <!--签到成功-->
+      <view class="successCall">
+        <image src="闹钟.png" class='courseInfoIcon'/>
+        <strong>签到成功</strong>
+      </view>   
+    </block>
+  </view>
+
+
+</page>

@@ -1,0 +1,68 @@
+/* pages/StudentClass/CourseUI/Seminar/FixedGroup/UnChooseTopic.wxss */
+/* 背景色 字体 */
+page {
+  background: rgba(102, 204, 255, 0.5);
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.seminarImg{
+  height: 4rem;
+  width: 4rem;
+  margin-left:8%;
+  margin-top:3%;
+  display: inline-block;
+}
+.seminarText{
+  height:2rem;
+  margin-left:5%;
+  line-height: 5rem;
+  display: inline-block;
+  vertical-align: top;
+}
+.WhiteText{
+  height: 2rem;
+  color: white;
+  margin-left: 5%;
+  display: inline-block;
+}
+.WhiteBackSquare{
+  height: 5%;
+  background-color: #ffffff;
+  width: 95%;
+  float: left;
+  margin-left: 3%;
+  border-radius: 50rpx;
+  margin-top: 2%;
+}
+.userAvatar{
+  height:2rem;
+  width: 2rem;
+  padding: 0.5em;
+  display: inline-block;
+}
+.groupInfoText{
+  margin-left: 3%;
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 1rem;
+}
+.btnBeLeader{
+	margin-top:3%;
+	color:#FFF;
+	font-size:1rem;
+	border-radius:0.9rem;
+  background-color:#66ccff;
+	width:50%;
+	border-style: none; 
+}
+.btnLeave{
+  height: 2rem;
+	color:#FFF;
+  background-color:#66ccff;
+	width:30%;
+  margin-left:30%; 
+  display: inline-block;
+  vertical-align: middle;
+}
