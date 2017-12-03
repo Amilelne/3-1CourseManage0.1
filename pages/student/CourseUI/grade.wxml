@@ -1,8 +1,12 @@
 <!--pages/StudentClass/CourseUI/Seminar/Grade/grade.wxml-->
 <view class="seminarblock">	
-  <span class="column0"><image class="seminarimg" src="users.png" /></span>
+  <span class="column0"><image class="seminarimg" src="../../images/users.png" /></span>
   <label class='greyword'>{{showView?'请为别的小组打分':'您的打分结果'}}</label>
 </view>
+ <!--细线，hr不好设置css，用一个高度很小的view来代替-->
+  <view class="hrView">
+  </view>
+
 <block >
   <view>
     <block wx:for="{{groups}}" wx:for-item="group">

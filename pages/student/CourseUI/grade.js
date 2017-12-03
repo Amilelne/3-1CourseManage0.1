@@ -11,8 +11,8 @@ Page({
     { id: 3, name: 'A4', score: 0 },
     { id: 4, name: 'A5', score: 0 }],
     showView:true,
-    heart_chosen: "heart_chosen.png",
-    heart_empty: "heart_empty.png",
+    heart_chosen: "../../images/heart_chosen.png",
+    heart_empty: "../../images/heart_empty.png",
     key: 0, //评分
     groupId: 0 //第一组
   },

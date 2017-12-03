@@ -2,7 +2,7 @@
 <page>
   <!--设置左上角的blueBoardIcon-->
   <view class="blueUsersView">
-    <image src="蓝色板.png" class='blueUsersIcon' />
+    <image src="../../images/blueBoard.png" class='blueUsersIcon' />
     <strong>讨论课信息</strong>
   </view>
 
@@ -12,19 +12,19 @@
 
   <!--课堂信息，由一个icon和一行文字组成-->
   <view class="courseInfoView">
-    <image src="老师.png" class='courseInfoIcon' />
+    <image src="../../images/teacher.png" class='courseInfoIcon' />
     <strong>邱明</strong>
   </view>
   <view class="courseInfoView">
-    <image src="邮箱.png" class='courseInfoIcon' />
+    <image src="../../images/mail.png" class='courseInfoIcon' />
     <strong>mingqiu@gmail.com</strong>
   </view>
   <view class="courseInfoView">
-    <image src="日期.png" class='courseInfoIcon' />
+    <image src="../../images/date.png" class='courseInfoIcon' />
     <strong>2017-11-11</strong>
   </view>
   <view class="courseInfoView">
-    <image src="地点.png" class='courseInfoIcon' />
+    <image src="../../images/site.png" class='courseInfoIcon' />
     <strong>海韵教学楼201</strong>
   </view>
 
@@ -43,12 +43,12 @@
     <button  type="button" class="{{clickSignup?'No':'blueBigBtn'}}" bindtap='buttonSignup'>
       签到
     </button>
-    <block  class="{{clickSignup?'':'No'}}">
+    <block>
       <!--签到成功-->
       <view class="{{clickSignup?'successCall':'No'}}">
-        <image src="闹钟.png" class='courseInfoIcon'/>
+        <image src="../../images/clock.png" class='courseInfoIcon'/>
       <strong>签到成功</strong>
       </view>   
     </block>
-  </view>-->
+  </view>
 </page>
