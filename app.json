@@ -1,6 +1,11 @@
 {
   "pages": [
     "pages/JAVA_Binding_MainUI/Binding/ChooseCharacter",
+    "pages/TeacherClass/ClassManage/ClassManage",
+    "pages/TeacherClass/CallInRoll/GroupInfoUI",
+    "pages/TeacherClass/CallInRoll/GrouRollCallListUI",
+    "pages/TeacherClass/CallInRoll/RollCallUI",
+    "pages/JAVA_Binding_MainUI/Binding/ChooseSchool1",
     "pages/student/CourseUI/seminarHome", 
     "pages/student/CourseUI/grade",
     "pages/student/CourseUI/UnChooseTopic",

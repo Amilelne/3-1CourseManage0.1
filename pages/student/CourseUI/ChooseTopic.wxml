@@ -17,11 +17,11 @@
     <span class="topicName">领域模型设计</span>
     <!--剩余选题数量大于等于2时-->
     <span class="leftNumWhite">剩余 ： 2/5</span>
-    <image src='九点.png' class="nineIcon"></image>
+    <image bindtap="buttonShow" src='九点.png' class="nineIcon"></image>
   </view>
 
   <!--当点击九点时出现topic的简介-->
-  <view class="topicDescribeView">
+  <view wx:if="{{show}}" class="topicDescribeView">
     <span class="topicDescribeTitle">
       领域模型设计
     </span>

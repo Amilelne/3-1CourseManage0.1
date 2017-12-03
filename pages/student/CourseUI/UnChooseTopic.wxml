@@ -2,7 +2,7 @@
 <view>
   <block>
     <view>
-      <image class="seminarImg" src="../images/users.png" />
+      <image class="seminarImg" src="users.png" />
 
       <!--讨论课和固定分组要加一个seminarView容器来固定位置-->
       <view class = "seminarView">
@@ -15,25 +15,73 @@
   <block>
     <view>
       <span class="WhiteText">队伍信息:</span>
-      <button class="btnLeave">辞职</button>
+      <button wx:if="{{isLeader}}" class="btnLeave" bindtap="toBeLeader">辞职</button>
     </view>
   </block>
+
   <view>
   <!--每个白色的块要用WhiteBackSquare固定位置-->
       <view class="WhiteBackSquare">
-      <image class="userAvatar" src="../images/user.png"></image>
+      <image class="userAvatar" src="user.png"></image>
       <!--姓名和学号的上下位置要用studentView固定-->
       <view class = "studentView">
-      <span class="groupInfoText">姓名</span>
-      <span class="groupInfoText">学生ID</span>
+      <span class="groupInfoText">刘XX</span>
+      <span class="groupInfoText">2432015220XXXX</span>
       </view>
       <!--队长两个字的位置要用leaderTextView固定-->
       <view class="leaderTextView">
-        <span class="groupInfoText">队长</span>
+        <span wx:if="{{isLeader}}" class="groupInfoText">队长</span>
       </view>
       </view>
   </view>
 
+  <view>
+  <!--每个白色的块要用WhiteBackSquare固定位置-->
+      <view class="WhiteBackSquare">
+      <image class="userAvatar" src="user.png"></image>
+      <!--姓名和学号的上下位置要用studentView固定-->
+      <view class = "studentView">
+      <span class="groupInfoText">周XX</span>
+      <span class="groupInfoText">2432015220XXXX</span>
+      </view>
+      </view>
+  </view>
+
+  <view>
+  <!--每个白色的块要用WhiteBackSquare固定位置-->
+      <view class="WhiteBackSquare">
+      <image class="userAvatar" src="user.png"></image>
+      <!--姓名和学号的上下位置要用studentView固定-->
+      <view class = "studentView">
+      <span class="groupInfoText">陈XX</span>
+      <span class="groupInfoText">2432015220XXXX</span>
+      </view>
+      </view>
+  </view>
+
+    <view>
+  <!--每个白色的块要用WhiteBackSquare固定位置-->
+      <view class="WhiteBackSquare">
+      <image class="userAvatar" src="user.png"></image>
+      <!--姓名和学号的上下位置要用studentView固定-->
+      <view class = "studentView">
+      <span class="groupInfoText">易XX</span>
+      <span class="groupInfoText">2432015220XXXX</span>
+      </view>
+      </view>
+  </view>
+
+    <view>
+  <!--每个白色的块要用WhiteBackSquare固定位置-->
+      <view class="WhiteBackSquare">
+      <image class="userAvatar" src="user.png"></image>
+      <!--姓名和学号的上下位置要用studentView固定-->
+      <view class = "studentView">
+      <span class="groupInfoText">李XX</span>
+      <span class="groupInfoText">2432015220XXXX</span>
+      </view>
+      </view>
+  </view>
 
   <!-- 选题 -->
   <block>
@@ -44,10 +92,11 @@
 
   <block>
     <view>
-      <button class="btnBeLeader">成为队长</button>
+      <button wx:if="{{!isLeader}}" class="btnBeLeader" bindtap="toBeLeader">成为队长</button>
     </view>
-    <view >
-      <button class="btnBeLeader">选题</button>
+
+    <view>
+      <button wx:if="{{isLeader}}" class="btnBeLeader" catchtap='topic' >选题</button>
     </view>
   </block>
 </view>

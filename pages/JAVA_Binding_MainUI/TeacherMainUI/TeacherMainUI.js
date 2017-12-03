@@ -8,7 +8,7 @@ data: {
   },
   btnToCourse:function(){
     wx.navigateTo({
-      url: '../../student/CourseUI/CourseMain',
+      url: '../../TeacherClass/ClassManage/ClassManage',
     })
   },
   CheckInfo:function(){

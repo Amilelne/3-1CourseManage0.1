@@ -1,8 +1,8 @@
 	
 <page style="background=#000000">
 	<view class="box5"><!-- 背景图的view -->
-		<image class="img7" src="../images/dengpao.png" />  
-		<image class="img8" src="../images/背景图2.jpg" />  
+		<image class="img7" src="../../images/bulb.png" />  
+		<image class="img8" src="../../images/background.jpg" />  
 		<view class="FONT41">请选择您的学校</view> 
 	</view>
 	<view class="box6" style=" background-color: =#66CCFF;">

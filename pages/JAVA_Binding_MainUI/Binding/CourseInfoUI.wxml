@@ -3,15 +3,15 @@
 	<text class="FONT1"> OOAD</text>
 	</view>
 <view  style="margin-top: 15%;">
-	<image class="img3" src="../images/人物头像【三元素 为设计而生 3png.com】.png"  alt=""/>
+	<image class="img3" src="../../images/UserIcon.png"  alt=""/>
 <text class="FONT3">老师：邱明</text>
 </view>
 	<view style="margin-top: 4%;"> 
-		<image class="img4" src="../images/发送电子邮件【三元素 为设计而生 3png.com】.png" alt="" />
+		<image class="img4" src="../../images/MailIcon.png" alt="" />
 		<text class="FONT3">邮箱：qiuming@gmail.com</text>
 	</view>
 		<view style="margin-top: 4%;"> 
-		<image class="img5" src="../images/房间图标【三元素 为设计而生 3png.com】.png" alt="" />
+		<image class="img5" src="../../images/HouseIcon.png" alt="" />
 		<text class="FONT3">班级：</text>
 	</view>
 	
@@ -29,7 +29,7 @@
 	<span class="FONT6" style="margin-left: 41%;">班级人数:31人 </span>		
 	</view>
 	<view style="margin-top: 4%;"> 
-		<image class="img6" src="../images/文件资料【三元素 为设计而生 3png.com】.png" alt=""/>
+		<image class="img6" src="../../images/FileIcon.png" alt=""/>
 		<text class="FONT3">简介：</text>
 	</view>
 </page>

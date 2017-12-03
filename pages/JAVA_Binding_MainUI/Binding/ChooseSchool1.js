@@ -78,14 +78,14 @@ Page(
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+  
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
- 
+  
   },
 
   /**
@@ -204,11 +204,15 @@ Page(
     else if (this.data.state == 'city_chosen')
     {
       var $current_school = e.currentTarget.dataset.school;
-      wx.navigateTo({url: '../index/TeacherBindingUI',});
+      wx.setStorage({
+        key: 'school',
+        data: e.currentTarget.dataset.school,
+      })
+      wx.navigateTo({url: './TeacherBindingUI',});
     }
   },
 
   AddSchool: function (e){
-    wx: wx.navigateTo({ url: '../index/CreateSchoolUI'})
+    wx: wx.navigateTo({ url: './CreateSchoolUI'})
   }
 })

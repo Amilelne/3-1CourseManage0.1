@@ -12,6 +12,11 @@ Page({
   inputUserName: function (e) {
     this.userName=e.detail.value
   },
+  chooseSchool:function(){
+    wx.redirectTo({
+      url: './ChooseSchool1',
+    })
+  },
   ConfirmButton:function()
   {
     var userInfo={
