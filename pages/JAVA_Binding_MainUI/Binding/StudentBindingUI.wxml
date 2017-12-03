@@ -2,7 +2,7 @@
 <page>
   <view class="topBoardView">  
       <image src="../../images/background.jpg" class="topIcon"></image>
-      <image src="../../images/light.png" class="topLight"></image>
+      <image src="../../images/bulb.png" class="topLight"></image>
       <image src="../../images/line.png" class="topLine"></image>
       <span class="topTips">请先绑定您的账号</span>
    </view>
@@ -14,8 +14,8 @@
       <span class="name" >姓名：</span>
       <input class="inputName" bindinput='inputUserName'/>
       <span class="school">学校：</span>
-      <input class="inputSchool" disabled='false'/>
-      <image src="schoolOptions.png" class="selectSchoolIcon"/>
+      <input class="inputSchool" bindinput='inputSchool'/>
+      <image src="../../images/ninedot.png" class="selectSchoolIcon" mode='width-flex'/>
       <button class="confirmButton" bindtap='ConfirmButton'>绑定</button>
    </view>
 </page>

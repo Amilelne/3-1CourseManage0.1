@@ -1,9 +1,9 @@
 <!--CreateSchool.wxml-->
 <page>
   <view class="topBoardView">  
-      <image src="背景.jpg" class="topIcon"></image>
-      <image src="灯.png" class="topLight"></image>
-      <image src="线.png" class="topLine"></image>
+      <image src="../../images/background.jpg" class="topIcon"></image>
+      <image src="../../images/bulb.png" class="topLight"></image>
+      <image src="../../images/line.png" class="topLine"></image>
       <span class="topTips">创建学校</span>
    </view>
    <view class="mainView">
@@ -11,7 +11,7 @@
       <span class="city">州市：厦门市</span>
       <span class="schoolName">学校名：</span>
       <input class="inputSchool"></input>
-      <image src="提示.png" class="tipIcon"/>
+      <image src="../../images/warning.png" class="tipIcon"/>
       <span class="tipFont">提交后不能再修改</span>
       <button class="confirmButton">创建</button>
    </view>

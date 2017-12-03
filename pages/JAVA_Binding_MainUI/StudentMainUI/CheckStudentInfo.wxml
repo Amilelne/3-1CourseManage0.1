@@ -2,7 +2,7 @@
 <page>
   <view class="topBoardView">  
       <image src="../../images/background.jpg" class="topIcon"></image>
-      <image src="../../images/UserIcon.png" class="topHead"></image>
+      <image src="../../images/user.png" class="topHead"></image>
       <span class="topClickHead">点击头像以修改</span>
       <span class="topName">{{userName}}</span>
       <span class="topID">{{userID}}</span>

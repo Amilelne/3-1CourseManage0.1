@@ -15,7 +15,7 @@
       <input class="inputName" bindinput='inputUserName'/>
       <span class="school">学校：</span>
       <input class="inputSchool"/>
-      <image src="schoolOptions.png" class="selectSchoolIcon"/>
+      <image src="../../images/ninedot.png" class="selectSchoolIcon"/>
       <button class="confirmButton" bindtap='ConfirmButton'>绑定</button>
    </view>
 </page>
