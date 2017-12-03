@@ -1,12 +1,11 @@
 {
   "pages": [
-    "pages/JAVA_Binding_MainUI/Binding/ChooseCharacter",
     "pages/student/CourseUI/Seminar/seminarHome",
+    "pages/JAVA_Binding_MainUI/Binding/ChooseCharacter",
     "pages/student/CourseUI/Seminar/Grade/grade",
     "pages/student/CourseUI/Seminar/FixedGroup/UnChooseTopic",
     "pages/student/CourseUI/Seminar/SignUP/signup",
     "pages/student/CourseUI/Seminar/ChooseTopic/ChooseTopic",
-    
     "pages/index/index",
     "pages/logs/logs",
     "pages/JAVA_Binding_MainUI/StudentMainUI/StudentMainUI",
