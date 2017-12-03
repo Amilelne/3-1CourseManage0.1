@@ -1,0 +1,29 @@
+<!--logs.wxml-->
+<page>
+  <!--设置蓝色上方-->
+  <view class='blueHeader'>
+    <span>{{course.name}}</span>
+    <span class="seminarText">{{seminar.name}}</span>
+  </view>
+  <!--讨论课的时间和分组方式-->
+ <view class="ourcontainer">
+  <view class="clockAndGroupView">
+    <image src="../../images/clock.png"  mode='widthFix'  class='clockAndGroupIcon'/>
+    <text class='clockAndGroupText'>{{seminar.startTime}} - {{seminar.endTime}}</text> 
+  </view>
+
+  <view class="clockAndGroupView">
+    <image src="../../images/clip.png"  mode='widthFix' class="clockAndGroupIcon" />
+    <text class='clockAndGroupText'>{{seminar.groupingMethod}}</text>
+  </view>
+  </view>
+
+  <!--讨论课的班级，利用列表渲染 wx:for-->
+  <block wx:for-items="{{classes}}">
+    <view class="classView" data-index="{{index}}" bindtap='classbtn'>
+      <image src="../../images/ClassManage.png" mode='widthFix' class="classIcon"/>
+      <p class="className">{{item.name}}</p>
+    </view>
+  </block>
+
+</page>

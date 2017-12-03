@@ -1,0 +1,46 @@
+<page>
+  <!--设置左上角的蓝色板-->
+  <view class="blueBoardView">
+    <image src="../../images/blueBoard.png" mode='widthFix' class='blueBoardIcon' />
+  </view>
+
+
+  <!--班级1 的字样-->
+  <view class='classNameView'>
+    {{classNode.name}}
+  </view>
+
+  <!--学生总数：40 的字样-->
+  <view class='studentSumView'>
+    签到人数：{{roster.attend.num}}/{{classNode.numStudent}}
+  </view>
+
+
+  <!--学生名单上面那个蓝色的bar-->
+  <view class='studentListBarView'>
+    已签到人员
+  </view>
+
+  <!--学生块-->
+  <view wx:for-items="{{roster.attend.list}}" class = 'studentView'>
+    <view class='studentBlock'>
+      <image src="../../images/user.png" mode='widthFix' class='userIcon' />
+      <span class="studentName">{{item.name}}</span>
+    </view>
+  </view>
+
+  <block wx:if="{{status=='called'}}">
+    <!--学生名单上面那个蓝色的bar-->
+    <view class='studentListBarView'>
+      未签到人员
+    </view>
+    <!--学生块-->
+    <view wx:for-items="{{roster.late.list}}" class = 'studentView'>
+      <view class='studentBlock'>
+        <image src="../../images/user.png" mode='widthFix' class='userIcon' />
+        <span class="studentName">{{item.name}}</span>
+      </view>
+    </view>
+  </block>
+
+</page>

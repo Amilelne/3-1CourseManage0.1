@@ -1,0 +1,88 @@
+<page>
+  <!--设置左上角的usersIcon-->
+  <view class="blueUsersView">
+    <image src="../../images/users.png" mode='widthFix' class='blueUsersIcon' />
+    <strong>队伍信息</strong>
+  </view>
+
+
+  <!--细线，hr不好设置css，用一个高度很小的view来代替-->
+  <view class="hrView">
+  </view>
+
+  <!--学生块，用整个view包住学生的部分，每次添加新学生能自动排好版，之后在span下面修改学生名字-->
+  <view class = 'studentView'>
+    <block wx:for-items="{{groups}}">
+        <!--学生名单上面那个蓝色的bar-->
+        <view data-index="{{index}}" bindtap='chooseToggle' class='studentListBarView'>
+          <span>{{item.name}}</span>
+          <span class="groupTopics">选题：{{item.topic}}</span>
+        </view>
+        <view wx:if="{{item.toggle}}" class = 'studentView'>
+          <view wx:for-items="{{item.list}}">
+            <view class='studentBlock'>
+              <image src="../../images/user.png" mode='widthFix' class='userIcon' />
+              <span class="studentName">{{item.name}}</span>
+              <block wx:if="{{item.islate}}">
+                <image bindtap='remove' data-index="{{index}}" src="../../images/redCross.png" mode='widthFix' class='redCancelIcon'/>
+              </block>
+            </view>
+          </view>
+          <!--空白添加学生的块-->
+          <block wx:if="{{groupingMethod=='random'}}">
+            <view bindtap='changecurgroup' data-index="{{index}}" class='studentBlock'>
+              <image bindtap='showmodalimg' src="../../images/add.png" mode='widthFix' class='addIcon'/>
+            </view>
+          </block>
+        </view>
+    </block>
+  </view>
+
+  
+
+  <!--未签到学生，要增加新学生复制一个view，修改名字-->
+  <block wx:if="{{groupingMethod=='random'}}">
+    <view class = 'studentView'>
+      <!--迟到学生上面那个蓝色的bar-->
+      <view class='studentNoCallBarView'>
+        <span>未签到学生</span>
+      </view>
+      <view wx:for="{{roster.late.list}}" wx:key="this" class='studentView'>
+        <block wx:if="{{!item.grouped}}">
+          <view class='studentBlock'>
+            <image src="../../images/user.png" mode="widthFix" class='userIcon' />
+            <span class="studentName">{{item.name}}</span>
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+
+  <!--弹窗-->
+  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+  <view class="modal-dialog" wx:if="{{showModal}}">
+    <view class="modal-title">添加学生</view>
+    <view class="modal-content">
+    <scroll-view scroll-y style="height: 100px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="red" scroll-top="100">
+      <view wx:for="{{roster.late.list}}" wx:key="this" class='modal-list'>
+        <block wx:if="{{!item.grouped}}">
+          <block wx:if="{{index==curselect}}">
+            <span class='input-holder-select'>{{item.name}}</span>
+          </block>
+          <block wx:else>
+            <span bindtap='select' data-index='{{index}}' class='input-holder'>{{item.name}}</span>
+          </block>
+        </block>
+      </view>
+    </scroll-view>
+
+    </view>
+    <view class="modal-footer">
+      <view class="btn-cancel" bindtap="onCancel">取消</view>
+      <view class="btn-confirm" bindtap="onConfirm">确定</view>
+    </view>
+  </view>
+
+
+
+</page>
