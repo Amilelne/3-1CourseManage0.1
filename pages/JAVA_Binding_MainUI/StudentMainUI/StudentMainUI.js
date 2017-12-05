@@ -4,7 +4,7 @@ Page({
   data: {
     userID: '',
     userName: '',
-    userSchool: ''
+    userSchool: '',
   },
   btnToCourse:function(){
     wx.navigateTo({

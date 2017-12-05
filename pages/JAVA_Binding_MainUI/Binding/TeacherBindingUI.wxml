@@ -14,7 +14,7 @@
       <span class="name">姓名：</span>
       <input class="inputName" bindinput='inputUserName' value="{{userName}}"></input>
       <span class="school">学校：</span>
-      <input class="inputSchool" value="{{userSchool}}"></input>
+      <view class="inputSchool" >{{userSchool}}</view>
       <image src="../../images/ninedot.png" class="selectSchoolIcon" catchtap="chooseSchool"/>
       <button class="confirmButton" bindtap='ConfirmButton'>绑定</button>
    </view>

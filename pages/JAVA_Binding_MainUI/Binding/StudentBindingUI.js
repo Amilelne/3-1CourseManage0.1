@@ -3,7 +3,7 @@ Page({
   data: {
     userID:'',
     userName:'',
-    userSchool:"厦门大学"
+    userSchool:"厦门大学",
   },
   inputUserID:function(e)
   {
@@ -26,7 +26,7 @@ Page({
     var userInfo={
       ID:this.userID,
       Name:this.userName,
-      Name:this.userSchool,
+      School:this.userSchool,
     }
     wx.setStorage({  //传递相应的参数
       key: 'info',
@@ -62,6 +62,8 @@ Page({
           })
         },
       })
+      console.log(this.userName)
+      console.log(this.userID)
   },
 
   /**
