@@ -2,7 +2,7 @@ Page({
   data: {
     userID: '',
     userName: '',
-    userSchool: "厦门大学"
+    userSchool: "",
   },
   inputUserID: function (e) {
     this.userID = e.detail.value
@@ -34,7 +34,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("TeacherBindingNow")
+    
+    const that = this
+    wx.getStorage({
+      key: 'school',
+      success: function(res) {
+        that.setData({
+          userSchool:res.data
+        })
+      },
+    })
+
   },
 
   /**

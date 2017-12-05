@@ -7,12 +7,12 @@
       <span class="topTips">创建学校</span>
    </view>
    <view class="mainView">
-      <span class="province">省份：福建省</span>
-      <span class="city">州市：厦门市</span>
+      <span class="province">省份：{{province}}</span>
+      <span class="city">州市：{{city}}</span>
       <span class="schoolName">学校名：</span>
       <input class="inputSchool"></input>
       <image src="../../images/warning.png" class="tipIcon"/>
       <span class="tipFont">提交后不能再修改</span>
-      <button class="confirmButton">创建</button>
+      <button class="confirmButton" bindtap="comfirm">创建</button>
    </view>
 </page>

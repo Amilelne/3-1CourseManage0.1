@@ -211,8 +211,16 @@ Page(
       wx.navigateTo({url: './TeacherBindingUI',});
     }
   },
-
   AddSchool: function (e){
-    wx: wx.navigateTo({ url: './CreateSchoolUI'})
+   
+    wx.setStorage({
+      key:'city',
+      data:this.data.city.text,
+    })
+    wx.setStorage({
+      key: 'province',
+      data:this.data.province.text,
+    })
+     wx.navigateTo({ url: './CreateSchoolUI' })
   }
 })
