@@ -33,7 +33,7 @@ Page({
   onLoad: function (option) {
     console.log("StudentMain")
     const that = this
-    wx.getStorage({ //获得绑定页的姓名教工号
+    wx.getStorage({ //获得绑定页的姓名学号
       key: 'info',
       success: function (res) {
         that.userID = "学号：" + res.data.ID

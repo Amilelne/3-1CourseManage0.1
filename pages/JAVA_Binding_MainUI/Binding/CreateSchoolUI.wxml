@@ -13,6 +13,6 @@
       <input class="inputSchool"></input>
       <image src="../../images/warning.png" class="tipIcon"/>
       <span class="tipFont">提交后不能再修改</span>
-      <button class="confirmButton" bindtap="comfirm">创建</button>
+      <button class="confirmButton" bindtap="confirm">创建</button>
    </view>
 </page>

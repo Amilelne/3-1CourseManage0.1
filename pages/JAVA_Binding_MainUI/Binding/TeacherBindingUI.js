@@ -3,6 +3,7 @@ Page({
     userID: '',
     userName: '',
     userSchool: "",
+    first:0,
   },
   inputUserID: function (e) {
     this.userID = e.detail.value
@@ -24,7 +25,11 @@ Page({
       url: '../TeacherMainUI/TeacherMainUI',
     })
   },
-  chooseSchool:function(){
+    chooseSchool: function() {
+      wx.setStorage({
+        key: 'student_or_teacher',
+        data: '2',
+      })
     wx.redirectTo({
       url: 'ChooseSchool1',
     })
@@ -34,7 +39,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
     const that = this
     wx.getStorage({
       key: 'school',
@@ -43,8 +47,23 @@ Page({
           userSchool:res.data
         })
       },
+    }),
+    wx.getStorage({
+      key: 'userID',
+      success: function (res) {
+        that.setData({
+          userID: res.data
+        })
+      },
+    }),
+    wx.getStorage({
+      key: 'userName',
+      success: function (res) {
+        that.setData({
+          userName: res.data
+        })
+      },
     })
-
   },
 
   /**
@@ -65,14 +84,28 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+  wx.setStorage({
+    key: 'userID',
+    data: this.userID,
+  })
+  wx.setStorage({
+    key: 'userName',
+    data: this.userName,
+  })
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    wx.setStorage({
+      key: 'userID',
+      data: this.userID,
+    })
+    wx.setStorage({
+      key: 'userName',
+      data: this.userName,
+    })
   },
 
   /**

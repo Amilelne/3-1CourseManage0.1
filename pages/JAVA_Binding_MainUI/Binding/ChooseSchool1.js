@@ -208,7 +208,16 @@ Page(
         key: 'school',
         data: e.currentTarget.dataset.school,
       })
-      wx.navigateTo({url: './TeacherBindingUI',});
+      wx.getStorage({
+        key: 'student_or_teacher',
+        success: function(res) {
+          if(res.data==1)
+          wx.navigateTo({ url: './StudentBindingUI', })
+          else
+            wx.navigateTo({ url: './TeacherBindingUI', })
+        },
+      })
+      
     }
   },
   AddSchool: function (e){
@@ -221,6 +230,6 @@ Page(
       key: 'province',
       data:this.data.province.text,
     })
-     wx.navigateTo({ url: './CreateSchoolUI' })
+     wx.redirectTo({ url: './CreateSchoolUI' })
   }
 })
