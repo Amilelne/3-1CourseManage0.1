@@ -4,11 +4,15 @@ Page({
 data: {
   userID:'',
   userName:'',
-  userSchool:''
+  userSchool:'',
+  courses:["OOAD","J2EE","操作系统","数据仓库"],
   },
-  btnToCourse:function(){
+  btnToCourse:function(e){
+    var index = parseInt(e.currentTarget.dataset.index);
+    var coursename = this.data.courses[index];
+    console.log(coursename);
     wx.navigateTo({
-      url: '../../TeacherClass/ClassManage/ClassManage',
+      url: '../../TeacherClass/ClassManage/ClassManage?courseName=' + coursename,
     })
   },
   CheckInfo:function(){
