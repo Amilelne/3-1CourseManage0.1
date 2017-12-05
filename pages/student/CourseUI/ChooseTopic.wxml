@@ -2,7 +2,7 @@
 <page>
   <!--设置左上角的usersIcon-->
   <view class="blueUsersView">
-    <image src="users.png" class='blueUsersIcon' />
+    <image src="../../images/users.png" class='blueUsersIcon' />
     <span class="title">请为您的队伍选题</span>
   </view>
 
@@ -12,12 +12,12 @@
 
   <!--当选题未选完时框是蓝色的，要增加新框就直接复制-->
   <view class="blueTopicView" >
-    <span class="topic" >话题A</span>
+    <span class="topic" catchtap="showMessage">话题A</span>
     <view class="hrVertical"> </view>
     <span class="topicName">领域模型设计</span>
     <!--剩余选题数量大于等于2时-->
     <span class="leftNumWhite">剩余 ： 2/5</span>
-    <image bindtap="buttonShow" src='九点.png' class="nineIcon"></image>
+    <image bindtap="buttonShow" src="../../images/ninedot.png" class="nineIcon"></image>
   </view>
 
   <!--当点击九点时出现topic的简介-->
@@ -28,16 +28,25 @@
     <span class="topicDescribeText">
        领域模型分析，包括领域模型的Package Diagrams
     </span>
-
   </view>
 
   <view class="blueTopicView">
-    <span class="topic">话题B</span>
+    <span class="topic" catchtap="showMessage">话题B</span>
     <view class="hrVertical"> </view>
     <span class="topicName">包划分</span>
     <!--剩余选题为1时会变红-->
     <span class="leftNumRed">剩余 ： 1/5</span>
-    <image src='九点.png' class="nineIcon"></image>
+    <image src="../../images/ninedot.png" class="nineIcon" catchtap='clickTopicB'></image>
+  </view>
+
+  <!--当点击九点时出现topic的简介-->
+  <view wx:if="{{showTopicB}}" class="topicDescribeView">
+    <span class="topicDescribeTitle">
+      模块划分
+    </span>
+    <span class="topicDescribeText">
+       按照模块划分，估计出每个模块的工作量
+    </span>
   </view>
 
   <!--无剩余名额时选题框为灰色-->
@@ -46,6 +55,16 @@
     <view class="hrVertical"> </view>
     <span class="topicName">界面设计</span>
     <span class="leftNumWhite">剩余 ： 0/5</span>
-    <image src='九点.png' class="nineIcon"></image>
+    <image src="../../images/ninedot.png" class="nineIcon" catchtap='clickTopicC'></image>
+  </view>
+
+  <!--当点击九点时出现topic的简介-->
+  <view wx:if="{{showTopicC}}" class="topicDescribeView">
+    <span class="topicDescribeTitle">
+      界面设计
+    </span>
+    <span class="topicDescribeText">
+       设计界面，要求能完成需求小组制定的需求，美观，大方
+    </span>
   </view>
 </page>

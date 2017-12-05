@@ -5,12 +5,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-    show:false
+    show:false,
+    showTopicB:false,
+    showTopicC:false
   },
   //buttonShow事件处理函数
   buttonShow:function(){
     this.setData({
       show:(!this.data.show)
+    })
+  },
+  clickTopicB: function () {
+    this.setData({
+      showTopicB: (!this.data.showTopicB)
+    })
+  },
+  clickTopicC: function () {
+    this.setData({
+      showTopicC: (!this.data.showTopicC)
     })
   },
   //showMessage事件处理函数

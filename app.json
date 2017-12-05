@@ -6,6 +6,8 @@
     "pages/TeacherClass/CallInRoll/GroupInfoUI",
     "pages/TeacherClass/CallInRoll/RollCallListUI",    
     "pages/JAVA_Binding_MainUI/Binding/ChooseSchool1",
+    "pages/JAVA_Binding_MainUI/Binding/CourseInfoUI",
+    "pages/JAVA_Binding_MainUI/Binding/CourseUI",
     "pages/student/CourseUI/seminarHome", 
     "pages/student/CourseUI/grade",
     "pages/student/CourseUI/UnChooseTopic",
@@ -20,8 +22,7 @@
     "pages/JAVA_Binding_MainUI/Binding/CreateSchoolUI",
     "pages/JAVA_Binding_MainUI/Binding/TeacherBindingUI",
     "pages/JAVA_Binding_MainUI/Binding/StudentBindingUI",
-    "pages/student/CourseUI/CourseMain",
-    "pages/student/CourseUI/CourseInfo"
+    "pages/student/CourseUI/CourseMain"
   ],
   "window": {
     "backgroundTextStyle": "light",

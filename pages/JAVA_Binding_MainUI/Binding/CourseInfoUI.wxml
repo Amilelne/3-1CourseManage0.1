@@ -4,7 +4,7 @@
 	</view>
 <view  style="margin-top: 15%;">
 	<image class="img3" src="../../images/UserIcon.png"  alt=""/>
-<text class="FONT3">老师：邱明</text>
+  <text class="FONT3">老师：邱明</text>
 </view>
 	<view style="margin-top: 4%;"> 
 		<image class="img4" src="../../images/MailIcon.png" alt="" />

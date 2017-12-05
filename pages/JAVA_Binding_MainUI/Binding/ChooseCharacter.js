@@ -15,6 +15,6 @@ Page({
   onLoad: function (options) {
   },
   onReady:function(options){
-    
+
   }
 })
