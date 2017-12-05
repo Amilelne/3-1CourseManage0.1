@@ -16,8 +16,7 @@ Page({
     var classId = this.data.classes[index].id;
     var text = this.data.seminar.groupingMethod;
     wx.navigateTo({
-      // url: '../CallInRoll/RollCallUI?classid=' + classId + '&groupingMethod='+text+'&status='+this.data.status,
-      url: '../CallInRoll/RollCallUI',
+    url: '../CallInRoll/RollCallUI?classid=' + classId + '&groupingMethod='+text+'&status='+this.data.status,
     })
   },
 
