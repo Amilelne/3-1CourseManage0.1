@@ -34,14 +34,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.getStorage({
-      key: 'info',
-      success: function(res) {
-        this.setData({
-          userID:res.
-        })
-      },
-    })
     console.log("TeacherBindingNow")
   },
 
