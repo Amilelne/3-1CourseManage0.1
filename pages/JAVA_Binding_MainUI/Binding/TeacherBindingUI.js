@@ -39,6 +39,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var userInfo = {
+      ID: this.userID,
+      Name: this.userName,
+      School: this.userSchool
+    }
+    wx.setStorage({  //传递相应的参数
+      key: 'info',
+      data: userInfo,
+    })
     const that = this
     wx.getStorage({
       key: 'school',
