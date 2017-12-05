@@ -3,7 +3,7 @@ Page({
   data: {
     userID:'',
     userName:'',
-    userSchool:"厦门大学",
+    userSchool:"",
     first:true,
   },
   inputUserID:function(e)
