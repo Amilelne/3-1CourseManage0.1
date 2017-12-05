@@ -32,6 +32,7 @@ data: {
    */
   onLoad: function (option) {
     console.log("TeacherMain")
+    /*
     const that = this
     wx.getStorage({ //获得绑定页的姓名教工号
       key: 'info',
@@ -46,6 +47,18 @@ data: {
             userSchool:"学校："+res.data.School
           })
       },
+    })*/
+    const that = this
+    wx.request({
+      url: 'http://120.77.173.98:8301/me',
+      method: "GET",
+      success: function (res) {
+        that.setData({
+          userID: "教工号：" + res.data.number,
+          userName: "姓名：" + res.data.type,
+          userSchool: "学校：" + res.data.School
+        })
+      }
     })
   },
 

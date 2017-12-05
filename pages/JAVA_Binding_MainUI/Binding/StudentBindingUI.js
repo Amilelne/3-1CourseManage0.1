@@ -4,6 +4,7 @@ Page({
     userID:'',
     userName:'',
     userSchool:"厦门大学",
+    first:true,
   },
   inputUserID:function(e)
   {
@@ -38,6 +39,7 @@ Page({
   },
   onLoad: function (options) {
     const that = this
+      this.first=true
     wx.getStorage({
       key: 'school',
       success: function (res) {
@@ -62,8 +64,6 @@ Page({
           })
         },
       })
-      console.log(this.userName)
-      console.log(this.userID)
   },
 
   /**

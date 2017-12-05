@@ -12,7 +12,7 @@ Page({
     })
   },
   CheckInfo: function () {
-    const that = this
+    const that = this/*
     var checkinfo =
       {
         Name: that.userName,
@@ -22,7 +22,7 @@ Page({
     wx.setStorage({
       key: 'cinfo-student',
       data: checkinfo,
-    })
+    })*/
     wx.navigateTo({
       url: '../StudentMainUI/CheckStudentInfo',
     })
@@ -32,6 +32,7 @@ Page({
    */
   onLoad: function (option) {
     console.log("StudentMain")
+    /*
     const that = this
     wx.getStorage({ //获得绑定页的姓名学号
       key: 'info',
@@ -46,6 +47,19 @@ Page({
             userSchool: "学校：" + res.data.School
           })
       },
+    })*/
+    const that=this
+    wx.request({
+      url: 'http://120.77.173.98:8301/me',
+      method:"GET",
+      success:function(res)
+      {
+        that.setData({
+          userID: "学号：" + res.data.number,
+          userName: "姓名：" + res.data.type,
+          userSchool: "学校：" + res.data.School
+        })
+      }
     })
   }
 })
