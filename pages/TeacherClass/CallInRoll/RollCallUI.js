@@ -73,6 +73,25 @@ Page({
       status: options.status,
     });
     console.log("Teacher enters the RollCall page under a "+this.data.groupingMethod+" method with "+this.data.status+" status");
+    var that=this;
+    wx.request({
+      url: 'http://120.77.173.98:8301/class/1',
+      method:"GET",
+      success: function (res) {
+        console.log(res.data);
+        that.setData({ classNode: res.data });
+      }
+    });
+    wx.request({
+      url: 'http://120.77.173.98:8301//seminar/1/class/1/attendance',
+      method: "GET",
+      success: function (res) {
+        console.log(res.data);
+        var ros=that.data.roster;
+        ros.attend.num = res.data.numPresent;
+        that.setData({ roster: ros});
+      }
+    });
   },
 
   /**

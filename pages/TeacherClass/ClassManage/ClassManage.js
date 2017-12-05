@@ -26,14 +26,14 @@ Page({
   onLoad: function (options) {
     console.log("Teacher enters the classManage page of one seminar");
     var that=this;
-    // wx.request({
-    //   url: 'http://120.77.173.98:8301/course/1',
-    //   method: "GET",
-    //   success: function (res) {
-    //     console.log(res.data);
-    //     that.setData({ course: res.data });
-    //   }
-    // });
+    wx.request({
+      url: 'http://120.77.173.98:8301/course/1',
+      method: "GET",
+      success: function (res) {
+        console.log(res.data);
+        that.setData({ course: res.data });
+      }
+    });
     wx.request({
       url: 'http://120.77.173.98:8301/course/1/class',
       method: "GET",
