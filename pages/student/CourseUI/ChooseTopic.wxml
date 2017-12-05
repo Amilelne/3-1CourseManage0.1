@@ -12,11 +12,11 @@
 
   <!--当选题未选完时框是蓝色的，要增加新框就直接复制-->
   <view class="blueTopicView" >
-    <span class="topic" catchtap="showMessage">话题A</span>
+    <span class="topic" catchtap="showMessage1">话题A</span>
     <view class="hrVertical"> </view>
     <span class="topicName">领域模型设计</span>
     <!--剩余选题数量大于等于2时-->
-    <span class="leftNumWhite">剩余 ： 2/5</span>
+    <span class="{{leftnumcolor1}}">剩余 ： {{value1}}/5</span>
     <image bindtap="buttonShow" src="../../images/ninedot.png" class="nineIcon"></image>
   </view>
 
@@ -30,12 +30,12 @@
     </span>
   </view>
 
-  <view class="blueTopicView">
-    <span class="topic" catchtap="showMessage">话题B</span>
+  <view class="{{topicView2}}">
+    <span class="topic" catchtap="showMessage2">话题B</span>
     <view class="hrVertical"> </view>
     <span class="topicName">包划分</span>
     <!--剩余选题为1时会变红-->
-    <span class="leftNumRed">剩余 ： 1/5</span>
+    <span class="{{leftnumcolor2}}">剩余 ：{{value2}}/5</span>
     <image src="../../images/ninedot.png" class="nineIcon" catchtap='clickTopicB'></image>
   </view>
 

@@ -7,7 +7,12 @@ Page({
   data: {
     show:false,
     showTopicB:false,
-    showTopicC:false
+    showTopicC:false,
+    value1:2,
+    value2:1,
+    leftnumcolor1:'leftNumWhite',
+    leftnumcolor2:'leftNumRed',
+    topicView2:'blueTopicView',
   },
   //buttonShow事件处理函数
   buttonShow:function(){
@@ -26,7 +31,8 @@ Page({
     })
   },
   //showMessage事件处理函数
-  showMessage:function(){
+  showMessage1:function(){
+    const that=this
     wx.showModal({
       title: '提示',
       content:'确定选择此话题吗(一旦选择，不可修改)?',
@@ -34,6 +40,27 @@ Page({
         if(res.confirm){
           console.log('choose')
         }
+        that.setData({
+          value1:1,
+          leftnumcolor1:'leftNumRed',
+        })
+      }
+    })
+  },
+  showMessage2: function () {
+    const that = this
+    wx.showModal({
+      title: '提示',
+      content: '确定选择此话题吗(一旦选择，不可修改)?',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('choose')
+        }
+        that.setData({
+          value2: 0,
+          leftnumcolor2: 'leftNumWhite',
+          topicView2:'greyTopicView'
+        })
       }
     })
   },
