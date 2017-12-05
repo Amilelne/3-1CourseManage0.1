@@ -11,5 +11,10 @@ Page({
     wx.navigateTo({
       url: '../Binding/StudentBindingUI',
     })
+  },
+  onLoad: function (options) {
+  },
+  onReady:function(options){
+    
   }
 })
