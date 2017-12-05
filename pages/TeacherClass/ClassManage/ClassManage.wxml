@@ -19,7 +19,7 @@
   </view>
 
   <!--讨论课的班级，利用列表渲染 wx:for-->
-  <block wx:for-items="{{classes}}">
+  <block wx:for-items="{{classes}}" wx:key="this">
     <view class="classView" data-index="{{index}}" bindtap='classbtn'>
       <image src="../../images/ClassManage.png" mode='widthFix' class="classIcon"/>
       <p class="className">{{item.name}}</p>
