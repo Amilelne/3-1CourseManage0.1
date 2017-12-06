@@ -6,9 +6,9 @@
       <span class="topName">{{userName}}</span>
       <span class="topID">{{userID}}</span>
    </view>
-   <view class="mainView">
-   <block wx:for="{{courses}}">
-    <button class="button{{index+1}}" data-index="{{index}}" catchtap='btnToCourse'>{{item}}</button>
-    </block>
+   <view class="mainView" wx:for="{{courses}}" wx:key="this">
+    <view class="oneRow" data-index="{{index}}" catchtap='btnToCourse'>
+      <text class="course">{{item}}</text>
+    </view>
    </view>
 </page>

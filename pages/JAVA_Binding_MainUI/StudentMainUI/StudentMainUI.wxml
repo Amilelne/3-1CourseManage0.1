@@ -6,10 +6,12 @@
       <span class="topName">{{userName}}</span>
       <span class="topID">{{userID}}</span>
    </view>
-   <view class="mainView" >
-   <block wx:for="{{courtea}}" wx:key="this">
-    <button class="button{{index+1}}" data-index="{{index}}" catchtap="btnToCourse" >{{item.course}}</button>
-    <span class="teacher{{index+1}}">教师：{{item.teacher}}</span>
-    </block>
+   <view class="mainView">
+      <block  wx:for="{{courtea}}" wx:key="this">
+        <view class='oneRow' data-index="{{index}}" catchtap="btnToCourse">
+          <text class="course">{{item.course}}</text>
+          <text class="teacher">教师：{{item.teacher}}</text>
+        </view>
+      </block>
    </view>
 </page>
