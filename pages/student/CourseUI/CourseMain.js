@@ -1,12 +1,14 @@
 // pages/index/CourseUI.js
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    seminar_list: [],
-    courseName:"",
+    seminar_list: [
+    {id:29,name:"界面原型设计",description:"界面原型设计",groupingMethod:"fixed",startTime:"2017-09-25",state:1},
+     { id:29, name:"界面原型设计", description:"界面原型设计", groupingMethod:"fixed", startTime:"2017-09-25",state:0},
+    ],
+    courseName:"OOAD",
   },
 
   /**
