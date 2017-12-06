@@ -5,10 +5,13 @@ Page({
     userID: '',
     userName: '',
     userSchool: '',
+    courtea: [{ course: "J2EE", teacher: "邱明" }, { course: "OOAD", teacher: "邱明" }, { course: "操作系统", teacher: "吴清强" }, { course: "数据仓库", teacher: "王鸿吉"} ],
   },
-  btnToCourse:function(){
+  btnToCourse:function(e){
+    var index = parseInt(e.currentTarget.dataset.index);
+    var coursename=this.data.courtea[index].course;
     wx.navigateTo({
-      url: '../../student/CourseUI/CourseMain',
+      url: '../../student/CourseUI/CourseMain?courseName='+coursename,
     })
   },
   CheckInfo: function () {

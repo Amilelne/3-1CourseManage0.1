@@ -1,6 +1,6 @@
 <page class="page">
 <view class="head20">
-	  <text class="FONT1"> OOAD</text>
+	  <text class="FONT1"> {{courseName}}</text>
 </view>
 <scroll-view style="position:absolute;background-color: #ffffff;left: 0rpx;width: 100%;height: 86%;margin-top: 0%;" scroll-y="true">
   <view wx:for="{{seminar_list}}" class="{{item.state==1?'box3':'box4'}}" bindtap='enterSeminar' data-state="{{item.state}}">

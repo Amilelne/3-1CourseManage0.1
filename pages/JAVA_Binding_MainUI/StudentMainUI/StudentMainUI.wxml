@@ -7,13 +7,9 @@
       <span class="topID">{{userID}}</span>
    </view>
    <view class="mainView" >
-    <button class="button1" catchtap="btnToCourse" >J2EE</button>
-    <span class="teacher1">教师：邱明</span>
-    <button class="button2" >OOAD</button>
-    <span class="teacher2">教师：邱明</span>
-    <button class="button3">操作系统</button>
-    <span class="teacher3">教师：吴清强</span>
-    <button class="button4">数据仓库</button>
-    <span class="teacher4">教师：王鸿吉</span>
+   <block wx:for="{{courtea}}" wx:key="this">
+    <button class="button{{index+1}}" data-index="{{index}}" catchtap="btnToCourse" >{{item.course}}</button>
+    <span class="teacher{{index+1}}">教师：{{item.teacher}}</span>
+    </block>
    </view>
 </page>

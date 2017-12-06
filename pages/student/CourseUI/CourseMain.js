@@ -6,12 +6,14 @@ Page({
    */
   data: {
     seminar_list: [],
+    courseName:"",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({courseName:options.courseName});
     var self = this;
     var $i;
     wx.request({
