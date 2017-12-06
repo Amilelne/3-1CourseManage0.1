@@ -5,13 +5,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    classNode: { id: 23, name: '班级1', numStudent: 40, time: [{ week: 1, day: 1, lessons: [1, 2], site: '海韵201' }, { week: 0, day: 3, lessons: [3, 4], site: '公寓405' }], calling: true, roster: '/roster/周三12班.xlsx', proportions: { '3': 20, '4': 60, '5': 20, report: 50, presentation: 50 } },
+    classNode: { id: 23, name: '班级1', numStudent: 0, time: [{ week: 1, day: 1, lessons: [1, 2], site: '海韵201' }, { week: 0, day: 3, lessons: [3, 4], site: '公寓405' }], calling: true, roster: '/roster/周三12班.xlsx', proportions: { '3': 20, '4': 60, '5': 20, report: 50, presentation: 50 } },
     roster: { id: 132, calling: 0, classid: 23, attend: { num: 0, list: [] }, late: { num: 0, list: [] } },
     groupingMethod:"random",
     status:"calling",
+    num:0,
+    allnum:40
   },
-
-  
 
   endModal: function () {
     var that=this;
@@ -25,6 +25,9 @@ Page({
         if (res.confirm) {
           console.log("Teacher confirm endRollCall");
           that.setData({ status: "called" });
+          that.setData({
+            num:40
+          })
         } else {
           console.log("Teacher cancel endRollCall");
         }
