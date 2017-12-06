@@ -20,6 +20,14 @@ Page({
       status: options.status,
     });
     console.log("Teacher enters the RollCallListUI page under a "+options.groupingMethod+" method and a "+this.data.status+" status");
+    var that = this;
+    wx.request({
+      url: 'http://120.77.173.98:8301/seminar/3/class/1/attendance/present',
+      method: "GET",
+      success: function (res) {
+        console.log(res.data);
+      }
+    });
   },
 
   /**

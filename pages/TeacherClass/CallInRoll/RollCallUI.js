@@ -5,13 +5,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    classNode: { id: 23, name: '班级1', numStudent: 0, time: [{ week: 1, day: 1, lessons: [1, 2], site: '海韵201' }, { week: 0, day: 3, lessons: [3, 4], site: '公寓405' }], calling: true, roster: '/roster/周三12班.xlsx', proportions: { '3': 20, '4': 60, '5': 20, report: 50, presentation: 50 } },
+    classNode: { id: 23, name: '班级1', numStudent: 40, time: [{ week: 1, day: 1, lessons: [1, 2], site: '海韵201' }, { week: 0, day: 3, lessons: [3, 4], site: '公寓405' }], calling: true, roster: '/roster/周三12班.xlsx', proportions: { '3': 20, '4': 60, '5': 20, report: 50, presentation: 50 } },
     roster: { id: 132, calling: 0, classid: 23, attend: { num: 0, list: [] }, late: { num: 0, list: [] } },
     groupingMethod:"random",
     status:"calling",
-    num:0,
-    allnum:40
   },
+
+  
 
   endModal: function () {
     var that=this;
@@ -24,10 +24,17 @@ Page({
       success: function (res) {
         if (res.confirm) {
           console.log("Teacher confirm endRollCall");
+          wx.request({
+            url: 'http://120.77.173.98:8301//seminar/1/class/1/attendance',
+            method: "GET",
+            success: function (res) {
+              console.log(res.data);
+              var ros = that.data.roster;
+              ros.attend.num = res.data.numPresent;
+              that.setData({ roster: ros });
+            }
+          });
           that.setData({ status: "called" });
-          that.setData({
-            num:40
-          })
         } else {
           console.log("Teacher cancel endRollCall");
         }
@@ -43,7 +50,20 @@ Page({
   },
 
   bigbtn1_1:function(){
-    this.setData({status:"calling"});
+    var that=this;
+    wx.request({
+      url: 'http://120.77.173.98:8301//seminar/1/class/1/attendance',
+      method: "GET",
+      success: function (res) {
+        console.log(res.data);
+        var ros = that.data.roster;
+        ros.attend.num = res.data.numPresent;
+        that.setData({ roster: ros });
+      }
+    });
+    this.setData({
+      status:"calling"
+    });
     console.log("Teacher starts calling in roll");
   },
 
@@ -90,9 +110,9 @@ Page({
       method: "GET",
       success: function (res) {
         console.log(res.data);
-        var ros=that.data.roster;
-        ros.attend.num = res.data.numPresent;
-        that.setData({ roster: ros});
+        var ros = that.data.roster;
+        ros.attend.num = 0;
+        that.setData({ roster: ros });
       }
     });
   },
