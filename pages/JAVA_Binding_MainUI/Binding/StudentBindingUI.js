@@ -56,15 +56,24 @@ Page({
     }
     //***********************************将个人信息存储到数据库
     wx.request({
-      url: 'http://localhost:8090/me',
+      url: app.data._preUrl+'/register',
       data:{
-
+        id:app.data._userID,
+        phone:'188',
+        wechatId:'wecharid',
+        openid:'199',
+        avatar:'',
+        password:'',
+        name:app.data._userName,
+        school:{
+          name:app.data._schoolName
+        },
+        number:app.data._userID,
+        type:0,
       },
-      method:'GET',
-      success: function (res) {
-        console.log(res.data)
-      }
+      method:'POST',
     })
+    
     //页面导航到下一页
     wx.setStorage({  //传递相应的参数
       key: 'info',

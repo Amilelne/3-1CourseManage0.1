@@ -4,35 +4,47 @@ Page({
    * 页面的初始数据
    */
   data: {
-    seminar_list: [
-    {id:29,name:"界面原型设计",description:"界面原型设计",groupingMethod:"fixed",startTime:"2017-09-25",state:1},
+    seminar_list: [],
+    /*{id:29,name:"界面原型设计",description:"界面原型设计",groupingMethod:"fixed",startTime:"2017-09-25",state:1},
      { id:29, name:"界面原型设计", description:"界面原型设计", groupingMethod:"fixed", startTime:"2017-09-25",state:0},
-    ],
-    courseName:"OOAD",
+    ]*/
+    courseName:"",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({courseName:options.courseName});
-    var self = this;
+    //****************获得各个seminar，以及获得上面的标题 
+    var courseName;
+    var app=getApp()
+    const that=this;
+    /*貌似/course/courseid出现了问题
+    wx.request({
+      url: app.data._preUrl+'/course/'+options.courseID,
+      method:'GET',
+      success:function(res)
+      {
+        console.log(res.data.name)
+        that.setData({
+          courseName: res.data.name,
+          });
+      }
+    })*/
     var $i;
     wx.request({
-      url: "http://120.77.173.98:8301/course/1/seminar",
+      url: app.data._preUrl + '/course/' + options.courseID+'/seminar',
       data: {
         embedGrade: true
       },
       type: "GET",
+      /*header:{
+        'Authorization': 'Bearer '+app._jwt,
+      },*/
       success: function (res) {
-        console.log(res);
+        console.log(res.data);
         for ($i = 0; $i < res.data.length; $i++) {
-          var s1 = "seminar_list[" + $i + "].property";
-          var s2 = "seminar_list[" + $i + "].state";
-          self.setData({
-            [s1]: res.data[$i],
-            [s2]: 1
-          });
+          that.data.seminar_list.push({ "id": res.data[$i].id, "name": res.data[$i].name, "groupingMethod": res.data[$i].groupingMethod, "startTime": res.data[$i].startTime, "endTime": res.data[$i].endTime})
         }
 
       }

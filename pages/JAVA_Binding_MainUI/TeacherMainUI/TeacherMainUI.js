@@ -47,7 +47,7 @@ data: {
      * 获取course数据
      */
     wx.request({
-      url: 'http://localhost:8090/course?userId=1',
+      url: app.data._preUrl+'/course?userId=1',
       success:function(res){
         console.log(res.data)
         that.setData({
