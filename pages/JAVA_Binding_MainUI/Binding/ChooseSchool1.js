@@ -161,11 +161,12 @@ Page(
   },
 
   chooseItem: function (e) {
+    var app=getApp()
     if(this.data.state=='none')
     {
       var $i,$j;
       var $current_province = e.currentTarget.dataset.province;
-
+      app.data._schoolProvince = e.currentTarget.dataset.province;
       this.setData({
         province: {id : 'province', text: $current_province},
         state: "province_chosen"
@@ -179,6 +180,7 @@ Page(
             var that = this;
             var up = "city_list_displayed[" + $j + "].city";
             that.setData({ [up]: this.data.city_list[$i][$j].city })
+            
           }
         }
       }
@@ -187,6 +189,7 @@ Page(
     {
       var $i,$j
       var $current_city = e.currentTarget.dataset.city;
+      app.data._schoolCity = e.currentTarget.dataset.city;
       this.setData({
         city: { id: 'city', text: $current_city },
         state: "city_chosen"
@@ -204,6 +207,7 @@ Page(
     else if (this.data.state == 'city_chosen')
     {
       var $current_school = e.currentTarget.dataset.school;
+      app.data._userSchool = e.currentTarget.dataset.school;
       wx.setStorage({
         key: 'school',
         data: e.currentTarget.dataset.school,

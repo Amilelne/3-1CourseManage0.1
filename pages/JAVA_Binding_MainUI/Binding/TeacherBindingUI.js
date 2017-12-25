@@ -3,7 +3,7 @@ Page({
     userID: '',
     userName: '',
     userSchool: "",
-    first:0,
+    first:0
   },
   inputUserID: function (e) {
     this.userID = e.detail.value
@@ -12,6 +12,23 @@ Page({
     this.userName = e.detail.value
   },
   ConfirmButton: function () {
+    const that=this
+    var app = getApp()
+    if(app.data._hasSetName==false)
+    {
+      app.data._hasSetName=true
+      app.data._userName=that.userName
+    }
+    if (app.data._hasSetID==false)
+    {
+      app.data._hasSetID=true
+      app.data._userID = that.userID
+    }
+    if (app.data._hasSetSchool==false)
+    {
+      app.data._hasSetSchool=true
+      app.data._userSchool=that.userSchool
+    }
     var userInfo = {
       ID: this.userID,
       Name: this.userName,
@@ -26,6 +43,16 @@ Page({
     })
   },
     chooseSchool: function() {
+      const that=this
+      var app = getApp()
+      if (app.data._hasSetName==false) {
+        app.data._hasSetName = true;
+        app.data._userName = that.userName
+      }
+      if (app.data._hasSetID==false) {
+        app.data._hasSetID = true;
+        app.data._userID = that.userID
+      }
       wx.setStorage({
         key: 'student_or_teacher',
         data: '2',

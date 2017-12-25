@@ -36,33 +36,11 @@ data: {
    */
   onLoad: function (option) {
     console.log("TeacherMain")
-    /*
     const that = this
-    wx.getStorage({ //获得绑定页的姓名教工号
-      key: 'info',
-      success: function (res) {
-        that.userID = "教工号：" + res.data.ID
-        that.userName="姓名：" + res.data.Name
-        that.userSchool= "学校：" + res.data.School
-        that.setData
-          ({
-            userID: "教工号：" + res.data.ID,
-            userName: "姓名：" + res.data.Name,
-            userSchool:"学校："+res.data.School
-          })
-      },
-    })*/
-    const that = this
-    wx.request({
-      url: 'http://120.77.173.98:8301/me',
-      method: "GET",
-      success: function (res) {
-        that.setData({
-          userID: "教工号：" + res.data.number,
-          userName: "姓名：" + res.data.type,
-          userSchool: "学校：" + res.data.School
-        })
-      }
+    var app=getApp()
+    that.setData({
+      userID:"教工号"+app.data._userID,
+      userName:"姓名:"+app.data._userName
     })
   },
 

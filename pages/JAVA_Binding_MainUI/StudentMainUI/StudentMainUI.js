@@ -15,17 +15,7 @@ Page({
     })
   },
   CheckInfo: function () {
-    const that = this/*
-    var checkinfo =
-      {
-        Name: that.userName,
-        ID: that.userID,
-        School: that.userSchool,
-      }
-    wx.setStorage({
-      key: 'cinfo-student',
-      data: checkinfo,
-    })*/
+    const that = this
     wx.navigateTo({
       url: '../StudentMainUI/CheckStudentInfo',
     })
@@ -34,35 +24,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
+
     console.log("StudentMain")
-    /*
     const that = this
-    wx.getStorage({ //获得绑定页的姓名学号
-      key: 'info',
-      success: function (res) {
-        that.userID = "学号：" + res.data.ID
-        that.userName = "姓名：" + res.data.Name
-        that.userSchool = "学校：" + res.data.School
-        that.setData
-          ({
-            userID: "学号：" + res.data.ID,
-            userName: "姓名：" + res.data.Name,
-            userSchool: "学校：" + res.data.School
-          })
-      },
-    })*/
-    const that=this
-    wx.request({
-      url: 'http://120.77.173.98:8301/me',
-      method:"GET",
-      success:function(res)
-      {
-        that.setData({
-          userID: "学号：" + res.data.number,
-          userName: "姓名：" + res.data.type,
-          userSchool: "学校：" + res.data.School
-        })
-      }
+    var app = getApp()
+    that.setData({
+      userID: "学号" + app.data._userID,
+      userName: "姓名:" + app.data._userName
     })
   }
 })

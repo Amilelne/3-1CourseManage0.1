@@ -32,29 +32,19 @@ Page({
   onLoad: function (options) {
     console.log("CheckTeacherInfo")
     const that = this
-    /*
-    wx.getStorage({ //获得绑定页的姓名学号
-      key: 'cinfo-student',
-      success: function (res) {
-        that.setData
-          ({
-            userID: res.data.ID,
-            userName: res.data.Name,
-            userSchool: res.data.School
-          })
-      },
-    })*/
-    wx.request({
-      url: 'http://120.77.173.98:8301/me',
-      method:"GET",
-      success: function(res) {
-        that.setData({
-          userID: "学号：" + res.data.number,
-          userName: "姓名：" + res.data.type,
-          userSchool: "学校：厦门大学",
-        })
-        console.log(res)
-      },
+    var app=getApp()
+     that.setData({
+      userID:"学号:"+app.data._userID,
+      userName:"姓名:"+app.data._userName,
+      userSchool: "学校:"+app.data._userSchool,
     })
-  },
+     wx.getStorage({
+       key: 'school',
+       success: function (res) {
+         that.setData({
+           userSchool: "学校:" + res.data
+         })
+    }
+     })
+  }
 })
