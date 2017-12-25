@@ -2,7 +2,7 @@
 var WXBizDataCrypt = require('./utils/RdWXBizDataCrypt.js');
 var AppId ='wx0e1ff5086222b3e9';
 var AppSecret = '5599d7f48b4306bd8a3809538fa5323b';
-var app=getApp();
+var that = this;
 
 App({
   data: {
@@ -18,51 +18,64 @@ App({
     _courseID:1,
     _classID:1,
     _seminarID:1,
-    _preUrl:'http://localhost:8090'
+    _preUrl:'http://localhost:8080',
+
+    _openId:'',
+    _userId:'',
   },
+  
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-    var that=this;
-
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if(res.code){
-          console.log(res);
+          //var that=this;
           wx.request({
-            url: app.data._preUrl+'/auth/weChat',
+            url: 'http://localhost:8080/auth/weChat',
             data:{
-              code:res.code
+              code:res.code,
+              "type":0
             },
             header:{
-              "content-type":"application/x-www-form-urlencoded"
+              "content-type":"application/json"
             },
             method:'POST',
             success:function(res){
               console.log(res.data);
-              //保存3rdSession到storage中
-              var pc=new WXBizDataCrypt(AppId,res.data.session_key);
-              wx.getUserInfo({
-                success: function (res) {
-                  var dedata = pc.decryptData(res.encryptedData, res.iv);
-                  that.setData({openId:dedata.openId});
-                  //保存解密后的信息到storage中
-                  wx.setStorage({
-                    key: 'decryptData',
-                    data: dedata,
-                  })
-                  console.log('解密后 data: ', data);
-                }
-              })
               wx.setStorage({
-                key: 'thirdSession',
-                data: res.data.thridSession,
+                key: 'jwt',
+                data: res.data.jwt,
               });
+              wx.setStorage({
+                key: 'openid',
+                data: res.data.openid,
+              });
+              wx.setStorage({
+                key: 'userId',
+                data: res.data.userId,
+              });
+              // app.data._openId = res.data.openid;
+              // app.data._userId = res.data.userId;
+              // var _openId = res.data.openid;
+              // var _userId = res.data.userId;
+              // that.setData(_openId);
+              // that.setData(_userId);
+              // that.setData({
+              //   _openId:"res.data.openid",
+              //   _userId:"res.data.userId",
+              // });
+              // app.data._openId = res.data.openid;
+              // app.data._userId = res.data.userId;
+              // app.setData({
+              //   _openId:res.data.openid,
+              //   _userId:res.data.userId,
+              // });
             },
             fail:function(res){
               console.log(res);

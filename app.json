@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/JAVA_Binding_MainUI/Binding/ChooseCharacter",
     "pages/TeacherClass/ClassManage/ClassManage",
     "pages/TeacherClass/CallInRoll/RollCallUI",
