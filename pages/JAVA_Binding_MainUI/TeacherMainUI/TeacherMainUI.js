@@ -9,10 +9,11 @@ data: {
   },
   btnToCourse:function(e){
     var index = parseInt(e.currentTarget.dataset.index);
-    var coursename = this.data.courses[index];
-    console.log(coursename);
+    var course = this.data.courses[index];
+    var app = getApp();
+    app.data._courseID = this.data.courses[index].id;
     wx.navigateTo({
-      url: '../../TeacherClass/ClassManage/ClassManage?courseName=' + coursename,
+      url: '../../TeacherClass/ClassManage/ClassManage?courseName=' + course.name,
     })
   },
   CheckInfo:function(){

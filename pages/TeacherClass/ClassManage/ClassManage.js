@@ -6,6 +6,7 @@ Page({
    */
   data: {
     course: { id: 23, name: 'OOAD', description: '面向对象设计与分析' },
+    courseName:'',
     seminar: { id: 29, name: '讨论课4', description: '界面原型设计', groupingMethod: 'random', startTime: '2017-10-09', endTime: '2017-10-24' },
     classes: [{ id: 23, name: '班级1' }, { id: 46, name: '班级2' }, { id: 47, name: '班级3' }],
     status:"tocall",
@@ -25,19 +26,11 @@ Page({
    */
   onLoad: function (options) {
     console.log("Teacher enters the classManage page of one seminar");
+    console.log(options)
     var that=this;
-    wx.request({
-      url: 'http://120.77.173.98:8301/course/1',
-      method: "GET",
-      success: function (res) {
-        console.log(res.data);
-        var da = res.data;
-        da.name = options.courseName;
-        console.log(options.courseName);
-        that.setData({ course: da });
-      }
-    });
-    
+    that.setData({
+      courseName:options.courseName
+    })
     wx.request({
       url: 'http://120.77.173.98:8301/course/1/class',
       method: "GET",
