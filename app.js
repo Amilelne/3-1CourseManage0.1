@@ -25,6 +25,34 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        // if(res.code){
+        //   console.log(res);
+        //   wx.request({
+        //     url: '',
+        //     data:{
+        //       code:res.code
+        //     },
+        //     header:{
+        //       "content-type":"application/x-www-form-urlencoded"
+        //     },
+        //     method:'POST',
+        //     success:function(res){
+        //       console.log(res.data);
+        //       //var data=res.data;
+        //       //var json=JSON.parse(data)
+        //       //保存3rdSession到storage中
+        //       wx.setStorage({
+        //         key: 'thirdSession',
+        //         data: res.data.thridSession,
+        //       })
+        //     },
+        //     fail:function(res){
+        //       console.log(res);
+        //     }
+        //   })
+        // }else{
+        //   console.log('获取用户登录失败：'+res.errMsg);
+        // }
       }
     })
     // 获取用户信息

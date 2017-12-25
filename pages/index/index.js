@@ -16,6 +16,31 @@ Page({
     })
   },
   onLoad: function () {
+    //可以避免session-key过期的情况
+    // wx.getUserInfo({
+    //   success:function(res){
+    //     console.log(res);
+    //     wx.request({
+    //       url: '',
+    //       data:{
+    //         thirdSesssion:wx.getStorageSync('thirdSession'),
+    //         encryptedData:res.encryptedData,
+    //         iv:res.iv
+    //       },
+    //       header:{
+    //         "content-type":"application/x-www-form-urlencoded"
+    //       },
+    //       method:'POST',
+    //       success:function(res){
+    //         console.log('更新成功');
+    //       },
+    //       fail:function(res){
+    //         console.log('用户拒绝');
+    //         console.log(res);
+    //       }
+    //     })
+    //   }
+    // })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
