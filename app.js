@@ -1,5 +1,16 @@
 //app.js
 App({
+  data: {
+  _userName:'',
+  _userID:'',
+  _userSchool:'',
+  _userType:1,    //0:学生，1：老师
+  _hasSetName:false,
+  _hasSetID:false,
+  _hasSetSchool:false,
+  _schoolCity:'',
+  _schoolProvince:''
+  },
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
