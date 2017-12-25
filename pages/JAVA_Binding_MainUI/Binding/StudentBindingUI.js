@@ -34,6 +34,7 @@ Page({
   },
   ConfirmButton:function()
   {
+    //设置参数
     const that = this
     var app = getApp()
     if (app.data._hasSetName == false) {
@@ -53,6 +54,18 @@ Page({
       Name:this.userName,
       School:this.userSchool,
     }
+    //***********************************将个人信息存储到数据库
+    wx.request({
+      url: 'http://localhost:8090/me',
+      data:{
+
+      },
+      method:'GET',
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
+    //页面导航到下一页
     wx.setStorage({  //传递相应的参数
       key: 'info',
       data: userInfo,

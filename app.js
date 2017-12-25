@@ -12,7 +12,8 @@ App({
   _schoolProvince:'',
   _courseID:1,
   _classID:1,
-  _seminarID:1
+  _seminarID:1,
+  _preUrl:'http://localhost:8090'
   },
   onLaunch: function () {
     // 展示本地存储能力

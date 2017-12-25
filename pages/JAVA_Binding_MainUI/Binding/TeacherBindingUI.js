@@ -12,6 +12,7 @@ Page({
     this.userName = e.detail.value
   },
   ConfirmButton: function () {
+    //设置全局变量
     const that=this
     var app = getApp()
     if(app.data._hasSetName==false)
@@ -38,6 +39,18 @@ Page({
       key: 'info',
       data: userInfo,
     })
+    //***********************************将个人信息存储到数据库
+    wx.request({
+      url: app.data._preUrl+'/me',
+      data: {
+
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
+    //导航到下一页
     wx.redirectTo({
       url: '../TeacherMainUI/TeacherMainUI',
     })

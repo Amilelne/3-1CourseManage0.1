@@ -16,17 +16,7 @@ Page({
     key: 0, //评分
     groupId: 0 //第一组
   },
-  //selectHeart事件处理函数
   selectHeart: function (e) {
-    // const key = parseInt(e.target.dataset.key);
-    // const groupId = parseInt(e.curentTarget.groupId);
-    // console.log(e.target.dataset.key);
-    // console.log(e.curentTarget.groupId);
-    // this.setData({
-    //     key: key,
-    //     groupId: groupId
-    // });
-
     const groupIndex = e.currentTarget.id;
     const score = e.target.dataset.score;
     console.log(groupIndex, score);
@@ -36,8 +26,26 @@ Page({
       groups: groups
     });
   },
-  //提交
+  //*******************************提交打分表到数据库
   submit:function(){
+    /* 提交到数据库的操作
+    var app=getApp()
+    var $i;
+    for($i=0;$i<this.data.groups.length;$i++)
+    {
+      wx.request({
+        url: 'http://localhost:8090/group/' + this.data.groups[$i].id + '/grade/presentation/' +parseInt(app.data._userID),
+        method:'PUT',
+        data: {
+          //topicId:,此时无法获得topicId
+          grade:this.data.groups[$i].score
+        },
+        success: function (res) {
+          console.log(res.data)
+        }
+      })
+    }*/
+    
     const that = this;
     wx.showModal({
       title: '提示',

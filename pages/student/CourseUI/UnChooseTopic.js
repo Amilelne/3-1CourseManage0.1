@@ -14,9 +14,21 @@ Page({
     isLeader: false
   },
 
-  //toBeLeader事件函数
+  //toBeLeader事件函数*****************************成为队长，存入数据库
   toBeLeader: function () {
+    var app=getApp()
     if (this.data.isLeader) {
+        /*存入数据库
+      wx.request({
+        url: '/group/' + { groupId } + '/resign',
+        data: {
+          id:app.data._userID
+      },
+        success: function (res) {
+          console.log(res.data)
+        }
+      })
+    */
       this.setData({
         isLeader: false
       })
@@ -25,6 +37,17 @@ Page({
       this.setData({
         isLeader: true
       })
+  /*存入数据库 
+      wx.request({
+        url: '/group/' + { groupId } + '/assign',
+        data: {
+          id:app.data._userID
+      },
+        success: function (res) {
+          console.log(res.data)
+        }
+      })
+    */
     }
   },
 
