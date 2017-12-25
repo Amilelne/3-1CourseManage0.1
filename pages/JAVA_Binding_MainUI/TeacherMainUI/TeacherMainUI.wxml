@@ -3,12 +3,12 @@
   <view class="topBoardView" bindtap="CheckInfo">  
       <image src="../../images/background.jpg" class="topIcon"></image>
       <image src="../../images/user.png" class="topHead"></image>
-      <span class="topName">{{userName}}</span>
-      <span class="topID">{{userID}}</span>
+      <span class="topName">姓名:{{userName}}</span>
+      <span class="topID">教工号:{{userID}}</span>
    </view>
    <view class="mainView" wx:for="{{courses}}" wx:key="this">
     <view class="oneRow" data-index="{{index}}" catchtap='btnToCourse'>
-      <text class="course">{{item}}</text>
+      <text class="course">{{item.name}}</text>
     </view>
    </view>
 </page>

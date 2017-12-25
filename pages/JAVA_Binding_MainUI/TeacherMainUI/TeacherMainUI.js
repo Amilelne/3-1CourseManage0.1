@@ -5,7 +5,7 @@ data: {
   userID:'',
   userName:'',
   userSchool:'',
-  courses:["OOAD","J2EE","操作系统","数据仓库"],
+  courses:[{"id":1,"name":"OOAD"},{"id":1,"name":"J2EE"}],
   },
   btnToCourse:function(e){
     var index = parseInt(e.currentTarget.dataset.index);
@@ -39,8 +39,20 @@ data: {
     const that = this
     var app=getApp()
     that.setData({
-      userID:"教工号"+app.data._userID,
-      userName:"姓名:"+app.data._userName
+      userID:app.data._userID,
+      userName:app.data._userName
+    })
+    /***********************************************
+     * 获取course数据
+     */
+    wx.request({
+      url: 'http://localhost:8090/course?userId=1',
+      success:function(res){
+        console.log(res.data)
+        that.setData({
+          courses:res.data
+        })
+      }
     })
   },
 
