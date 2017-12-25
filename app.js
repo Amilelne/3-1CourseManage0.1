@@ -9,7 +9,10 @@ App({
   _hasSetID:false,
   _hasSetSchool:false,
   _schoolCity:'',
-  _schoolProvince:''
+  _schoolProvince:'',
+  _courseID:1,
+  _classID:1,
+  _seminarID:1
   },
   onLaunch: function () {
     // 展示本地存储能力
