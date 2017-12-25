@@ -21,7 +21,7 @@ Page({
     //   success:function(res){
     //     console.log(res);
     //     wx.request({
-    //       url: '',
+    //       url: app.data._preUrl+'/auth/weChat',
     //       data:{
     //         thirdSesssion:wx.getStorageSync('thirdSession'),
     //         encryptedData:res.encryptedData,

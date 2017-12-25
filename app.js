@@ -28,7 +28,7 @@ App({
         // if(res.code){
         //   console.log(res);
         //   wx.request({
-        //     url: '',
+        //     url: app.data._preUrl+'/auth/weChat',
         //     data:{
         //       code:res.code
         //     },
