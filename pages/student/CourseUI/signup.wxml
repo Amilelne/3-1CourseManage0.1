@@ -12,19 +12,19 @@
 
   <!--课堂信息，由一个icon和一行文字组成-->
   <view class="courseInfoView">
-    <image src="../../images/teacher.png" class='courseInfoIcon' />
+    <image src="../../images/teacher.png" mode='widthFix' class='courseInfoIcon' />
     <strong>邱明</strong>
   </view>
   <view class="courseInfoView">
-    <image src="../../images/mail.png" class='courseInfoIcon' />
+    <image src="../../images/mail.png" mode='widthFix' class='courseInfoIcon' />
     <strong>mingqiu@gmail.com</strong>
   </view>
   <view class="courseInfoView">
-    <image src="../../images/date.png" class='courseInfoIcon' />
+    <image src="../../images/date.png" mode='widthFix' class='courseInfoIcon' />
     <strong>2017-11-11</strong>
   </view>
   <view class="courseInfoView">
-    <image src="../../images/site.png" class='courseInfoIcon' />
+    <image src="../../images/site.png" mode='widthFix' class='courseInfoIcon' />
     <strong>海韵教学楼201</strong>
   </view>
 
