@@ -19,9 +19,6 @@ App({
     _classID:1,
     _seminarID:1,
     _preUrl:'http://localhost:8080',
-
-    _openId:'',
-    _userId:'',
   },
   
   onLaunch: function () {
@@ -40,7 +37,7 @@ App({
             url: 'http://localhost:8080/auth/weChat',
             data:{
               code:res.code,
-              "type":0
+              "type": 0,
             },
             header:{
               "content-type":"application/json"
@@ -60,6 +57,28 @@ App({
                 key: 'userId',
                 data: res.data.userId,
               });
+              if(res.data.status){
+                wx.navigateTo({
+                  url: '../Binding/ChooseCharacter',
+                })
+              }else{
+                wx.request({
+                  url: 'http://localhost:8080/me',
+                  data: {
+                    jwt: res.data.jwt,
+                  },
+                  header: {
+                    "content-type": "application/json"
+                  },
+                  method: 'GET',
+                  success: function (res) {
+                    console.log(res);
+                  }
+                })
+                wx.navigateTo({
+                  url: '../Binding/ChooseCharacter',
+                })
+              }
               // app.data._openId = res.data.openid;
               // app.data._userId = res.data.userId;
               // var _openId = res.data.openid;
@@ -93,6 +112,7 @@ App({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
+              console.log(res);
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
 
