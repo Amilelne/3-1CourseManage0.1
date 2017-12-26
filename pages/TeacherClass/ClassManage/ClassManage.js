@@ -1,6 +1,5 @@
 // pages/TeacherClass/ClassManage/classManage.js
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -25,14 +24,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var app = getApp();
     console.log("Teacher enters the classManage page of one seminar");
-    console.log(options)
     var that=this;
+    console.log(app.data._courseID)
     that.setData({
       courseName:options.courseName
     })
     wx.request({
-      url: 'http://120.77.173.98:8301/course/1/class',
+      url: 'http://localhost:8090/class/courseId/'+app.data._courseID,
       method: "GET",
       success: function (res) {
         console.log(res.data);

@@ -32,6 +32,7 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if(res.code){
+          console.log("res.code="+res.code)
           //var that=this;
           wx.request({
             url: 'http://localhost:8080/auth/weChat',
@@ -68,7 +69,8 @@ App({
                     jwt: res.data.jwt,
                   },
                   header: {
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "Authorization":`Bearer ${res.data.jwt}`
                   },
                   method: 'GET',
                   success: function (res) {
