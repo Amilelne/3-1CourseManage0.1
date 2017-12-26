@@ -131,6 +131,7 @@ Page({
       userID: app.data._userID,
       userPhone: app.data._userPhone,
       userPassword: app.data._userPassword,
+      userSchool:app.data._userSchool
     })
     var userInfo = {
       ID: this.userID,
