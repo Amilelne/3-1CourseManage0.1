@@ -6,12 +6,16 @@ Page({
    */
   data: {
     clickSignup:false,
+
     SeminarDetailVO:'',
+    attendanceVO:'',
     seminarId:'',
-    classId:'',
+    classId:'',//如何获得？
   },
   //事件处理函数
   buttonSignup: function () {
+    var app=getApp();
+    var that=this;
     //获取信息
     wx.getLocation({
       type: 'wgs84',
@@ -20,7 +24,7 @@ Page({
         var longitude = res.longitude
         //获取成功签到
         wx.request({
-          url: app.data._preUrl + this.data.seminarId + '/class/' + this.data.classId + '/attendance',
+          url: app.data._preUrl + that.data.seminarId + '/class/' + that.data.classId + '/attendance',
           data: {
             location: {
               longitude: longitude,
@@ -42,7 +46,7 @@ Page({
         });
       }
     });
-    //变换表格
+    //变换状态:应在success之下
     this.setData({
       clickSignup: true
     });
@@ -53,7 +57,10 @@ Page({
   onLoad: function (options) {
     console.log(options);
     var seminarId=options.seminarId;
+    this.setData({seminarId:seminarId});
+    //获取讨论课信息
     var app=getApp();
+    var that=this;
     wx.request({
       url: app.data._preUrl + '/seminar/' + seminarId+'/detail',
       header: {
@@ -62,7 +69,7 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        console.log('seminar相关数据', res.data)
+        console.log('seminar相关数据', res)
         that.setData({
           SeminarDetailVO: res.data,
         });
@@ -72,7 +79,32 @@ Page({
       }
     });
     //获取classId
+    //unknown
 
+    //获取签到状态
+    //to look up attendance
+    wx.request({
+      url: app.data._preUrl + '/seminar/' + seminarId + '/class/' +this.data.classId +'/attendance',
+      header: {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log('签到相关数据', res)
+        that.setData({
+          attendanceVO: res.data,
+        });
+        if(res.statusCode==200){
+          that.setData({
+            clickSignup: true,//标明已经签到成功
+          });
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    });
   },
 
   /**

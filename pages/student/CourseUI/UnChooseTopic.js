@@ -24,7 +24,7 @@ Page({
   toBeLeader: function () {
     var app=getApp();
     if (this.data.isLeader) {
-        //存入数据库
+      //修改数据库-去队长
       wx.request({
         url: app.data._preUrl+'/group/' + this.data.myGroupVO.id + '/resign',
         data: {
@@ -47,43 +47,37 @@ Page({
       })
     }
     else {
+      //修改数据库-加队长
+      wx.request({
+        url: app.data._preUrl + '/group/' + this.data.myGroupVO.id + '/assign',
+        data: {
+          id: app.data._userID
+        },
+        header: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer ' + app.data._jwt,
+        },
+        method: 'PUT',
+        success: function (res) {
+          console.log(res);
+        },
+        fail: function (res) {
+          console.log(res);
+        }
+      });
       this.setData({
         isLeader: true
       })
-  /*存入数据库 
-      wx.request({
-        url: '/group/' + { groupId } + '/assign',
-        data: {
-          id:app.data._userID
-      },
-        success: function (res) {
-          console.log(res.data)
-        }
-      })
-    */
     }
   },
 
   //topic事件监听
   topic: function () {
     wx.redirectTo({
-      url: './ChooseTopic',
+      url: './ChooseTopic?seminarId='+this.data.seminarId,
     })
   },
 
-  /////////////////////
-  //BeLeader的事件函数
-  BeLeader: function () {
-    this.setData({
-      showLeader: true
-    })
-  },
-  //Leave的事件函数
-  Leave: function () {
-    this.setData({
-      showLeader: false
-    })
-  },
   //chooseTopic的事件函数
   chooseTopic: function () {
     wx.navigateTo({

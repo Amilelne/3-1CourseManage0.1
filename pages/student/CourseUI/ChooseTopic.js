@@ -21,17 +21,20 @@ Page({
       groupMemberLimit: 6,
       groupLeft: 2
     }],
+
+    show:-1,
+    //getTopicVOS:'',
   },
   //buttonShow事件处理函数
   buttonShow:function(e){
     var index = parseInt(e.currentTarget.dataset.index);
     console.log(index);
     this.setData({
-      show:(!this.data.show)
+      show:index
     })
   },
   //showMessage事件处理函数
-  showMessage1:function(){
+  showMessage1:function(){//*************************需要一个controller的调用 */
     const that=this
     wx.showModal({
       title: '提示',
@@ -55,9 +58,10 @@ Page({
   onLoad: function (options) {
     var app=getApp()
     const that=this
-    app.data._seminarID=1,//赋值一个变量
+    //app.data._seminarID=1,//赋值一个变量
+    //获取topics相关数据
     wx.request({
-      url:app.data._preUrl+'/seminar/'+app.data._seminarID+'/topic',
+      url:app.data._preUrl+'/seminar/'+options.seminarId+'/topic',
       header:{
       "content-type": "application/json",
       "Authorization": 'Bearer ' + app.data._jwt,
@@ -65,10 +69,17 @@ Page({
       method:'GET',
       success:function(res)
       {
-        console.log(res.data)
+        console.log(res)
+        // var show;
+        // for(var i= 0;i<res.data.length;i++){
+        //   show[i]=false;
+        // }
         that.setData({
-          //topic:res.data
+          topic: res.data
         })
+      },
+      fail:function(res){
+        console.log(res)
       }
     })
   },
