@@ -8,7 +8,7 @@ Page({
 
     signup:function(){
       wx.navigateTo({
-        url: './signup',
+        url: './signup?seminarId='+seminarId,
       })
     },
 

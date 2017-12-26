@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    clickSignup:false
+    clickSignup:false,
+    SeminarDetailVO:''
   },
   //事件处理函数
   buttonSignup: function () {
@@ -17,7 +18,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log(options);
+    var seminarId=options.seminarId;
+    wx.request({
+      url: app.data._preUrl + '/seminar/' + seminarId+'/detail',
+      header: {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log('seminar相关数据', res.data)
+        that.setData({
+          SeminarDetailVO: res.data,
+        });
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    });
   },
 
   /**
