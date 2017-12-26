@@ -1,15 +1,7 @@
 // pages/StudentClass/CourseUI/Seminar/Grade/grade.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    groups: [{ id: 0, name: 'A1', score: 0 },
-    { id: 1, name: 'A2', score: 0 },
-    { id: 2, name: 'A3', score: 0 },
-    { id: 3, name: 'A4', score: 0 },
-    { id: 4, name: 'A5', score: 0 }],
+    groups:[],
     showView:true,
     heart_chosen: "../../images/heart_chosen.png",
     heart_empty: "../../images/heart_empty.png",
@@ -28,13 +20,12 @@ Page({
   },
   //*******************************提交打分表到数据库
   submit:function(){
-    /* 提交到数据库的操作
     var app=getApp()
     var $i;
     for($i=0;$i<this.data.groups.length;$i++)
     {
       wx.request({
-        url: 'http://localhost:8090/group/' + this.data.groups[$i].id + '/grade/presentation/' +parseInt(app.data._userID),
+        url: app.data._preUrl+'/group/' + this.data.groups[$i].id + '/grade/presentation/' +parseInt(app.data._userID),
         method:'PUT',
         data: {
           //topicId:,此时无法获得topicId
@@ -44,7 +35,7 @@ Page({
           console.log(res.data)
         }
       })
-    }*/
+    }
     
     const that = this;
     wx.showModal({
@@ -66,7 +57,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    //*****************获得数据库中获得小组
+    var app=getApp();
+    app.data._seminarID=1
+    const that=this
+    wx.request({
+      url:app.data._preUrl+'/seminar/'+app.data._seminarID+'group/my',
+      header: {
+        'Authorization': 'Bearer ' + app.data._jwt
+      },
+      method:'GET',
+      success:function(res)
+      {
+        that.data.group=res.data
+      }
+    })
   },
 
   /**
