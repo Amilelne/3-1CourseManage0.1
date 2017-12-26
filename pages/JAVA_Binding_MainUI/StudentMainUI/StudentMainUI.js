@@ -1,8 +1,7 @@
 // JAVA_Binding_MainUI/StudentMainUI/StudentMainUI.js
 Page({
   data: {
-    userName: '',
-    userSchool: '',
+    userDetailVO:'',
     studentClassVOS:'',
       // String courseName;
       // BigInteger courseId;
@@ -29,28 +28,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
-    var app=getApp()
-    const that = this
+    var app=getApp();
+    const that = this;
     console.log("StudentMain");
     //可以避免session-key过期的情况
     wx.getUserInfo({
       success: function (res) {
         console.log(res);
-        wx.request({
-          url: app.data._preUrl +'/auth/refresh',
-          header:{
-            "content-type": "application/json",
-            "Authorization": 'Bearer ' + app.data._jwt,
-          },
-          method:'GET',
-          success:function(res){
-            console.log('更新成功', res.data);
-            app.data._jwt=res.data;
-          },
-          fail:function(res){
-            console.log('用户拒绝', res.data);
-          }
-        })
+        // wx.request({
+        //   url: app.data._preUrl +'/auth/refresh',
+        //   header:{
+        //     "content-type": "application/json",
+        //     "Authorization": 'Bearer ' + app.data._jwt,
+        //   },
+        //   method:'GET',
+        //   success:function(res){
+        //     console.log('更新成功', res.data);
+        //     app.data._jwt=res.data;
+        //   },
+        //   fail:function(res){
+        //     console.log('用户拒绝', res.data);
+        //   }
+        // })
       }
     })
     if (app.globalData.userInfo) {
@@ -90,7 +89,7 @@ Page({
       method: 'GET',
       success: function (res) {
         console.log('选课信息',res);
-        // this.data.studentClassVOS = res.data.studentClassVOS;
+        that.setData({ studentClassVOS : res.data.studentClassVOS });
       },          
       fail:function(res){
         console.log(res);
@@ -107,10 +106,11 @@ Page({
       method: 'GET',
       success: function (res) {
         console.log('学生信息',res);
-        if (res.data.userDetailVO!=null){
-
-          this.data.userName = res.data.name;
-          this.data.userSchool = res.data.school.name;
+        if (res.data!=null){
+          that.setData({
+            userDetailVO:res.data
+          });
+          console.log('页面数据',that.data);
         }
       },
       fail:function(res){
