@@ -18,18 +18,9 @@ Page({
       method: 'POST',
       success: function (res) {
         console.log(res.data);
-        wx.setStorage({
-          key: 'jwt',
-          data: res.data.jwt,
-        });
-        wx.setStorage({
-          key: 'openid',
-          data: res.data.openid,
-        });
-        wx.setStorage({
-          key: 'userId',
-          data: res.data.userId,
-        });
+        app.data._jwt = res.data.jwt;
+        app.data._openid = res.data.openid;
+        app.data._userId = res.data.userId;
         if (res.data.status=='unbind') {
           wx.navigateTo({
             url: '../Binding/TeacherBindingUI',
@@ -44,6 +35,7 @@ Page({
         console.log(res);
       }
     });
+    //可能得删除
     wx.removeStorage({
       key: 'school',
       success: function(res) {},
@@ -65,18 +57,9 @@ Page({
       method: 'POST',
       success: function (res) {
         console.log(res.data);
-        wx.setStorage({
-          key: 'jwt',
-          data: res.data.jwt,
-        });
-        wx.setStorage({
-          key: 'openid',
-          data: res.data.openid,
-        });
-        wx.setStorage({
-          key: 'userId',
-          data: res.data.userId,
-        });
+        app.data._jwt = res.data.jwt;
+        app.data._openid = res.data.openid;
+        app.data._userId = res.data.userId;
         if (res.data.status == 'unbind') {
           wx.navigateTo({
             url: '../Binding/StudentBindingUI',
@@ -91,6 +74,7 @@ Page({
         console.log(res);
       }
     });
+    //可能得删除
     wx.removeStorage({
       key: 'school',
       success: function (res) { },

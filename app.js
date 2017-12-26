@@ -19,7 +19,11 @@ App({
     _classID:1,
     _seminarID:1,
     _preUrl:'http://localhost:8080',
-    _code:''
+
+    _code:'',
+    _jwt:'',
+    _openid:'',
+    _userId:''
   },
   
   onLaunch: function () {
