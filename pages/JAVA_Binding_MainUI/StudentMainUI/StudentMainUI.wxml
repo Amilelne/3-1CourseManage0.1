@@ -3,8 +3,8 @@
   <view class="topBoardView" bindtap='CheckInfo'>  
       <image src="../../images/background.jpg" class="topIcon"></image>
       <image src="../../images/user.png" class="topHead"></image>
-      <span class="topName">姓名：{{userDetailVO.name}}</span>
-      <span class="topID">学工号：{{userDetailVO.number}}</span>
+      <span class="topName">姓名：{{userName}}</span>
+      <span class="topID">学工号：{{userNumber}}</span>
    </view>
    <view class="mainView">
       <block  wx:for="{{studentClassVOS}}" wx:key="this">

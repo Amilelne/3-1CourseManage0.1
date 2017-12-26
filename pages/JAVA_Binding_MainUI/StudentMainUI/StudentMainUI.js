@@ -1,6 +1,8 @@
 // JAVA_Binding_MainUI/StudentMainUI/StudentMainUI.js
 Page({
   data: {
+    userName:'',
+    userNumber:'',
     userDetailVO:'',
     studentClassVOS:'',
       // String courseName;
@@ -111,8 +113,12 @@ Page({
         console.log('学生信息',res);
         if (res.data!=null){
           that.setData({
+            userName:res.data.name,
+            userNumber:res.data.number,
             userDetailVO:res.data
           });
+          app.data._userName = res.data.name;
+          app.data._userId = res.data.number;
           console.log('页面数据',that.data);
         }
       },

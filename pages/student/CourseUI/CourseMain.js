@@ -171,13 +171,10 @@ Page({
 
   },
   enterSeminar: function (e) {
-    var $state = e.currentTarget.dataset.state;
-    console.info($state);
-    if ($state == 1) {
-      wx: wx.navigateTo({ url: './seminarHome' });
-    }
-
-
+    var index = e.currentTarget.dataset.index;
+    var groupingMethod = this.data.listSeminarAndGradeVO[index].groupingMethod;
+    var seminarId = this.data.listSeminarAndGradeVO[index].id;
+    wx.navigateTo({ url: '../CourseUI/seminarHome?seminarId=' + seminarId + '&groupingMethod=' + groupingMethod});
   }
 })
 
