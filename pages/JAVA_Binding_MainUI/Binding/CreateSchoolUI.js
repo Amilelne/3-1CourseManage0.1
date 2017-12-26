@@ -10,10 +10,31 @@ Page({
     schoolname: '',
   },
   schoolName: function (e) {
-    this.schoolname=e.detail.value
+    this.data.schoolname=e.detail.value
   },
   confirm:function(e)
   {
+    const that=this
+    var app=getApp()
+    app.data._userSchool=that.data.schoolname
+    //*********向数据库中添加新的学校
+    // console.log(that.data.schoolname)
+    // console.log(that.data.province)
+    // console.log(that.data.city)
+    wx.request({
+      url: app.data._preUrl + '/school',
+      data: {
+        name: that.data.schoolname,
+        province: that.data.province,
+        city: that.data.city
+      },
+      method: 'POST',
+      header:
+      {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+    })
     wx.setStorage({
       key: 'school',
       data: this.schoolname,
@@ -31,8 +52,6 @@ Page({
           })
       },
     })
-    
-    
   },
   /**
    * 生命周期函数--监听页面加载
