@@ -9,6 +9,9 @@ Page({
      { id:29, name:"界面原型设计", description:"界面原型设计", groupingMethod:"fixed", startTime:"2017-09-25",state:0},
     ]*/
     courseName:"",
+
+    getCourseVO:'',
+    listSeminarAndGradeVO:''
   },
 
   /**
@@ -19,36 +22,36 @@ Page({
     var courseName;
     var app=getApp()
     const that=this;
-    /*貌似/course/courseid出现了问题
+    console.log('courseId',options.courseID);
+    //获取course的相关数据
     wx.request({
       url: app.data._preUrl+'/course/'+options.courseID,
+      header:{
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
       method:'GET',
       success:function(res)
       {
-        console.log(res.data.name)
+        console.log('course相关数据',res.data)
         that.setData({
-          courseName: res.data.name,
-          });
+          getCourseVO: res.data,
+        });
       }
-    })*/
-    var $i;
+    });
+    //获取course下的seminars
     wx.request({
-      url: app.data._preUrl + '/course/' + options.courseID+'/seminar',
-      data: {
-        embedGrade: true
+      url: app.data._preUrl + '/course/' + options.courseID+'student/seminar',
+      header: {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
       },
-      type: "GET",
-      /*header:{
-        'Authorization': 'Bearer '+app._jwt,
-      },*/
+      method: "GET",
       success: function (res) {
-        console.log(res.data);
-        for ($i = 0; $i < res.data.length; $i++) {
-          that.data.seminar_list.push({ "id": res.data[$i].id, "name": res.data[$i].name, "groupingMethod": res.data[$i].groupingMethod, "startTime": res.data[$i].startTime, "endTime": res.data[$i].endTime})
-        }
-
+        console.log('seminars相关数据',res.data);
+        that.setData({listSeminarAndGradeVO:res.data});
       }
-    })
+    });
   },
 
   /**
