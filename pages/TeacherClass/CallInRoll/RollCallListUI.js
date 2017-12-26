@@ -12,6 +12,7 @@ Page({
     className:'',
     presentList:'',
     attendanceNum:'0',
+    numStudent:'',
   },
 
   /**
@@ -23,6 +24,7 @@ Page({
       groupingMethod:options.groupingMethod,
       status: options.status,
       className:options.className,
+      numStudent:options.classNum,
     });
     console.log("Teacher enters the RollCallListUI page "+options.className+" under a "+options.groupingMethod+" method and a "+this.data.status+" status");
     var that = this;

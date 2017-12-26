@@ -65,7 +65,7 @@ Page({
   smallbtn:function(){
     console.log("Teacher will go to the RollCallListUI page");
     wx.navigateTo({
-      url: '../CallInRoll/RollCallListUI?groupingMethod=' + this.data.groupingMethod+'&status='+this.data.status,
+      url: '../CallInRoll/RollCallListUI?groupingMethod=' + this.data.groupingMethod+'&status='+this.data.status+'&classNum=' + this.data.classNode.numStudent,
     })
   },
 

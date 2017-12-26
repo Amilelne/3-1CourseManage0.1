@@ -12,7 +12,7 @@
 
   <!--学生总数：40 的字样-->
   <view class='studentSumView'>
-    签到人数：{{attendanceNum}}/{{classNode.numStudent}}
+    签到人数：{{attendanceNum}}/{{numStudent}}
   </view>
 
 
