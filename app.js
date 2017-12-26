@@ -22,7 +22,8 @@ App({
     _code:'',
     _jwt:'',
     _openid:'',
-    _userId:''
+    _userId:'',
+    
   },
   
   onLaunch: function () {

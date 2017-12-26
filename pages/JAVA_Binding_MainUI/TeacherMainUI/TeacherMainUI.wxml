@@ -4,7 +4,7 @@
       <image src="../../images/background.jpg" class="topIcon"></image>
       <image src="../../images/user.png" class="topHead"></image>
       <span class="topName">姓名:{{userName}}</span>
-      <span class="topID">教工号:{{userID}}</span>
+      <span class="topID">教工号:{{userNumber}}</span>
    </view>
    <view class="mainView" wx:for="{{courses}}" wx:key="this">
     <view class="oneRow" data-index="{{index}}" catchtap='btnToCourse'>

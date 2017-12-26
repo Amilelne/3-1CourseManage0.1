@@ -12,7 +12,7 @@
 
   <!--学生总数：40 的字样-->
   <view class='studentSumView'>
-    签到人数：{{roster.attend.num}}/{{classNode.numStudent}}
+    签到人数：{{attendanceNum}}/{{classNode.numStudent}}
   </view>
 
 
@@ -22,7 +22,7 @@
   </view>
 
   <!--学生块-->
-  <view wx:for-items="{{roster.attend.list}}" class = 'studentView'>
+  <view wx:for-items="{{presentList}}" class = 'studentView'>
     <view class='studentBlock'>
       <image src="../../images/user.png" mode='widthFix' class='userIcon' />
       <span class="studentName">{{item.name}}</span>

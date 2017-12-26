@@ -4,6 +4,7 @@ Page({
 data: {
   userID:'',
   userName:'',
+  userNumber:'',
   userSchool:'',
   courses:[{"id":1,"name":"OOAD"},{"id":1,"name":"J2EE"}],
   },
@@ -45,6 +46,21 @@ data: {
     that.setData({
       userID:app.data._userID,
       userName:app.data._userName
+    })
+    /**
+     * 获取教师基本信息
+     */
+    wx.request({
+      url:app.data._preUrl+'/me',
+      header:{
+        'Authorization': 'Bearer ' + app.data._jwt
+      },
+      success:function(res){
+        that.setData({
+            userName:res.data.name,
+            userNumber:res.data.number
+        })
+      }
     })
     /***********************************************
      * 获取course数据
