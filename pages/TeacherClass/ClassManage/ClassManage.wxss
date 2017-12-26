@@ -69,7 +69,7 @@
 /*班级名*/
 
 .className {
-  font-size: 40rpx;
+  font-size: 48rpx;
   padding-left: 30%;
 }
 
