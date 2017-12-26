@@ -33,6 +33,20 @@ Page({
       },
       fail: function (res) {
         console.log(res);
+        wx.showModal({
+          title: '提示',
+          content: '信息获取失败',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('确定');
+            } else if (res.cancel) {
+              console.log('取消');
+            }
+          }
+        });
+        wx.reLaunch({
+          url: '../Binding/ChooseCharacter'
+        });
       }
     });
     //可能得删除
@@ -72,6 +86,20 @@ Page({
       },
       fail: function (res) {
         console.log(res);
+        wx.showModal({
+          title: '提示',
+          content: '信息获取失败',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('确定');
+            } else if (res.cancel) {
+              console.log('取消');
+            }
+          }
+        });
+        wx.reLaunch({
+          url: '../Binding/ChooseCharacter'
+        });
       }
     });
     //可能得删除

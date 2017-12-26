@@ -1,5 +1,4 @@
 //app.js
-var WXBizDataCrypt = require('./utils/RdWXBizDataCrypt.js');
 var AppId ='wx0e1ff5086222b3e9';
 var AppSecret = 'c0bc5f7ab3886cf2124e676b5c0df1b5';
 var that = this;

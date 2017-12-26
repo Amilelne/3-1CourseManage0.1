@@ -1,18 +1,23 @@
 // JAVA_Binding_MainUI/StudentMainUI/StudentMainUI.js
 Page({
   data: {
-    userID: '',
     userName: '',
     userSchool: '',
-    courtea:[],
+    studentClassVOS:'',
+      // String courseName;
+      // BigInteger courseId;
+      // String courseTeacher;
+      // String className;
+      // BigInteger classId;
+      // String site;
   },
   btnToCourse:function(e){
     var index = parseInt(e.currentTarget.dataset.index);
-    var coursename=this.data.courtea[index].course;
+    var coursename=this.data.studentClassVOS[index].course;
     wx.navigateTo({
-      url: '../../student/CourseUI/CourseMain?courseID=' + this.data.courtea[index].id,
+      url: '../../student/CourseUI/CourseMain?courseID=' + this.data.studentClassVOS[index].id,
     })
-    console.log(this.data.courtea[index].id)
+    console.log(this.data.studentClassVOS[index].id)
   },
   CheckInfo: function () {
     const that = this
@@ -24,39 +29,95 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
-//初始化*****************随便写的
     var app=getApp()
     const that = this
-    app._userID='24320152202700',
     console.log("StudentMain");
-    /*       //需要获得courselist/根据波波的
-    wx.request({
-      url:app._preUrl+'/course',
-      method: 'GET',
-      success:function(res)
-      {
-        var $i;
-        for($i=0;$i<res.data.length;$i++)
-        {
-          wx.request({
-            url:app._preUrl+'/course/'+res.data[$i].id,
-            method:'GET',
-            succrss:function(res){
-              that.data.courtea.push({ "course": res.data.name, "teacher": res.data.teacherName });
+    //可以避免session-key过期的情况
+    wx.getUserInfo({
+      success: function (res) {
+        console.log(res);
+        wx.request({
+          url: app.data._preUrl +'/auth/refresh',
+          header:{
+            "content-type": "application/json",
+            "Authorization": 'Bearer ' + app.data._jwt,
+          },
+          method:'GET',
+          success:function(res){
+            console.log('更新成功', res.data);
+            app.data._jwt=res.data;
+          },
+          fail:function(res){
+            console.log('用户拒绝', res.data);
           }
         })
-        }
-      } 
-    })*/
-    that.data.courtea.push({"course":"OOAD","teacher":"邱明","id":1});
-    //console.log(this.data.courtea)
-    /*{ course: "OOAD", teacher: "邱明" }, { course: "操作系统", teacher: "吴清强" }, { course: "数据仓库", teacher: "王鸿吉" });*/
-    
-    var app = getApp()
-    that.setData({
-      userID: "学号:" + app.data._userID,
-      userName: "姓名:" + app.data._userName,
-      courtea:this.data.courtea,
+      }
     })
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
+
+    //获取选课数据
+    wx.request({
+      url: app.data._preUrl + '/course/student',
+      header: {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log('选课信息',res);
+        // this.data.studentClassVOS = res.data.studentClassVOS;
+      },          
+      fail:function(res){
+        console.log(res);
+      }
+    });
+
+    //获取学生信息
+    wx.request({
+      url: app.data._preUrl + '/me',
+      header: {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log('学生信息',res);
+        if (res.data.userDetailVO!=null){
+
+          this.data.userName = res.data.name;
+          this.data.userSchool = res.data.school.name;
+        }
+      },
+      fail:function(res){
+        console.log(res);
+
+      }
+    });
+    
   }
 })

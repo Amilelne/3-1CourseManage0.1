@@ -7,10 +7,10 @@
       <span class="topID">{{userID}}</span>
    </view>
    <view class="mainView">
-      <block  wx:for="{{courtea}}" wx:key="this">
+      <block  wx:for="{{studentClassVOS}}" wx:key="this">
         <view class='oneRow' data-index="{{index}}" catchtap="btnToCourse">
-          <text class="course">{{item.course}}</text>
-          <text class="teacher">教师：{{item.teacher}}</text>
+          <text class="courseName"><!--{{item.courseName}}--></text>
+          <text class="courseTeacher">教师：<!--{{item.courseTeacher}}--></text>
         </view>
       </block>
    </view>
