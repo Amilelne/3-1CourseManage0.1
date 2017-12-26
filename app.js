@@ -64,15 +64,13 @@ App({
               }else{
                 wx.request({
                   url: 'http://localhost:8080/me',
-                  data: {
-                    jwt: res.data.jwt,
-                  },
                   header: {
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    'Authorization': res.data.jwt,
                   },
                   method: 'GET',
-                  success: function (res) {
-                    console.log(res);
+                  success: function (ress) {
+                    console.log(ress);
                   }
                 })
                 wx.navigateTo({
@@ -95,6 +93,7 @@ App({
               //   _openId:res.data.openid,
               //   _userId:res.data.userId,
               // });
+
             },
             fail:function(res){
               console.log(res);
