@@ -8,19 +8,19 @@ Page({
 
     signup:function(){
       wx.navigateTo({
-        url: './signup?seminarId='+seminarId,
+        url: './signup?seminarId='+this.data.seminarId,
       })
     },
 
     group: function () {
       wx.navigateTo({
-        url: './UnChooseTopic',
+        url: './UnChooseTopic?seminarId=' + this.data.seminarId + '&groupingMethod=' + this.data.groupingMethod+'&seminarName='+this.data.seminarName,
       })
     },
 
     score: function () {
       wx.navigateTo({
-        url: './grade',
+        url: './grade?seminarId=' + this.data.seminarId,
       })
     },
 

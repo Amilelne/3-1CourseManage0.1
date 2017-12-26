@@ -75,9 +75,11 @@ Page({
       method:'GET',
       success:function(res){
         console.log('course相关数据',res.data)
-        that.setData({
-          getCourseVO: res.data,
-        });
+        if("data" in res && res.data!=null){
+          that.setData({
+            getCourseVO: res.data,
+          });
+        }
       },
       fail:function(res){
         console.log(res);
@@ -93,19 +95,20 @@ Page({
       method: "GET",
       success: function (res) {
         console.log('seminars相关数据',res.data);
-        
-        //获取seminar的status
-        var lists = res.data;
-        console.log('lists-a', lists);
-        var curDate = new Date();
-        for (var i = 0; i < lists.length; i++) {
-          var myDate = new Date(lists[i].startTime);
-          lists[i].status = myDate < curDate;
+        if ("data" in res && res.data != null){
+          //获取seminar的status
+          var lists = res.data;
+          console.log('lists-a', lists);
+          var curDate = new Date();
+          for (var i = 0; i < lists.length; i++) {
+            var myDate = new Date(lists[i].startTime);
+            lists[i].status = myDate < curDate;
+          }
+          that.setData({
+            listSeminarAndGradeVO: lists,
+          });
+          console.log('lists-f', lists);
         }
-        that.setData({
-          listSeminarAndGradeVO: lists,
-        });
-        console.log('lists-f', lists);
       },
       fail:function(res){
         console.log(res);

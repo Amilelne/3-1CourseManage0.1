@@ -6,10 +6,43 @@ Page({
    */
   data: {
     clickSignup:false,
-    SeminarDetailVO:''
+    SeminarDetailVO:'',
+    seminarId:'',
+    classId:'',
   },
   //事件处理函数
   buttonSignup: function () {
+    //获取信息
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        var latitude = res.latitude
+        var longitude = res.longitude
+        //获取成功签到
+        wx.request({
+          url: app.data._preUrl + this.data.seminarId + '/class/' + this.data.classId + '/attendance',
+          data: {
+            location: {
+              longitude: longitude,
+              latitude: latitude,
+              elevation: 0.0,
+            }
+          },
+          header: {
+            "content-type": "application/json",
+            "Authorization": 'Bearer ' + app.data._jwt,
+          },
+          method: 'POST',
+          success: function (res) {
+            console.log('course相关数据', res.data)
+          },
+          fail: function (res) {
+            console.log(res);
+          }
+        });
+      }
+    });
+    //变换表格
     this.setData({
       clickSignup: true
     });
@@ -20,6 +53,7 @@ Page({
   onLoad: function (options) {
     console.log(options);
     var seminarId=options.seminarId;
+    var app=getApp();
     wx.request({
       url: app.data._preUrl + '/seminar/' + seminarId+'/detail',
       header: {
@@ -37,6 +71,8 @@ Page({
         console.log(res);
       }
     });
+    //获取classId
+
   },
 
   /**

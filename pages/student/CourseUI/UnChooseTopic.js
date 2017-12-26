@@ -11,24 +11,37 @@ Page({
       { "name": "易中天", studentId: 24320152202783 },
       { "name": "轩辕朗", studentId: 24320152202788 }],
     showLeader: false,*/
-    isLeader: false
+    isLeader: '',
+
+    seminarName:'',
+    groupingMethod:'',
+    seminarId:'',
+
+    myGroupVO:'',
   },
 
   //toBeLeader事件函数*****************************成为队长，存入数据库
   toBeLeader: function () {
-    var app=getApp()
+    var app=getApp();
     if (this.data.isLeader) {
-        /*存入数据库
+        //存入数据库
       wx.request({
-        url: '/group/' + { groupId } + '/resign',
+        url: app.data._preUrl+'/group/' + this.data.myGroupVO.id + '/resign',
         data: {
           id:app.data._userID
-      },
+        },
+        header: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer ' + app.data._jwt,
+        },
+        method:'PUT',
         success: function (res) {
-          console.log(res.data)
+          console.log(res);
+        },
+        fail:function(res){
+          console.log(res);
         }
-      })
-    */
+      });
       this.setData({
         isLeader: false
       })
@@ -81,7 +94,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options);
+    this.setData({
+      seminarName:options.seminarName,
+      groupingMethod: options.groupingMethod,
+      seminarId: options.seminarId,
+    });
+    var app=getApp();
+    var that=this;
+    //获取队伍信息
+    wx.request({
+      url: app.data._preUrl + '/seminar/' + this.data.seminarId+'/group/my',
+      header: {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log('course相关数据', res.data);
+        if(res.data.leader==null){
+          that.setData({isLeader:false});//初始化界面标记量
+        }
+        that.setData({
+          myGroupVO: res.data,
+        });
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    });
   },
 
   /**

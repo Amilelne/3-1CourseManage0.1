@@ -13,19 +13,19 @@
   <!--课堂信息，由一个icon和一行文字组成-->
   <view class="courseInfoView">
     <image src="../../images/teacher.png" mode='widthFix' class='courseInfoIcon' />
-    <strong>邱明</strong>
+    <strong>{{SeminarDetailVO.teacherName}}</strong>
   </view>
   <view class="courseInfoView">
     <image src="../../images/mail.png" mode='widthFix' class='courseInfoIcon' />
-    <strong>mingqiu@gmail.com</strong>
+    <strong>{{SeminarDetailVO.teacherEmail}}</strong>
   </view>
   <view class="courseInfoView">
     <image src="../../images/date.png" mode='widthFix' class='courseInfoIcon' />
-    <strong>2017-11-11</strong>
+    <strong>{{SeminarDetailVO.startTime}}</strong>
   </view>
   <view class="courseInfoView">
     <image src="../../images/site.png" mode='widthFix' class='courseInfoIcon' />
-    <strong>海韵教学楼201</strong>
+    <strong>{{SeminarDetailVO.site}}</strong>
   </view>
 
 

@@ -5,8 +5,8 @@ s<view>
 
       <!--讨论课和固定分组要加一个seminarView容器来固定位置-->
       <view class = "seminarView">
-      <text class="seminarText">讨论课4</text>
-      <span class="seminarText">固定分组</span>
+      <text class="seminarText">{{seminarName}}</text>
+      <span class="seminarText">{{groupingMethod}}</span>
       </view>
     </view>
   </block>
@@ -18,68 +18,21 @@ s<view>
     </view>
   </block>
 
-  <view>
-  <!--每个白色的块要用WhiteBackSquare固定位置-->
-      <view class="WhiteBackSquare">
-      <image class="userAvatar" src="user.png"></image>
-      <!--姓名和学号的上下位置要用studentView固定-->
-      <view class = "studentView">
-      <span class="groupInfoText">刘XX</span>
-      <span class="groupInfoText">2432015220XXXX</span>
-      </view>
-      <!--队长两个字的位置要用leaderTextView固定-->
-      <view class="leaderTextView">
-        <span wx:if="{{isLeader}}" class="groupInfoText">队长</span>
-      </view>
-      </view>
-  </view>
 
-  <view>
-  <!--每个白色的块要用WhiteBackSquare固定位置-->
-      <view class="WhiteBackSquare">
-      <image class="userAvatar" src="user.png"></image>
-      <!--姓名和学号的上下位置要用studentView固定-->
-      <view class = "studentView">
-      <span class="groupInfoText">周XX</span>
-      <span class="groupInfoText">2432015220XXXX</span>
-      </view>
-      </view>
-  </view>
-
-  <view>
-  <!--每个白色的块要用WhiteBackSquare固定位置-->
-      <view class="WhiteBackSquare">
-      <image class="userAvatar" src="user.png"></image>
-      <!--姓名和学号的上下位置要用studentView固定-->
-      <view class = "studentView">
-      <span class="groupInfoText">陈XX</span>
-      <span class="groupInfoText">2432015220XXXX</span>
-      </view>
-      </view>
-  </view>
-
-    <view>
-  <!--每个白色的块要用WhiteBackSquare固定位置-->
-      <view class="WhiteBackSquare">
-      <image class="userAvatar" src="user.png"></image>
-      <!--姓名和学号的上下位置要用studentView固定-->
-      <view class = "studentView">
-      <span class="groupInfoText">易XX</span>
-      <span class="groupInfoText">2432015220XXXX</span>
-      </view>
-      </view>
-  </view>
-
-    <view>
-  <!--每个白色的块要用WhiteBackSquare固定位置-->
-      <view class="WhiteBackSquare">
-      <image class="userAvatar" src="user.png"></image>
-      <!--姓名和学号的上下位置要用studentView固定-->
-      <view class = "studentView">
-      <span class="groupInfoText">李XX</span>
-      <span class="groupInfoText">2432015220XXXX</span>
-      </view>
-      </view>
+  <view wx:for-items="{{myGroupVO.members}}" wx:key="this">
+    <!--每个白色的块要用WhiteBackSquare固定位置-->
+        <view class="WhiteBackSquare">
+        <image class="userAvatar" src="user.png"></image>
+        <!--姓名和学号的上下位置要用studentView固定-->
+        <view class = "studentView">
+        <span class="groupInfoText">{{item.name}}</span>
+        <span class="groupInfoText">{{item.number}}</span>
+        </view>
+        <!--队长两个字的位置要用leaderTextView固定-->
+        <view class="leaderTextView">
+          <span wx:if="{{item.id==myGroupVO.leader.id}}" class="groupInfoText">队长</span>
+        </view>
+        </view>
   </view>
 
   <!-- 选题 -->
