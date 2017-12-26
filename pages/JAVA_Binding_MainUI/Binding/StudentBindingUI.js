@@ -29,7 +29,7 @@ Page({
     }
     if (app.data._hasSetID == false) {
       app.data._hasSetID = true
-      app.data._userID = that.userID
+      app.data._userNum = that.userID
     }
     if (app.data._hasSetSchool == false) {
       app.data._hasSetSchool = true
@@ -69,14 +69,14 @@ Page({
       url: app.data._preUrl + '/me',
       data: {
         name: app.data._userName,
-        id: app.data._userID,
+        id: app.data._userNum,
         phone: app.data._userPhone,
         email: '',
         gender: '男',
         avatar: '',
         title: '',
         type: 0,
-        number: app.data._userID,
+        number: app.data._userNum,
       },
       header:
       {
@@ -102,7 +102,7 @@ Page({
     }
     if (app.data._hasSetID == false) {
       app.data._hasSetID = true;
-      app.data._userID = that.userID
+      app.data._userNum = that.userID
     }
     if (app.data._hasSetPhone == false) {
       app.data._hasSetPhone = true
@@ -128,7 +128,7 @@ Page({
     var app = getApp()
     this.setData({
       userName: app.data._userName,
-      userID: app.data._userID,
+      userID: app.data._userNum,
       userPhone: app.data._userPhone,
       userPassword: app.data._userPassword,
       userSchool:app.data._userSchool

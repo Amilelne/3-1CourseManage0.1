@@ -25,7 +25,7 @@ Page({
     for($i=0;$i<this.data.groups.length;$i++)
     {
       wx.request({
-        url: app.data._preUrl+'/group/' + this.data.groups[$i].id + '/grade/presentation/' +parseInt(app.data._userID),
+        url: app.data._preUrl+'/group/' + this.data.groups[$i].id +'/grade/presentation/' +parseInt(app.data._userID),
         method:'PUT',
         data: {
           //topicId:,此时无法获得topicId

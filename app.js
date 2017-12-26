@@ -6,7 +6,7 @@ var that = this;
 App({
   data: {
     _userName:'',
-    _userID:'',
+    _userNum:'',
     _userSchool:'',
     _userType:1,    //0:学生，1：老师
     _userPhone:'',
