@@ -7,7 +7,7 @@ Page({
     var app=getApp();
     app.data._userType=1;
     wx.request({
-      url: 'http://localhost:8080/auth/weChat',
+      url: app.data._preUrl +'/auth/weChat',
       data: {
         code: app.data._code,
         "type": 1,//app.data._userType
@@ -54,7 +54,7 @@ Page({
     var app = getApp();
     app.data._userType = 0;
     wx.request({
-      url: 'http://localhost:8080/auth/weChat',
+      url: app.data._preUrl+'/auth/weChat',
       data: {
         code: app.data._code,
         "type": 0,//app.data._userType
