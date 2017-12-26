@@ -5,7 +5,7 @@ data: {
   userID:'',
   userName:'',
   userSchool:'',
-  courses:[{"id":1,"name":"OOAD"},{"id":1,"name":"J2EE"}],
+  courses:[],
   },
   btnToCourse:function(e){
     var index = parseInt(e.currentTarget.dataset.index);
@@ -36,9 +36,11 @@ data: {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
-    console.log("TeacherMain")
+    var app = getApp()
     const that = this
-    var app=getApp()
+    //先设置教工号
+    app.data._userID ='20170315'
+    console.log("TeacherMain")
     that.setData({
       userID:app.data._userID,
       userName:app.data._userName
@@ -46,8 +48,18 @@ data: {
     /***********************************************
      * 获取course数据
      */
+    var jwtValue
+    wx.getStorage({
+      key: 'jwt',
+      success: function(res) {
+        jwtValue=res.data
+      },
+    })
     wx.request({
-      url: app.data._preUrl+'/course?userId=1',
+      url: app.data._preUrl+'/course',
+      header:{
+        'Authorization': 'Bearer '+jwtValue
+      },
       success:function(res){
         console.log(res.data)
         that.setData({
