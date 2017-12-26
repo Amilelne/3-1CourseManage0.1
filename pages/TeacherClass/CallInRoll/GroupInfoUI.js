@@ -5,11 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    groups: [{ id: "1031A1", topic: "A", name: "1A1", list: [{ id: "001", name: "杨XX" }, { id: "002", name: "周XX" }, { id: "003", name: "孙XX" }, { id: "004", name: "王XX" }, { id: "005", name: "李XX" }] }, { id: "1031A2", topic: "A", name: "1A2", list: [{ id: "006", name: "杨XX" }, { id: "007", name: "周XX" }, { id: "008", name: "唐XX" }, { id: "009", name: "王XX" }, { id: "010", name: "李XX" }] }, { id: "1031B1", topic: "B", name: "1B1", list: [{ id: "011", name: "杨XX" }, { id: "012", name: "周XX" }, { id: "013", name: "孙XX" }, { id: "014", name: "王XX" }, { id: "015", name: "李XX" }] }, { id: "1031B2", topic: "B", name: "1B2", list: [{ id: "016", name: "杨XX" }, { id: "017", name: "周XX" }, { id: "018", name: "孙XX" }, { id: "019", name: "王XX" }, { id: "020", name: "李XX" }] }],
-    roster: { id: 132, calling: 0, classid: 23, attend: { num: 0, list: [] }, late: { num: 0, list: [{ id: "021", name: "王XX" }, { id: "022", name: "钱XX" }, { id: "023", name: "林XX" }] } },
+    groups: [{ id: "1031A1", topic: "A", name: "1A1", list: [{ id: "001", name: "学生1" }, { id: "002", name: "学生2" }, { id: "003", name: "学生3" }, { id: "004", name: "学生4" }, { id: "005", name: "学生5" }] }, { id: "1031A2", topic: "A", name: "1A2", list: [{ id: "006", name: "学生6" }, { id: "007", name: "学生7" }, { id: "008", name: "学生8" }, { id: "009", name: "学生9" }, { id: "010", name: "学生10" }] }, { id: "1031B1", topic: "B", name: "1B1", list: [{ id: "011", name: "学生11" }, { id: "012", name: "学生12" }, { id: "013", name: "学生13" }, { id: "014", name: "学生14" }, { id: "015", name: "学生15" }] }, { id: "1031B2", topic: "B", name: "1B2", list: [{ id: "016", name: "学生16" }, { id: "017", name: "学生17" }, { id: "018", name: "学生18" }, { id: "019", name: "学生19" }, { id: "020", name: "学生20" }] }],
+    roster: { id: 132, calling: 0, classid: 23, attend: { num: 0, list: [] }, late: { num: 0, list: [{ id: "021", name: "学生21" }, { id: "022", name: "学生22" }, { id: "023", name: "学生23" }] } },
     groupingMethod: "random",
     status: "calling",
-    
+    groupLists:'',
     curgroup: 0,
 
     curselect:-1,
@@ -95,24 +95,20 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {    
-    this.data.groups.forEach(function (item) {
-      item.toggle = false;
-      item.add=false;
+  onLoad: function (options) {
+    var app = getApp();
+    var that = this;    
+    wx.request({
+      url: app.data._preUrl + '/seminar/' + app.data._seminarID + '/topic',
+      method: "GET",
+      header: {
+        'Authorization': 'Bearer ' + app.data._jwt
+      },
+      success: function (res) {
+        console.log(res.data)
+        that.setData({ groupList: res.data });
+      }
     });
-    this.data.groups.forEach(function (item) {
-      item.list.forEach(function(item){
-        item.islate=false;
-      });
-    });
-    this.data.roster.late.list.forEach(function (item) {
-      item.grouped = false;
-    });
-    this.setData({
-      groupingMethod: options.groupingMethod,
-      status: options.status,
-    });
-    console.log("Teacher enters the GroupInfoUI page under a " + this.data.groupingMethod + " method with " + this.data.status + " status");
   },
 
   /**

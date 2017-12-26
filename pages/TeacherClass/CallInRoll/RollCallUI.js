@@ -149,6 +149,9 @@ Page({
     });
     wx.request({
       url: app.data._preUrl +'/seminar/'+app.data._seminarID+'/class/'+app.data.classID+'/attendance',
+      header: {
+        'Authorization': 'Bearer ' + app.data._jwt
+      },
       method: "GET",
       success: function (res) {
         console.log(res.data);
