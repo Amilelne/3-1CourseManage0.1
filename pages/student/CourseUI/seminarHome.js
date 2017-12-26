@@ -1,7 +1,9 @@
 Page({
     data: {
       courseName:'',
-      seminarName:''
+      seminarName:'',
+      seminarId:'',
+      groupingMethod:''
     },
 
     signup:function(){
@@ -26,7 +28,15 @@ Page({
         console.log(options);
         var seminarId = options.seminarId;
         var groupingMethod = options.groupingMethod;
+        var courseName=options.courseName;
+        var seminarName=options.seminarName;
+        this.setData({
+          seminarId:seminarId,
+          groupingMethod:groupingMethod,
+          courseName:courseName,
+          seminarName:seminarName
+        });
     },
-    
+
 });
 

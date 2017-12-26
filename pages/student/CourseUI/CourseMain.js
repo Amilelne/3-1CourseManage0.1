@@ -4,15 +4,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    seminar_list: [],
-    /*{id:29,name:"界面原型设计",description:"界面原型设计",groupingMethod:"fixed",startTime:"2017-09-25",state:1},
-     { id:29, name:"界面原型设计", description:"界面原型设计", groupingMethod:"fixed", startTime:"2017-09-25",state:0},
-    ]*/
-    courseName:"",
-
     getCourseVO:'',
     listSeminarAndGradeVO:'',
-    status:''
   },
 
   /**
@@ -70,7 +63,6 @@ Page({
       })
     }
     //****************获得各个seminar，以及获得上面的标题 
-    var courseName;
     const that=this;
     console.log('courseId',options.courseID);
     //获取course的相关数据
@@ -174,7 +166,8 @@ Page({
     var index = e.currentTarget.dataset.index;
     var groupingMethod = this.data.listSeminarAndGradeVO[index].groupingMethod;
     var seminarId = this.data.listSeminarAndGradeVO[index].id;
-    wx.navigateTo({ url: '../CourseUI/seminarHome?seminarId=' + seminarId + '&groupingMethod=' + groupingMethod});
+    wx.navigateTo({ url: '../CourseUI/seminarHome?seminarId=' + seminarId + '&groupingMethod=' + groupingMethod + '&courseName=' + this.data.getCourseVO.name + '&seminarName=' + this.data.listSeminarAndGradeVO[index].name});
+    
   }
 })
 
