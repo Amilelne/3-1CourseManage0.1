@@ -1,4 +1,4 @@
-<!--StudentBindingUI.wxml-->
+<!--studentBindingUI.wxml-->
 <page>
   <view class="topBoardView">  
       <image src="../../images/background.jpg" class="topIcon"></image>
@@ -7,15 +7,19 @@
       <span class="topTips">请先绑定您的账号</span>
    </view>
    <view class="mainView">
-      <span class="studentID">学号：</span>
-      <input class="inputStudentID" bindinput='inputUserID' value="{{userID}}"></input>
+      <span class="teacherID">学工号：</span>
+      <input class="inputTeacherID" bindinput='inputUserID' value="{{userID}} " id='eg'></input>
       <image src="../../images/warning.png" class="tipIcon"/>
       <span class="tipFont">提交后不能再修改</span>
-      <span class="name" >姓名：</span>
-      <input class="inputName" bindinput='inputUserName' value="{{userName}}"/>
+      <span class="name">姓名：</span>
+      <span class="phone">手机：</span>
+      <span class="password">密码：</span>
+      <input class="inputPhone" bindinput='inputUserPhone' value="{{userPhone}}"></input>
+      <input class="inputName" bindinput='inputUserName' value="{{userName}}"></input>
+      <input class="inputPassword" type='password' bindinput="inputUserPassword" value="{{userPassword}}"></input>
       <span class="school">学校：</span>
-      <view class="inputSchool" bindtap='inputSchool'>{{userSchool}}</view>
-      <image src="../../images/ninedot.png" class="selectSchoolIcon" mode='width-flex' catchtap="chooseSchool"/>
+      <view class="inputSchool" >{{userSchool}}</view>
+      <image src="../../images/ninedot.png" class="selectSchoolIcon" catchtap="chooseSchool"/>
       <button class="confirmButton" bindtap='ConfirmButton'>绑定</button>
    </view>
 </page>

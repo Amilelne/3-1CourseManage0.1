@@ -62,7 +62,7 @@ Page({
     app.data._seminarID=1
     const that=this
     wx.request({
-      url:app.data._preUrl+'/seminar/'+app.data._seminarID+'group/my',
+      url:app.data._preUrl+'/seminar/'+app.data._seminarID+'group',
       header: {
         'Authorization': 'Bearer ' + app.data._jwt
       },
@@ -70,6 +70,7 @@ Page({
       success:function(res)
       {
         that.data.group=res.data
+        console.log(res.data)
       }
     })
   },

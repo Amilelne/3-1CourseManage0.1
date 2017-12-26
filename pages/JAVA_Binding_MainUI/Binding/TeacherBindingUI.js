@@ -3,6 +3,8 @@ Page({
     userID: '',
     userName: '',
     userSchool: "",
+    userPhone:'',
+    userPassword:'',
     first:0
   },
   inputUserID: function (e) {
@@ -11,7 +13,16 @@ Page({
   inputUserName: function (e) {
     this.userName = e.detail.value
   },
-  ConfirmButton: function () {
+  inputUserPhone:function(e)
+  {
+    this.userPhone=e.detail.value
+  },
+  inputUserPassword:function(e)
+  {
+    this.userPassword=e.detail.value
+  },
+  ConfirmButton: function () 
+  {
     //设置全局变量
     const that=this
     var app = getApp()
@@ -30,6 +41,30 @@ Page({
       app.data._hasSetSchool=true
       app.data._userSchool=that.userSchool
     }
+    if(app.data._hasSetPhone==false)
+    {
+      app.data._hasSetPhone=true
+      app.data._userPhone=that.userPhone
+    }
+    if(app.data._hasSetPassword==false)
+    {
+      app.data._hasSetPassword=true
+      app.data._userPassword=that.userPassword
+    }
+      if(app.data._hasSetPhone==false)
+    {
+      app.data._hasSetPhone=true
+      app.data._userPhone=that.userPhone
+    }
+    if(app.data._hasSetPassword==false)
+    {
+      app.data._hasSetPassword=true
+      app.data._userPassword=that.userPassword
+    }
+    // console.log(app.data._userID)
+    // console.log(app.data._userName)
+    // console.log(app.data._userPhone)
+    // console.log(app.data._userPassword)
     var userInfo = {
       ID: this.userID,
       Name: this.userName,
@@ -43,16 +78,29 @@ Page({
     wx.request({
       url: app.data._preUrl+'/me',
       data: {
-
+        name: app.data._userName,
+        id:app.data._userID,
+        phone:app.data._userPhone,
+        email:'',
+        gender:'男',
+        avatar:'',
+        title:'',
+        type:1,
+        number:app.data._userID,
       },
-      method: 'GET',
+      header:
+      {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method: 'PUT',
       success: function (res) {
         console.log(res.data)
       }
     })
     //导航到下一页
     wx.redirectTo({
-      url: '../TeacherMainUI/TeacherMainUI',
+      url: '../StudentMainUI/StudentMainUI',
     })
   },
     chooseSchool: function() {
@@ -66,9 +114,17 @@ Page({
         app.data._hasSetID = true;
         app.data._userID = that.userID
       }
+      if (app.data._hasSetPhone == false) {
+        app.data._hasSetPhone = true
+        app.data._userPhone = that.userPhone
+      }
+      if (app.data._hasSetPassword == false) {
+        app.data._hasSetPassword = true
+        app.data._userPassword = that.userPassword
+      }
       wx.setStorage({
         key: 'student_or_teacher',
-        data: '2',
+        data: '1',
       })
     wx.redirectTo({
       url: 'ChooseSchool1',
@@ -79,6 +135,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var app=getApp()
+    this.setData({
+      userName:app.data._userName,
+      userID:app.data._userID,
+      userPhone:app.data._userPhone,
+      userPassword:app.data._userPassword,
+    })
     var userInfo = {
       ID: this.userID,
       Name: this.userName,
