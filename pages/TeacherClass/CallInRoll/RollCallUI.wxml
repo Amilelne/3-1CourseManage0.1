@@ -12,7 +12,7 @@
 
   <!--学生总数：40 的字样-->
   <view class='studentSumView'>
-    学生总数: {{allnum}}
+    学生总数: {{classNode.numStudent}}
   </view>
 
   <!--细线，hr不好设置css，用一个高度很小的view来代替-->
@@ -32,7 +32,7 @@
   <block wx:else>
     <view class="studentNum">
       <image src="../../images/users.png" mode='widthFix' class="usersIcon"/>
-      已签到学生: {{num}}/{{classNode.numStudent}}
+      已签到学生: {{attendanceNum}}/{{classNode.numStudent}}
     </view>
   </block>
 

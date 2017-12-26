@@ -48,24 +48,6 @@ Page({
         that.setData({ classes: res.data});
       }
     });
-    wx.request({
-      url: 'http://120.77.173.98:8301/seminar/1',
-      method: "GET",
-      success: function (res) {
-        console.log(res.data);
-        var resd=res.data;
-        resd.groupingMethod="random";
-        that.setData({ seminar: resd });
-      }
-    });
-    wx.request({
-      url: 'http://120.77.173.98:8301/seminar/1/class/1/attendance',
-      method:"GET",
-      success:function(res){
-        console.log(res.data);
-        that.setData({ status: res.data.status });
-      }
-    });
   },
 
   /**

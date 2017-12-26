@@ -1,6 +1,5 @@
 // pages/TeacherClass/CallInRoll/RollCallUI.js
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -9,13 +8,18 @@ Page({
     roster: { id: 132, calling: 0, classid: 23, attend: { num: 0, list: [] }, late: { num: 0, list: [] } },
     groupingMethod:"random",
     status:"calling",
-    className:'',
+    className:'一班',
+    latitude:'112',
+    longitude:'221',
+    elevation:'50',
+    attendanceNum:'0',
   },
 
   
 
   endModal: function () {
     var that=this;
+    var app = getApp();
     wx.showModal({
       title: '提示',
       content: '确定要结束点名？',
@@ -26,7 +30,10 @@ Page({
         if (res.confirm) {
           console.log("Teacher confirm endRollCall");
           wx.request({
-            url: 'http://120.77.173.98:8301//seminar/1/class/1/attendance',
+            url: app.data._preUrl + '/seminar/' + app.data._seminarID + '/class/' + app.data._classID + '/attendance/end',
+            header: {
+              'Authorization': 'Bearer ' + app.data._jwt
+            },
             method: "GET",
             success: function (res) {
               console.log(res.data);
@@ -35,6 +42,18 @@ Page({
               that.setData({ roster: ros });
             }
           });
+          wx.request({
+            url: app.data._preUrl + '/seminar/' + app.data._seminarID + '/class/' + app.data._classID + '/attendance/present' ,
+            header: {
+              'Authorization': 'Bearer ' + app.data._jwt
+            },
+            method: "GET",
+            success:function(res){
+              that.setData({
+                attendanceNum:res.data.length
+              })
+            }
+          })
           that.setData({ status: "called" });
         } else {
           console.log("Teacher cancel endRollCall");
@@ -51,10 +70,27 @@ Page({
   },
 
   bigbtn1_1:function(){
-    var that=this;
+    var that = this;
+    var app = getApp();
+    wx.getLocation({
+      success: function(res) {
+          that.setData({
+            latitude:res.latitude,
+            longitude:res.longitude,
+          })
+      },
+    });
     wx.request({
-      url: 'http://120.77.173.98:8301//seminar/1/class/1/attendance',
-      method: "GET",
+      url: app.data._preUrl +'/seminar/'+app.data._seminarID+'/class/'+app.data._classID+'/attendance',
+      method: "POST",
+      data:{
+        longitude:that.longitude,
+        latitude:that.latitude,
+        elevation:that.elevation,
+      },
+      header: {
+        'Authorization': 'Bearer ' + app.data._jwt
+      },
       success: function (res) {
         console.log(res.data);
         var ros = that.data.roster;
@@ -75,9 +111,9 @@ Page({
   },*/
 
   bigbtn1_3: function () {
-    console.log("Teacher will go to the RollCallListUI page");
+    console.log("Teacher will go to the RollCallListUI page****"+this.data.className);
     wx.navigateTo({
-      url: '../CallInRoll/RollCallListUI?groupingMethod=' + this.data.groupingMethod + '&status=' + this.data.status,
+      url: '../CallInRoll/RollCallListUI?groupingMethod=' + this.data.groupingMethod + '&status=' + this.data.status+'&className='+this.data.className,
     })
   },
 
@@ -112,7 +148,7 @@ Page({
       }
     });
     wx.request({
-      url: 'http://120.77.173.98:8301//seminar/1/class/1/attendance',
+      url: app.data._preUrl +'/seminar/'+app.data._seminarID+'/class/'+app.data.classID+'/attendance',
       method: "GET",
       success: function (res) {
         console.log(res.data);

@@ -10,13 +10,15 @@ Page({
     groupingMethod:"random",
     status:"calling",
     className:'',
+    presentList:'',
+    attendanceNum:'0',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("options="+options)
+    var app = getApp();
     this.setData({
       groupingMethod:options.groupingMethod,
       status: options.status,
@@ -25,12 +27,19 @@ Page({
     console.log("Teacher enters the RollCallListUI page "+options.className+" under a "+options.groupingMethod+" method and a "+this.data.status+" status");
     var that = this;
     wx.request({
-      url: 'http://120.77.173.98:8301/seminar/3/class/1/attendance/present',
+      url: app.data._preUrl + '/seminar/' + app.data._seminarID + '/class/' + app.data._classID + '/attendance/present',
+      header: {
+        'Authorization': 'Bearer ' + app.data._jwt
+      },
       method: "GET",
       success: function (res) {
-        console.log(res.data);
+        console.log(res.data)
+        that.setData({
+          presentList: res.data,
+          attendanceNum:res.data.length
+        })
       }
-    });
+    })
   },
 
   /**
