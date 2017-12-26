@@ -8,18 +8,21 @@ Page({
     classNode: { id: 23, name: '班级1', numStudent: 40, time: [{ week: 1, day: 1, lessons: [1, 2], site: '海韵201' }, { week: 0, day: 3, lessons: [3, 4], site: '公寓405' }], calling: true, roster: '/roster/周三12班.xlsx', proportions: { '3': 20, '4': 60, '5': 20, report: 50, presentation: 50 } },
     roster: { id: 132, calling: 0, classid: 23, attend: { num: 37, list: [{ id: "111", name: "杨xx" }, { id: "112", name: "周xx" }, { id: "113", name: "孙xx" }] }, late: { num: 0, list: [{ id: "111", name: "杨xx" }, { id: "112", name: "周xx" }, { id: "113", name: "孙xx" }] } },
     groupingMethod:"random",
-    status:"calling"
+    status:"calling",
+    className:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("options="+options)
     this.setData({
       groupingMethod:options.groupingMethod,
       status: options.status,
+      className:options.className,
     });
-    console.log("Teacher enters the RollCallListUI page under a "+options.groupingMethod+" method and a "+this.data.status+" status");
+    console.log("Teacher enters the RollCallListUI page "+options.className+" under a "+options.groupingMethod+" method and a "+this.data.status+" status");
     var that = this;
     wx.request({
       url: 'http://120.77.173.98:8301/seminar/3/class/1/attendance/present',

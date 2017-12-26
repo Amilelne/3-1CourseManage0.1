@@ -10,6 +10,9 @@ data: {
   btnToCourse:function(e){
     var index = parseInt(e.currentTarget.dataset.index);
     var course = this.data.courses[index];
+    /**
+     * 设置courseID
+     */
     var app = getApp();
     app.data._courseID = this.data.courses[index].id;
     wx.navigateTo({
@@ -47,7 +50,10 @@ data: {
      * 获取course数据
      */
     wx.request({
-      url: app.data._preUrl+'/course?userId=1',
+      url: app.data._preUrl+'/course',
+      header:{
+        'Authorization':'Bearer '+app.data._jwt
+      },
       success:function(res){
         console.log(res.data)
         that.setData({

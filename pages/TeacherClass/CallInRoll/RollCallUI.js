@@ -9,6 +9,7 @@ Page({
     roster: { id: 132, calling: 0, classid: 23, attend: { num: 0, list: [] }, late: { num: 0, list: [] } },
     groupingMethod:"random",
     status:"calling",
+    className:'',
   },
 
   
@@ -94,12 +95,17 @@ Page({
     this.setData({ 
       groupingMethod: options.groupingMethod,
       status: options.status,
+      className:options.className,
     });
     console.log("Teacher enters the RollCall page under a "+this.data.groupingMethod+" method with "+this.data.status+" status");
     var that=this;
+    var app = getApp();
     wx.request({
-      url: 'http://120.77.173.98:8301/class/1',
+      url: app.data._preUrl+'/class/'+app.data._classID,
       method:"GET",
+      header: {
+        'Authorization': 'Bearer ' + app.data._jwt
+      },
       success: function (res) {
         console.log(res.data);
         that.setData({ classNode: res.data });

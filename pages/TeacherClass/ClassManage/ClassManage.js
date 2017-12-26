@@ -15,9 +15,14 @@ Page({
   classbtn: function (e) {
     var index = parseInt(e.currentTarget.dataset.index);
     var classId = this.data.classes[index].id;
+    console.log("class name=" + this.data.classes[index].name);
+    /**
+     * 获取classID
+     */
+    getApp().data._classID = this.data.classes[index].id;
     var text = this.data.seminar.groupingMethod;
     wx.navigateTo({
-    url: '../CallInRoll/RollCallUI?classid=' + classId + '&groupingMethod='+text+'&status='+this.data.status,
+    url: '../CallInRoll/RollCallUI?classid=' + classId + '&groupingMethod='+text+'&status='+this.data.status+'&className='+this.data.classes[index].name,
     })
   },
 
@@ -28,12 +33,16 @@ Page({
     console.log("Teacher enters the classManage page of one seminar");
     console.log(options)
     var that=this;
+    var app = getApp();
     that.setData({
       courseName:options.courseName
     })
     wx.request({
-      url: 'http://120.77.173.98:8301/course/1/class',
+      url: app.data._preUrl+'/course/'+app.data._courseID+'/class',
       method: "GET",
+      header:{
+        'Authorization': 'Bearer ' + app.data._jwt
+      },
       success: function (res) {
         console.log(res.data);
         that.setData({ classes: res.data});

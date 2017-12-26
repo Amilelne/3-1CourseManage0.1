@@ -7,7 +7,7 @@
 
   <!--班级1 的字样-->
   <view class='classNameView'>
-    {{classNode.name}}
+    {{className}}
   </view>
 
   <!--学生总数：40 的字样-->
