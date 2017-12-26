@@ -1,7 +1,11 @@
 // pages/StudentClass/CourseUI/Seminar/Grade/grade.js
 Page({
   data: {
-    groups:[],
+    groups: [{ id: 0, name: 'A1', score: 0 },
+    { id: 1, name: 'A2', score: 0 },
+    { id: 2, name: 'A3', score: 0 },
+    { id: 3, name: 'A4', score: 0 },
+    { id: 4, name: 'A5', score: 0 }],
     showView:true,
     heart_chosen: "../../images/heart_chosen.png",
     heart_empty: "../../images/heart_empty.png",
@@ -19,35 +23,53 @@ Page({
     });
   },
   //*******************************提交打分表到数据库
-  submit:function(){
-    var app=getApp()
-    var $i;
-    for($i=0;$i<this.data.groups.length;$i++)
-    {
-      wx.request({
-        url: app.data._preUrl+'/group/' + this.data.groups[$i].id +'/grade/presentation/' +parseInt(app.data._userID),
-        method:'PUT',
-        data: {
-          //topicId:,此时无法获得topicId
-          grade:this.data.groups[$i].score
-        },
-        success: function (res) {
-          console.log(res.data)
-        }
-      })
-    }
-    
+  submit:function(){ 
     const that = this;
     wx.showModal({
       title: '提示',
       content: '确定要打分吗？',
       success: function (res) {
         if (res.confirm) {
-          that.setData(
-            {
-              showView:false,
-            }
-          )
+          that.setData({showView:false,})
+          var app = getApp()
+          var $i;
+          for ($i = 0; $i < that.data.groups.length; $i++) {
+            var topiciiid/*
+            wx.request({
+              url:app.data._preUrl+'/group/'+that.data.groups[$i].id,
+              method:"GET",
+              header:{
+                "content-type": "application/json",
+                "Authorization": 'Bearer ' + app.data._jwt,
+              },
+              data:{
+                embedTopics:true,
+                embedGrade:true,
+              },
+              success:function(res)
+              {
+                topiciiid=res.data.topics.id
+                //console.log(res.data)
+              }
+            })*/
+            wx.request({
+              url: app.data._preUrl + '/group/' + $i + '/grade/presentation/' + 1,
+              method: 'PUT',
+              data: {
+                topicId:$i,
+                grade: that.data.groups[$i].score
+              },
+              header:
+              {
+                "content-type": "application/json",
+                "Authorization": 'Bearer ' + app.data._jwt,
+              },
+              success: function (res) 
+              {
+                console.log(res.data)
+              }
+            })
+          }
         }
       }
     }
@@ -59,10 +81,10 @@ Page({
   onLoad: function (options) {
     //*****************获得数据库中获得小组
     var app=getApp();
-    app.data._seminarID=1
+    options.seminarId=1
     const that=this
     wx.request({
-      url:app.data._preUrl+'/seminar/'+app.data._seminarID+'group',
+      url:app.data._preUrl+'/seminar/'+options.seminarId+'/group',
       header: {
         'Authorization': 'Bearer ' + app.data._jwt
       },
