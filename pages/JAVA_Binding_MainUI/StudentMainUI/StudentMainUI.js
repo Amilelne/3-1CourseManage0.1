@@ -31,26 +31,28 @@ Page({
     const that = this;
     console.log("StudentMain");
     //可以避免session-key过期的情况
-    wx.getUserInfo({
-      success: function (res) {
-        console.log(res);
-        wx.request({
-          url: app.data._preUrl +'/auth/refresh',
-          header:{
-            "content-type": "application/json",
-            "Authorization": 'Bearer ' + app.data._jwt,
-          },
-          method:'GET',
-          success:function(res){
-            console.log('更新成功', res.data);
-            app.data._jwt=res.data;
-          },
-          fail:function(res){
-            console.log('用户拒绝', res.data);
-          }
-        })
-      }
-    })
+    // wx.getUserInfo({
+    //   success: function (res) {
+    //     console.log(res);
+    //     wx.request({
+    //       url: app.data._preUrl +'/auth/refresh',
+    //       header:{
+    //         "content-type": "application/json",
+    //         "Authorization": 'Bearer ' + app.data._jwt,
+    //       },
+    //       method:'GET',
+    //       success:function(res){
+    //         console.log('更新成功', res.data);
+    //         if(res.data!=null){
+    //           app.data._jwt=res.data;
+    //         }
+    //       },
+    //       fail:function(res){
+    //         console.log('用户拒绝', res.data);
+    //       }
+    //     })
+    //   }
+    // })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

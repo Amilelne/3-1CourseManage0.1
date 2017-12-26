@@ -3,19 +3,12 @@
 	  <text class="FONT1"> {{getCourseVO.name}}</text>
 </view>
 <scroll-view style="position:absolute;background-color: #ffffff;left: 0rpx;width: 100%;height: 86%;margin-top: 0%;" scroll-y="true">
-  <view wx:for="{{seminar_list}}" wx:key="this" class="{{item.state==1?'box3':'box4'}}" bindtap='enterSeminar' data-state="{{item.state}}">
+  <view wx:for="{{listSeminarAndGradeVO}}" wx:key="this" class="{{item.status==1?'box3':'box4'}}" bindtap='enterSeminar' data-state="{{item.state}}">
       <text class="FONT12" > {{item.name}}</text>
 	    <text class="FONT2" style="margin-left: 60%;margin-top: 3%" > 
           {{item.startTime}}至{{item.endTime}}
       </text>
-	     
-       <!--
-      <view wx:if="{{item.groupingMethod=='fixed'}}" class="FONT2" style="margin-left: 60%;margin-top: 12%"> 
-              分组方式: 固定分组
-      </view>
-      <view wx:else class="FONT2" style="margin-left: 60%;margin-top: 12%"> 
-              分组方式: 随机分组
-      </view>-->
+	    
       <view class="FONT2" style="margin-left: 60%;margin-top: 12%"> 
               分组方式: {{item.groupingMethod}}
       </view>
