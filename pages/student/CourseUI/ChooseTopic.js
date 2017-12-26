@@ -5,14 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    /*show:false,
-    showTopicB:false,
-    showTopicC:false,
-    value1:2,
-    value2:1,
-    leftnumcolor1:'leftNumWhite',
-    leftnumcolor2:'leftNumRed',
-    topicView2:'blueTopicView',*/
     topic: [{id: 257,
       serial: 'A',
       name: "领域模型与模块",
@@ -27,7 +19,7 @@ Page({
       description: "Domain model与模块划分",
       groupLimit: 5,
       groupMemberLimit: 6,
-      groupLeft: 1
+      groupLeft: 2
     }],
   },
   //buttonShow事件处理函数
@@ -48,9 +40,11 @@ Page({
         if(res.confirm){
           console.log('choose')
         }
+        var $value=that.data.topic[1].groupLeft;
+        $value=$value-1
+        that.data.topic[1].groupLeft=$value
         that.setData({
-          value1:1,
-          leftnumcolor1:'leftNumRed',
+          topic:that.data.topic
         })
       }
     })
@@ -73,7 +67,7 @@ Page({
       {
         console.log(res.data)
         that.setData({
-          topic:res.data
+          //topic:res.data
         })
       }
     })
