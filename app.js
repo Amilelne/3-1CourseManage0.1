@@ -9,6 +9,10 @@ App({
     _userID:'',
     _userSchool:'',
     _userType:1,    //0:学生，1：老师
+    _userPhone:'',
+    _userPassword:'',
+    _hasSetPhone:false,
+    _hasSetPassword:false,
     _hasSetName:false,
     _hasSetID:false,
     _hasSetSchool:false,

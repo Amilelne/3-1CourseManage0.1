@@ -12,7 +12,11 @@
       <image src="../../images/warning.png" class="tipIcon"/>
       <span class="tipFont">提交后不能再修改</span>
       <span class="name">姓名：</span>
+      <span class="phone">手机：</span>
+      <span class="password">密码：</span>
+      <input class="inputPhone" bindinput='inputUserPhone' value="{{userPhone}}"></input>
       <input class="inputName" bindinput='inputUserName' value="{{userName}}"></input>
+      <input class="inputPassword" type='password' bindinput="inputUserPassword" value="{{userPassword}}"></input>
       <span class="school">学校：</span>
       <view class="inputSchool" >{{userSchool}}</view>
       <image src="../../images/ninedot.png" class="selectSchoolIcon" catchtap="chooseSchool"/>

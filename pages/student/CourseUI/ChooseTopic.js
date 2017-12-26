@@ -5,29 +5,37 @@ Page({
    * 页面的初始数据
    */
   data: {
-    show:false,
+    /*show:false,
     showTopicB:false,
     showTopicC:false,
     value1:2,
     value2:1,
     leftnumcolor1:'leftNumWhite',
     leftnumcolor2:'leftNumRed',
-    topicView2:'blueTopicView',
+    topicView2:'blueTopicView',*/
+    topic: [{id: 257,
+      serial: 'A',
+      name: "领域模型与模块",
+      description: "Domain model与模块划分",
+      groupLimit: 5,
+      groupMemberLimit: 6,
+      groupLeft: 0
+    }, {
+      id: 257,
+      serial: 'B',
+      name: "领域模型与模块",
+      description: "Domain model与模块划分",
+      groupLimit: 5,
+      groupMemberLimit: 6,
+      groupLeft: 1
+    }],
   },
   //buttonShow事件处理函数
-  buttonShow:function(){
+  buttonShow:function(e){
+    var index = parseInt(e.currentTarget.dataset.index);
+    console.log(index);
     this.setData({
       show:(!this.data.show)
-    })
-  },
-  clickTopicB: function () {
-    this.setData({
-      showTopicB: (!this.data.showTopicB)
-    })
-  },
-  clickTopicC: function () {
-    this.setData({
-      showTopicC: (!this.data.showTopicC)
     })
   },
   //showMessage事件处理函数
@@ -47,28 +55,28 @@ Page({
       }
     })
   },
-  showMessage2: function () {
-    const that = this
-    wx.showModal({
-      title: '提示',
-      content: '确定选择此话题吗(一旦选择，不可修改)?',
-      success: function (res) {
-        if (res.confirm) {
-          console.log('choose')
-        }
-        that.setData({
-          value2: 0,
-          leftnumcolor2: 'leftNumWhite',
-          topicView2:'greyTopicView'
-        })
-      }
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var app=getApp()
+    const that=this
+    app.data._seminarID=1,//赋值一个变量
+    wx.request({
+      url:app.data._preUrl+'/seminar/'+app.data._seminarID+'/topic',
+      header:{
+      "content-type": "application/json",
+      "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method:'GET',
+      success:function(res)
+      {
+        console.log(res.data)
+        that.setData({
+          topic:res.data
+        })
+      }
+    })
   },
 
   /**

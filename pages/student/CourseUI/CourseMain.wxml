@@ -1,22 +1,19 @@
 <page class="page">
 <view class="head20">
-	  <text class="FONT1"> {{courseName}}</text>
+	  <text class="FONT1"> {{getCourseVO.name}}</text>
 </view>
 <scroll-view style="position:absolute;background-color: #ffffff;left: 0rpx;width: 100%;height: 86%;margin-top: 0%;" scroll-y="true">
-  <view wx:for="{{seminar_list}}" class="{{item.state==1?'box3':'box4'}}" bindtap='enterSeminar' data-state="{{item.state}}">
-      <text class="FONT12" > 讨论课{{index+1}}</text>
+  <view wx:for="{{listSeminarAndGradeVO}}" wx:key="this" class="{{item.status==1?'box3':'box4'}}" bindtap='enterSeminar' data-index="{{index}}">
+      <text class="FONT12" > {{item.name}}</text>
 	    <text class="FONT2" style="margin-left: 60%;margin-top: 3%" > 
-          {{item.property.startTime}}至{{item.property.endTime}}
+          {{item.startTime}}至{{item.endTime}}
       </text>
-	     
-      <view wx:if="{{item.property.groupingMethod=='fixed'}}" class="FONT2" style="margin-left: 60%;margin-top: 12%"> 
-              分组方式: 固定分组
-      </view>
-      <view wx:else class="FONT2" style="margin-left: 60%;margin-top: 12%"> 
-              分组方式: 随机分组
+	    
+      <view class="FONT2" style="margin-left: 60%;margin-top: 12%"> 
+              分组方式: {{item.groupingMethod}}
       </view>
       
-	    <text class="FONT2" style="margin-left: 60%;margin-top: 21%"> 成绩：未完成</text>  
+	    <text class="FONT2" style="margin-left: 60%;margin-top: 21%"> 成绩：{{item.grade}}</text>  
   </view>
 </scroll-view>
 	

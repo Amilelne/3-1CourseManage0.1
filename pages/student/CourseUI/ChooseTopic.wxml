@@ -11,16 +11,36 @@
   </view>
 
   <!--当选题未选完时框是蓝色的，要增加新框就直接复制-->
-  <view class="blueTopicView" >
-    <span class="topic" catchtap="showMessage1">话题A</span>
+  <block wx:for="{{topic}}" wx:for-item="t" >
+  <block wx:if='{{t.groupLeft!=0}}'>
+  <view class='blueTopicView' >
+    <span class="topic" catchtap="showMessage1">{{'话题'+t.serial}}</span>
     <view class="hrVertical"> </view>
-    <span class="topicName">领域模型设计</span>
+    <span class="topicName">{{t.description}}</span>
     <!--剩余选题数量大于等于2时-->
-    <span class="{{leftnumcolor1}}">剩余 ： {{value1}}/5</span>
-    <image bindtap="buttonShow" src="../../images/ninedot.png" class="nineIcon"></image>
+    <block wx:if='{{t.groupLeft!=1}}'>
+    <span class="leftNumWhite">剩余:{{t.groupLeft}}/{{t.groupLimit}}</span>
+    <image bindtap="buttonShow" data-index="{{index}}" src="../../images/ninedot.png" class="nineIcon"></image>
+    </block>
+    <!--剩余选题数量小于2时-->
+    <block wx:elif='{{t.groupLeft==1}}'>
+    <span class="leftNumRed">剩余:{{t.groupLeft}}/{{t.groupLimit}}</span>
+    <image bindtap="buttonShow" data-index="{{index}}" src="../../images/ninedot.png" class="nineIcon"></image>
+    </block>
   </view>
+  </block>
+  <block wx:elif='{{t.groupLeft==0}}'>
+  <view class='greyTopicView' >
+    <span class="topic" catchtap="showMessage1">{{'话题'+t.serial}}</span>
+    <view class="hrVertical"> </view>
+    <span class="topicName">{{t.description}}</span>
+    <span class="leftNumWhite">剩余:{{t.groupLeft}}/{{t.groupLimit}}</span>
+    <image src="../../images/ninedot.png" class="nineIcon"></image>
+  </view>
+  </block>
+</block>
 
-  <!--当点击九点时出现topic的简介-->
+  <!--当点击九点时出现topic的简介
   <view wx:if="{{show}}" class="topicDescribeView">
     <span class="topicDescribeTitle">
       领域模型设计
@@ -33,13 +53,13 @@
   <view class="{{topicView2}}">
     <span class="topic" catchtap="showMessage2">话题B</span>
     <view class="hrVertical"> </view>
-    <span class="topicName">包划分</span>
-    <!--剩余选题为1时会变红-->
+    <span class="topicName">包划分</span>-->
+    <!--剩余选题为1时会变红
     <span class="{{leftnumcolor2}}">剩余 ：{{value2}}/5</span>
     <image src="../../images/ninedot.png" class="nineIcon" catchtap='clickTopicB'></image>
-  </view>
+  </view>-->
 
-  <!--当点击九点时出现topic的简介-->
+  <!--当点击九点时出现topic的简介
   <view wx:if="{{showTopicB}}" class="topicDescribeView">
     <span class="topicDescribeTitle">
       模块划分
@@ -47,18 +67,18 @@
     <span class="topicDescribeText">
        按照模块划分，估计出每个模块的工作量
     </span>
-  </view>
+  </view>-->
 
-  <!--无剩余名额时选题框为灰色-->
+  <!--无剩余名额时选题框为灰色
   <view class="greyTopicView">
     <span class="topic">话题C</span>
     <view class="hrVertical"> </view>
     <span class="topicName">界面设计</span>
     <span class="leftNumWhite">剩余 ： 0/5</span>
     <image src="../../images/ninedot.png" class="nineIcon" catchtap='clickTopicC'></image>
-  </view>
+  </view>-->
 
-  <!--当点击九点时出现topic的简介-->
+  <!--当点击九点时出现topic的简介
   <view wx:if="{{showTopicC}}" class="topicDescribeView">
     <span class="topicDescribeTitle">
       界面设计
@@ -66,5 +86,5 @@
     <span class="topicDescribeText">
        设计界面，要求能完成需求小组制定的需求，美观，大方
     </span>
-  </view>
+  </view>-->
 </page>

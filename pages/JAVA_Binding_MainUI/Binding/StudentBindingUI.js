@@ -1,40 +1,26 @@
-// JAVA_Binding_MainUI/Binding/StudentBindingUI.js
 Page({
   data: {
-    userID:'',
-    userName:'',
-    userSchool:"",
-    first:true,
+    userID: '',
+    userName: '',
+    userSchool: "",
+    userPhone: '',
+    userPassword: '',
+    first: 0
   },
-  inputUserID:function(e)
-  {
-    this.userID=e.detail.value
+  inputUserID: function (e) {
+    this.userID = e.detail.value
   },
   inputUserName: function (e) {
-    this.userName=e.detail.value
+    this.userName = e.detail.value
   },
-  chooseSchool:function(){
-    const that = this
-    var app = getApp()
-    if (app.data._hasSetName == false) {
-      app.data._hasSetName = true;
-      app.data._userName = that.userName
-    }
-    if (app.data._hasSetID == false) {
-      app.data._hasSetID = true;
-      app.data._userID = that.userID
-    }
-    wx.setStorage({
-      key: 'student_or_teacher',
-      data: '1',
-    })
-    wx.redirectTo({
-      url: './ChooseSchool1',
-    })
+  inputUserPhone: function (e) {
+    this.userPhone = e.detail.value
   },
-  ConfirmButton:function()
-  {
-    //设置参数
+  inputUserPassword: function (e) {
+    this.userPassword = e.detail.value
+  },
+  ConfirmButton: function () {
+    //设置全局变量
     const that = this
     var app = getApp()
     if (app.data._hasSetName == false) {
@@ -49,43 +35,113 @@ Page({
       app.data._hasSetSchool = true
       app.data._userSchool = that.userSchool
     }
-    var userInfo={
-      ID:this.userID,
-      Name:this.userName,
-      School:this.userSchool,
+    if (app.data._hasSetPhone == false) {
+      app.data._hasSetPhone = true
+      app.data._userPhone = that.userPhone
     }
-    //***********************************将个人信息存储到数据库
-    wx.request({
-      url: app.data._preUrl+'/register',
-      data:{
-        id:app.data._userID,
-        phone:'188',
-        wechatId:'wecharid',
-        openid:'199',
-        avatar:'',
-        password:'',
-        name:app.data._userName,
-        school:{
-          name:app.data._schoolName
-        },
-        number:app.data._userID,
-        type:0,
-      },
-      method:'POST',
-    })
-    
-    //页面导航到下一页
+    if (app.data._hasSetPassword == false) {
+      app.data._hasSetPassword = true
+      app.data._userPassword = that.userPassword
+    }
+    if (app.data._hasSetPhone == false) {
+      app.data._hasSetPhone = true
+      app.data._userPhone = that.userPhone
+    }
+    if (app.data._hasSetPassword == false) {
+      app.data._hasSetPassword = true
+      app.data._userPassword = that.userPassword
+    }
+    // console.log(app.data._userID)
+    // console.log(app.data._userName)
+    // console.log(app.data._userPhone)
+    // console.log(app.data._userPassword)
+    var userInfo = {
+      ID: this.userID,
+      Name: this.userName,
+      School: this.userSchool
+    }
     wx.setStorage({  //传递相应的参数
       key: 'info',
       data: userInfo,
     })
+    //***********************************将个人信息存储到数据库
+    wx.request({
+      url: app.data._preUrl + '/me',
+      data: {
+        name: app.data._userName,
+        id: app.data._userID,
+        phone: app.data._userPhone,
+        email: '',
+        gender: '男',
+        avatar: '',
+        title: '',
+        type: 0,
+        number: app.data._userID,
+      },
+      header:
+      {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method: 'PUT',
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
+    //导航到下一页
     wx.redirectTo({
-      url:'../StudentMainUI/StudentMainUI',
+      url: '../TeacherMainUI/TeacherMainUI',
     })
   },
-  onLoad: function (options) {
+  chooseSchool: function () {
     const that = this
-      this.first=true
+    var app = getApp()
+    if (app.data._hasSetName == false) {
+      app.data._hasSetName = true;
+      app.data._userName = that.userName
+    }
+    if (app.data._hasSetID == false) {
+      app.data._hasSetID = true;
+      app.data._userID = that.userID
+    }
+    if (app.data._hasSetPhone == false) {
+      app.data._hasSetPhone = true
+      app.data._userPhone = that.userPhone
+    }
+    if (app.data._hasSetPassword == false) {
+      app.data._hasSetPassword = true
+      app.data._userPassword = that.userPassword
+    }
+    wx.setStorage({
+      key: 'student_or_teacher',
+      data: '2',
+    })
+    wx.redirectTo({
+      url: 'ChooseSchool1',
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var app = getApp()
+    this.setData({
+      userName: app.data._userName,
+      userID: app.data._userID,
+      userPhone: app.data._userPhone,
+      userPassword: app.data._userPassword,
+    })
+    var userInfo = {
+      ID: this.userID,
+      Name: this.userName,
+      School: this.userSchool
+    }
+    wx.setStorage({  //传递相应的参数
+      key: 'info',
+      data: userInfo,
+    })
+    const that = this
     wx.getStorage({
       key: 'school',
       success: function (res) {

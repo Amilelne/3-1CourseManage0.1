@@ -1,6 +1,8 @@
 // JAVA_Binding_MainUI/StudentMainUI/StudentMainUI.js
 Page({
   data: {
+    userName:'',
+    userNumber:'',
     userDetailVO:'',
     studentClassVOS:'',
       // String courseName;
@@ -14,9 +16,8 @@ Page({
     var index = parseInt(e.currentTarget.dataset.index);
     var coursename=this.data.studentClassVOS[index].course;
     wx.navigateTo({
-      url: '../../student/CourseUI/CourseMain?courseID=' + this.data.studentClassVOS[index].id,
+      url: '../../student/CourseUI/CourseMain?courseID=' + this.data.studentClassVOS[index].courseId,
     })
-    console.log(this.data.studentClassVOS[index].id)
   },
   CheckInfo: function () {
     const that = this
@@ -32,26 +33,28 @@ Page({
     const that = this;
     console.log("StudentMain");
     //可以避免session-key过期的情况
-    wx.getUserInfo({
-      success: function (res) {
-        console.log(res);
-        // wx.request({
-        //   url: app.data._preUrl +'/auth/refresh',
-        //   header:{
-        //     "content-type": "application/json",
-        //     "Authorization": 'Bearer ' + app.data._jwt,
-        //   },
-        //   method:'GET',
-        //   success:function(res){
-        //     console.log('更新成功', res.data);
-        //     app.data._jwt=res.data;
-        //   },
-        //   fail:function(res){
-        //     console.log('用户拒绝', res.data);
-        //   }
-        // })
-      }
-    })
+    // wx.getUserInfo({
+    //   success: function (res) {
+    //     console.log(res);
+    //     wx.request({
+    //       url: app.data._preUrl +'/auth/refresh',
+    //       header:{
+    //         "content-type": "application/json",
+    //         "Authorization": 'Bearer ' + app.data._jwt,
+    //       },
+    //       method:'GET',
+    //       success:function(res){
+    //         console.log('更新成功', res.data);
+    //         if(res.data!=null){
+    //           app.data._jwt=res.data;
+    //         }
+    //       },
+    //       fail:function(res){
+    //         console.log('用户拒绝', res.data);
+    //       }
+    //     })
+    //   }
+    // })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -89,7 +92,9 @@ Page({
       method: 'GET',
       success: function (res) {
         console.log('选课信息',res);
-        that.setData({ studentClassVOS : res.data.studentClassVOS });
+        if(res.statusCode==200){
+          that.setData({ studentClassVOS: res.data });
+        }
       },          
       fail:function(res){
         console.log(res);
@@ -108,8 +113,12 @@ Page({
         console.log('学生信息',res);
         if (res.data!=null){
           that.setData({
+            userName:res.data.name,
+            userNumber:res.data.number,
             userDetailVO:res.data
           });
+          app.data._userName = res.data.name;
+          app.data._userId = res.data.number;
           console.log('页面数据',that.data);
         }
       },

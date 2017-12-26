@@ -4,51 +4,114 @@ Page({
    * 页面的初始数据
    */
   data: {
-    seminar_list: [],
-    /*{id:29,name:"界面原型设计",description:"界面原型设计",groupingMethod:"fixed",startTime:"2017-09-25",state:1},
-     { id:29, name:"界面原型设计", description:"界面原型设计", groupingMethod:"fixed", startTime:"2017-09-25",state:0},
-    ]*/
-    courseName:"",
+    getCourseVO:'',
+    listSeminarAndGradeVO:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var app=getApp();
+    //可以避免session-key过期的情况
+    // wx.getUserInfo({
+    //   success: function (res) {
+    //     console.log(res);
+    //     wx.request({
+    //       url: app.data._preUrl + '/auth/refresh',
+    //       header: {
+    //         "content-type": "application/json",
+    //         "Authorization": 'Bearer ' + app.data._jwt,
+    //       },
+    //       method: 'GET',
+    //       success: function (res) {
+    //         console.log('更新成功', res.data);
+    //         if(res.data!=null){
+    //           app.data._jwt = res.data;
+    //         }
+    //       },
+    //       fail: function (res) {
+    //         console.log('用户拒绝', res.data);
+    //       }
+    //     })
+    //   }
+    // })
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
     //****************获得各个seminar，以及获得上面的标题 
-    var courseName;
-    var app=getApp()
     const that=this;
-    /*貌似/course/courseid出现了问题
+    console.log('courseId',options.courseID);
+    //获取course的相关数据
     wx.request({
       url: app.data._preUrl+'/course/'+options.courseID,
-      method:'GET',
-      success:function(res)
-      {
-        console.log(res.data.name)
-        that.setData({
-          courseName: res.data.name,
-          });
-      }
-    })*/
-    var $i;
-    wx.request({
-      url: app.data._preUrl + '/course/' + options.courseID+'/seminar',
-      data: {
-        embedGrade: true
+      header:{
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
       },
-      type: "GET",
-      /*header:{
-        'Authorization': 'Bearer '+app._jwt,
-      },*/
-      success: function (res) {
-        console.log(res.data);
-        for ($i = 0; $i < res.data.length; $i++) {
-          that.data.seminar_list.push({ "id": res.data[$i].id, "name": res.data[$i].name, "groupingMethod": res.data[$i].groupingMethod, "startTime": res.data[$i].startTime, "endTime": res.data[$i].endTime})
-        }
-
+      method:'GET',
+      success:function(res){
+        console.log('course相关数据',res.data)
+        that.setData({
+          getCourseVO: res.data,
+        });
+      },
+      fail:function(res){
+        console.log(res);
       }
-    })
+    });
+    //获取course下的seminars
+    wx.request({
+      url: app.data._preUrl + '/course/' + options.courseID+'/student/seminar',
+      header: {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method: "GET",
+      success: function (res) {
+        console.log('seminars相关数据',res.data);
+        
+        //获取seminar的status
+        var lists = res.data;
+        console.log('lists-a', lists);
+        var curDate = new Date();
+        for (var i = 0; i < lists.length; i++) {
+          var myDate = new Date(lists[i].startTime);
+          lists[i].status = myDate < curDate;
+        }
+        that.setData({
+          listSeminarAndGradeVO: lists,
+        });
+        console.log('lists-f', lists);
+      },
+      fail:function(res){
+        console.log(res);
+      }
+    });
+    
   },
 
   /**
@@ -100,13 +163,11 @@ Page({
 
   },
   enterSeminar: function (e) {
-    var $state = e.currentTarget.dataset.state;
-    console.info($state);
-    if ($state == 1) {
-      wx: wx.navigateTo({ url: './seminarHome' });
-    }
-
-
+    var index = e.currentTarget.dataset.index;
+    var groupingMethod = this.data.listSeminarAndGradeVO[index].groupingMethod;
+    var seminarId = this.data.listSeminarAndGradeVO[index].id;
+    wx.navigateTo({ url: '../CourseUI/seminarHome?seminarId=' + seminarId + '&groupingMethod=' + groupingMethod + '&courseName=' + this.data.getCourseVO.name + '&seminarName=' + this.data.listSeminarAndGradeVO[index].name});
+    
   }
 })
 
