@@ -28,9 +28,6 @@
     <strong>{{SeminarDetailVO.site}}</strong>
   </view>
 
-
-  
-
   <!--迟到签到成功
   <view class="lateCall">
         <image src="闹钟.png" class='courseInfoIcon'/>
@@ -39,16 +36,65 @@
 
 
   <!--签到按钮-->
-  <view>
-    <button  type="button" class="{{clickSignup?'No':'blueBigBtn'}}" bindtap='buttonSignup'>
-      签到
-    </button>
-    <block>
-      <!--签到成功-->
-      <view class="{{clickSignup?'successCall':'No'}}">
-        <image src="../../images/clock.png" class='courseInfoIcon'/>
-      <strong>签到成功</strong>
-      </view>   
-    </block>
-  </view>
+  <block wx:if="{{signState==1}}">
+    <view>
+      <block>
+        <!--签到未开始-->
+        <view class="successCall">
+          <!-- 
+          <image src="../../images/clock.png" class='courseInfoIcon'/>
+          -->
+          <strong>签到未开始</strong>
+        </view>   
+      </block>
+    </view>
+  </block>
+  <block wx:else-if="{{signState==2}}">
+    <view>
+      <!-- 有按钮表示可以签到，可能的结果为：签到成功、签到成功（迟到） -->
+      <button  type="button" class="blueBigBtn" bindtap='buttonSignup'>
+        签到
+      </button>
+    </view>
+  </block>
+  <block wx:else-if="{{signState==3}}">
+    <view>
+      <block>
+        <!--签到成功-->
+        <view class="successCall">
+          <!-- 
+          <image src="../../images/clock.png" class='courseInfoIcon'/>
+          -->
+          <strong>签到成功</strong>
+        </view>   
+      </block>
+    </view>
+  </block>
+  <block wx:else-if="{{signState==4}}">
+    <view>
+      <block>
+        <!--签到成功(迟到)-->
+        <view class="successCall">
+          <!-- 
+          <image src="../../images/clock.png" class='courseInfoIcon'/>
+          -->
+          <strong>签到成功（迟到）</strong>
+        </view>   
+      </block>
+    </view>
+  </block>
+  <block wx:else-if="{{signState==5}}">
+    <view>
+      <block>
+        <!--签到失败-->
+        <view class="successCall">
+          <!-- 
+          <image src="../../images/clock.png" class='courseInfoIcon'/>
+          -->
+          <strong>签到失败</strong>
+        </view>   
+      </block>
+    </view>
+  </block>
+
 </page>

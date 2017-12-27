@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    clickSignup:'',
+    signState:1,
 
     SeminarDetailVO:'',
     attendanceVO:'',
@@ -16,7 +16,6 @@ Page({
   buttonSignup: function () {
     var app=getApp();
     var that=this;
-    if(app.data._signUp==0){
       // wx.request({
         // url: app.data._preUrl + 'seminar'+that.data.seminarId + '/class/' + that.data.classId + '/attendance',
         // data: {
@@ -33,17 +32,12 @@ Page({
         // method: 'POST',
         // success: function (res) {
         //   console.log('course相关数据', res.data);
-          //变换状态:应在success之下
-          this.setData({
-            clickSignup: true
-          });
-          app.data._signUp=1;
+
       //   },
       //   fail: function (res) {
       //     //console.log(res);
       //   }
       // });
-    }
     // if(this.data.clickSignup==false){
     //   //获取信息
     //   wx.getLocation({
@@ -142,6 +136,7 @@ Page({
     //     }
     //   })
     // }
+
     //获取讨论课信息
     wx.request({
       url: app.data._preUrl + '/seminar/' + seminarId+'/detail',
@@ -160,56 +155,53 @@ Page({
         console.log(res);
       }
     });
-    //获取classId
-    //unknown
 
     //获取签到状态
-    //to look up attendance
     var latitude;
     var longitude;
-    // wx.getLocation({
-    //   type: 'wgs84',
-    //   success: function (res) {
-    //     latitude = res.latitude;
-    //     longitude = res.longitude;
-    //   }
-    // });
-    // wx.request({
-    //   url: app.data._preUrl + '/seminar/' + seminarId + '/class/' +this.data.classId +'/attendance/'+app.data._userId,
-    //   data:{
-    //     locationVO:{
-    //       latitude: latitude,
-    //       longitude: longitude,
-    //       elevation: 0.0,
-    //     }
-    //   },
-    //   header: {
-    //     "content-type": "application/json",
-    //     "Authorization": 'Bearer ' + app.data._jwt,
-    //   },
-    //   method: 'GET',
-    //   success: function (res) {
-    //     console.log('签到相关数据', res)
-    //     that.setData({
-    //       status: res.data,
-    //     });
-    //     if(res.statusCode==200&&res.data){
-    //       that.setData({
-    //         clickSignup: true,//标明已经签到成功
-    //       });
-    //     }else{
-    //       that.setData({
-    //         clickSignup: false,//标明未签到
-    //       });
-    //     }
-    //   },
-    //   fail: function (res) {
-    //     console.log(res);
-    //     that.setData({
-    //       clickSignup: false,//标明未签到
-    //     });
-    //   }
-    // });
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        latitude = res.latitude;
+        longitude = res.longitude;
+      }
+    });
+    wx.request({
+      url: app.data._preUrl + '/seminar/' + seminarId + '/class/' +this.data.classId +'/attendance/',
+      data:{
+        //locationVO:{
+          latitude: latitude,
+          longitude: longitude,
+          elevation: 0.0,
+        //}
+      },
+      header: {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log('签到相关数据', res)
+        that.setData({
+          status: res.data,
+        });
+        if(res.statusCode==200&&res.data){
+          that.setData({
+            clickSignup: true,//标明已经签到成功
+          });
+        }else{
+          that.setData({
+            clickSignup: false,//标明未签到
+          });
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        that.setData({
+          clickSignup: false,//标明未签到
+        });
+      }
+    });
     if(app.data._signUp==0){
       that.setData({
         clickSignup: false,//标明未签到
