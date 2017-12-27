@@ -6,7 +6,8 @@ data: {
   userName:'',
   userNumber:'',
   userSchool:'',
-  courses:[{"id":1,"name":"OOAD"},{"id":1,"name":"J2EE"}],
+  //courses:[{"id":1,"name":"OOAD"},{"id":1,"name":"J2EE"}],
+  courses:''
   },
   btnToCourse:function(e){
     var index = parseInt(e.currentTarget.dataset.index);
@@ -101,11 +102,11 @@ data: {
       },
       success:function(res){
         console.log(res.data);
-        if(res.statusCode==200){
+        if ("data" in res && res.data !=null){
           that.setData({
             courses: res.data
           });
-        }else{
+        }else if(res.statusCode!=200){
           wx.showModal({
             title: '提示',
             content: '信息获取失败',
