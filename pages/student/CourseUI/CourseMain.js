@@ -103,7 +103,7 @@ Page({
       method: "GET",
       success: function (res) {
         console.log('seminars相关数据',res.data);
-        if ("data" in res && res.data != null){
+        if ("data" in res && res.data != null && res.statusCode==200){
           //获取seminar的status
           var lists = res.data;
           console.log('lists-a', lists);

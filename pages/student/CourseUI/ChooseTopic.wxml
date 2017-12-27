@@ -34,7 +34,7 @@
     <span class="topic" catchtap="showMessage1">话题{{t.serial}}</span>
     <view class="hrVertical"> </view>
     <span class="topicName">{{t.description}}</span>
-    <span class="leftNumWhite">剩余:{{t.groupLeft}}/{{t.groupLimit}}</span>
+    <span class="leftNumWhite">剩余:{{t.groupLeft.length}}/{{t.groupLimit}}</span>
     <image src="../../images/ninedot.png" class="nineIcon"></image>
   </view>
   </block>
