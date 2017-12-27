@@ -82,7 +82,8 @@ Page({
     //*****************获得数据库中获得小组
     var app=getApp();
     options.seminarId=1
-    const that=this
+    const that=this;
+    for(var i=0;i<5;i++)that.data.groups[i]
     wx.request({
       url:app.data._preUrl+'/seminar/'+options.seminarId+'/group',
       header: {

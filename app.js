@@ -21,6 +21,8 @@ App({
     _courseID:1,
     _classID:1,
     _seminarID:1,
+    _signUp:0,
+    _grade:[0,0,0,0,0],
     _preUrl:'http://localhost:8080',
 
     _code:'',
