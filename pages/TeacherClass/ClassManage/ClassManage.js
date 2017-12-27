@@ -44,8 +44,35 @@ Page({
         'Authorization': 'Bearer ' + app.data._jwt
       },
       success: function (res) {
-        console.log(res.data);
-        that.setData({ classes: res.data});
+        console.log(res);
+        if(res.statusCode==200){
+          that.setData({ classes: res.data });
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: '信息获取失败',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('确定');
+              } else if (res.cancel) {
+                console.log('取消');
+              }
+            }
+          });
+        }
+      },
+      fail:function(res){
+        wx.showModal({
+          title: '提示',
+          content: '信息获取失败',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('确定');
+            } else if (res.cancel) {
+              console.log('取消');
+            }
+          }
+        });
       }
     });
   },
