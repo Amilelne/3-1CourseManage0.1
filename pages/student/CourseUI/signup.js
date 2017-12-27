@@ -10,7 +10,7 @@ Page({
     SeminarDetailVO:'',
     attendanceVO:'',
     seminarId:'',
-    classId:'',//如何获得？
+    classId:'',//根据上一个页面的传值获得
   },
   //事件处理函数
   buttonSignup: function () {
@@ -57,10 +57,62 @@ Page({
   onLoad: function (options) {
     console.log(options);
     var seminarId=options.seminarId;
-    this.setData({seminarId:seminarId});
+    this.setData({
+      classId:options.classId,
+      seminarId:seminarId
+      });
+    var app = getApp();
+    var that = this;
+    //可以避免session-key过期的情况
+    // wx.getUserInfo({
+    //   success: function (res) {
+    //     console.log(res);
+    //     wx.request({
+    //       url: app.data._preUrl + '/auth/refresh',
+    //       header: {
+    //         "content-type": "application/json",
+    //         "Authorization": 'Bearer ' + app.data._jwt,
+    //       },
+    //       method: 'GET',
+    //       success: function (res) {
+    //         console.log('更新成功', res);
+    //         if(res.statusCode==200){
+    //           app.data._jwt = res.data;
+    //         }
+    //       },
+    //       fail: function (res) {
+    //         console.log('用户拒绝', res.data);
+    //       }
+    //     })
+    //   }
+    // })
+    // if (app.globalData.userInfo) {
+    //   this.setData({
+    //     userInfo: app.globalData.userInfo,
+    //     hasUserInfo: true
+    //   })
+    // } else if (this.data.canIUse) {
+    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+    //   // 所以此处加入 callback 以防止这种情况
+    //   app.userInfoReadyCallback = res => {
+    //     this.setData({
+    //       userInfo: res.userInfo,
+    //       hasUserInfo: true
+    //     })
+    //   }
+    // } else {
+    //   // 在没有 open-type=getUserInfo 版本的兼容处理
+    //   wx.getUserInfo({
+    //     success: res => {
+    //       app.globalData.userInfo = res.userInfo
+    //       this.setData({
+    //         userInfo: res.userInfo,
+    //         hasUserInfo: true
+    //       })
+    //     }
+    //   })
+    // }
     //获取讨论课信息
-    var app=getApp();
-    var that=this;
     wx.request({
       url: app.data._preUrl + '/seminar/' + seminarId+'/detail',
       header: {

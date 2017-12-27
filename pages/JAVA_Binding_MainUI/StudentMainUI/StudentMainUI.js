@@ -16,7 +16,7 @@ Page({
     var index = parseInt(e.currentTarget.dataset.index);
     var coursename=this.data.studentClassVOS[index].course;
     wx.navigateTo({
-      url: '../../student/CourseUI/CourseMain?courseID=' + this.data.studentClassVOS[index].courseId,
+      url: '../../student/CourseUI/CourseMain?courseId=' + this.data.studentClassVOS[index].courseId + '&classId=' + this.data.studentClassVOS[index].classId,
     })
   },
   CheckInfo: function () {

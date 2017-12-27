@@ -6,6 +6,9 @@ Page({
   data: {
     getCourseVO:'',
     listSeminarAndGradeVO:'',
+    courseId:'',
+    classId:'',
+    seminarId:''
   },
 
   /**
@@ -64,10 +67,15 @@ Page({
     }
     //****************获得各个seminar，以及获得上面的标题 
     const that=this;
-    console.log('courseId',options.courseID);
+    //获取上个页面的数据
+    console.log(options);
+    that.setData({
+      courseId:options.courseId,
+      classId:options.classId
+    });
     //获取course的相关数据
     wx.request({
-      url: app.data._preUrl+'/course/'+options.courseID,
+      url: app.data._preUrl+'/course/'+options.courseId,
       header:{
         "content-type": "application/json",
         "Authorization": 'Bearer ' + app.data._jwt,
@@ -87,7 +95,7 @@ Page({
     });
     //获取course下的seminars
     wx.request({
-      url: app.data._preUrl + '/course/' + options.courseID+'/student/seminar',
+      url: app.data._preUrl + '/course/' + options.courseId+'/student/seminar',
       header: {
         "content-type": "application/json",
         "Authorization": 'Bearer ' + app.data._jwt,
@@ -169,7 +177,7 @@ Page({
     var index = e.currentTarget.dataset.index;
     var groupingMethod = this.data.listSeminarAndGradeVO[index].groupingMethod;
     var seminarId = this.data.listSeminarAndGradeVO[index].id;
-    wx.navigateTo({ url: '../CourseUI/seminarHome?seminarId=' + seminarId + '&groupingMethod=' + groupingMethod + '&courseName=' + this.data.getCourseVO.name + '&seminarName=' + this.data.listSeminarAndGradeVO[index].name});
+    wx.navigateTo({ url: '../CourseUI/seminarHome?classId='+this.data.classId+'&seminarId=' + seminarId + '&groupingMethod=' + groupingMethod + '&courseName=' + this.data.getCourseVO.name + '&seminarName=' + this.data.listSeminarAndGradeVO[index].name});
     
   }
 })
