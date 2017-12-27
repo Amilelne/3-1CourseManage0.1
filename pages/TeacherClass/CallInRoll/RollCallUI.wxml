@@ -23,7 +23,7 @@
    <block wx:if="{{status=='calling'}}">
     <view class="studentNum2">
       <image src="../../images/users.png" mode='widthFix' class="usersIcon2"/>
-      已签到学生: {{roster.attend.num}}/{{classNode.numStudent}}
+      已签到学生: {{attendanceNum}}/{{classNode.numStudent}}
     </view>
     <button bindtap='smallbtn' type="button" class="blueSmallBtn">
       签到名单

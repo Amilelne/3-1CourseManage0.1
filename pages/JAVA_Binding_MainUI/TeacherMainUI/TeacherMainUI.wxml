@@ -6,9 +6,11 @@
       <span class="topName">姓名:{{userName}}</span>
       <span class="topID">教工号:{{userNumber}}</span>
    </view>
-   <view class="mainView" wx:for="{{courses}}" wx:key="this">
-    <view class="oneRow" data-index="{{index}}" catchtap='btnToCourse'>
+   <block wx:if="{{courses.length>0}}">
+      <view class="mainView" wx:for="{{courses}}" wx:key="this">
+      <view class="oneRow" data-index="{{index}}" catchtap='btnToCourse'>
       <text class="course">{{item.name}}</text>
-    </view>
-   </view>
+      </view>
+      </view>
+   </block>
 </page>

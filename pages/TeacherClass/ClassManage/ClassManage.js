@@ -7,8 +7,8 @@ Page({
   data: {
     course: { id: 23, name: 'OOAD', description: '面向对象设计与分析' },
     courseName:'',
-    seminar: { id: 29, name: '讨论课4', description: '界面原型设计', groupingMethod: 'random', startTime: '2017-10-09', endTime: '2017-10-24' },
-    classes: [{ id: 23, name: '班级1' }, { id: 46, name: '班级2' }, { id: 47, name: '班级3' }],
+    seminar: { id: 29, name: '讨论课1', description: '界面原型设计', groupingMethod: 'random', startTime: '2017-10-09', endTime: '2017-10-24' },
+    classes: [],
     status:"tocall",
   },
 
@@ -44,35 +44,10 @@ Page({
         'Authorization': 'Bearer ' + app.data._jwt
       },
       success: function (res) {
-        console.log(res);
-        if(res.statusCode==200){
+        console.log(res.data);
+        if(res.data){
           that.setData({ classes: res.data });
-        }else{
-          wx.showModal({
-            title: '提示',
-            content: '信息获取失败',
-            success: function (res) {
-              if (res.confirm) {
-                console.log('确定');
-              } else if (res.cancel) {
-                console.log('取消');
-              }
-            }
-          });
         }
-      },
-      fail:function(res){
-        wx.showModal({
-          title: '提示',
-          content: '信息获取失败',
-          success: function (res) {
-            if (res.confirm) {
-              console.log('确定');
-            } else if (res.cancel) {
-              console.log('取消');
-            }
-          }
-        });
       }
     });
   },

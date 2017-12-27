@@ -15,8 +15,8 @@
     <block wx:for-items="{{groups}}">
         <!--学生名单上面那个蓝色的bar-->
         <view data-index="{{index}}" bindtap='chooseToggle' class='studentListBarView'>
-          <span>{{item.name}}</span>
-          <span class="groupTopics">选题：{{item.topic}}</span>
+          <span>组号:{{item.groupName}}</span>
+          <span class="groupTopics">选题：{{item.seminarName}}</span>
         </view>
         <view wx:if="{{item.toggle}}" class = 'studentView'>
           <view wx:for-items="{{item.list}}">
@@ -47,7 +47,7 @@
       <view class='studentNoCallBarView'>
         <span>未签到学生</span>
       </view>
-      <view wx:for="{{roster.late.list}}" wx:key="this" class='studentView'>
+      <view wx:for="{{absentList}}" wx:key="this" class='studentView'>
         <block wx:if="{{!item.grouped}}">
           <view class='studentBlock'>
             <image src="../../images/user.png" mode="widthFix" class='userIcon' />
