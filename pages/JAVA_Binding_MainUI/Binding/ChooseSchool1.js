@@ -11,39 +11,9 @@ Page(
     state:'none',
     city_list_displayed:[],
     school_list_displayed:[],
-
-    provinces_list:[
-      { province:'北京'},{ province:'天津'},
-      { province:'黑龙江'},{ province:'吉林'},
-      { province:'辽宁'},{ province:'河北'},
-      { province:'内蒙古'},{ province:'河南'},
-      { province:'山东'},{ province:'浙江'},
-      { province:'江苏'},{ province:'福建'},
-      { province: '江西' }, { province: '安徽' }, 
-      { province: '广西' }, { province: '广东' },
-      { province: '山西' }, { province: '陕西' },
-      { province: '甘肃' }
-    ],
-    
-    city_list:[
-      [
-        { province: '北京', city: '海淀区' }, { province: '北京', city: '朝阳区' }
-      ],
-      [
-        { province: '福建', city: '福州' }, { province: '福建', city: '厦门' }, { province: '福建', city: '泉州' }, 
-        { province: '福建', city: '漳州' }, { province: '福建',city: '莆田' }
-      ]
-    ],
-    school_list: [
-      [
-        { city: '海淀区', school: '清华大学' }, { city: '海淀区', school: '北京大学' },
-      ],
-      [
-        { city: '厦门', school: '诚毅学院' }, { city: '厦门', school: '华侨大学' },
-        { city: '厦门', school: '华夏学院' }, { city: '厦门', school: '嘉庚学院' },
-        { city: '厦门', school: '厦门大学' }, { city: '厦门',school: '厦门理工大学'}
-      ]
-    ]
+    provinces_list:[],
+    city_list:[],
+    school_list: []
   },
   /**
    * 生命周期函数--监听页面加载
@@ -51,7 +21,7 @@ Page(
   onLoad: function (options) {
     const that=this
     var $i,$j,$k
-    /*获取省份列表
+    var app=getApp()
       wx.request({
         url: app.data._preUrl+'/school/province',
         header: {
@@ -61,80 +31,23 @@ Page(
         method: 'GET',
         success:function(res)
         {
-            var pro={}
+          console.log("get:"+res.data); 
             for($i=0;$i<res.data.length;$i++)
             {
+              var pro={}
               pro.province=res.data[$i]
               that.data.provinces_list.push(pro)
             }
+            console.log(that.data.provinces_list)
+            that.setData({
+              provinces_list: that.data.provinces_list
+            })
         },
         fail:function(res)
         {
           console.log("获得省份列表失败！")
         }
-      })*/
-
-      /*获得城市列表
-      for($i=0;$i<that.data.provinces_list.length;$i++)
-      {
-        var pro = []
-        wx.request({
-          url: app.data._preUrl + '/school/city',
-          header: {
-            "content-type": "application/json",
-            "Authorization": 'Bearer ' + app.data._jwt,
-          },
-          method: 'GET',
-          data:
-          {
-            province: that.data.provinces_list[$i]
-          },
-          success: function (res) {
-            
-            for ($j = 0; $j < res.data.length; $j++) {
-              var cit={}
-              cit.province = that.data.provinces_list[$i]
-              cit.city=res.data[$j]
-              pro.push(city)
-            }
-          },
-          fail: function (res) {
-            console.log("获得城市列表失败！")
-          }
-        })
-        that.data.city_list.push(pro) 
-      }*/
-
-      /*获取学校列表
-      for($i=0;$i<that.data.city_list.length;$i++)
-      {
-        var schools=[]
-        wx.request({
-          url: app.data._preUrl + '/school',
-          header: {
-            "content-type": "application/json",
-            "Authorization": 'Bearer ' + app.data._jwt,
-          },
-          method: 'GET',
-          data:
-          {
-            province: that.data.city_list[$i]
-          },
-          success: function (res) {
-
-            for ($j = 0; $j < res.data.length; $j++) {
-              var sch = {}
-              sch.city=that.data.city_list[$i]
-              sch.school= res.data[$j].name
-              schools.push(sch)
-            }
-          },
-          fail: function (res) {
-            console.log("获得城市列表失败！")
-          }
-        })
-        school_list.push(schools)
-      }*/
+      })
   },
 
   /**
@@ -255,38 +168,75 @@ Page(
         province: {id : 'province', text: $current_province},
         state: "province_chosen"
       });
-      for($i=0;$i<this.data.city_list.length;$i++)
-      {
-        if (this.data.city_list[$i][0].province == $current_province)
-        {
-          for ($j = 0; $j < this.data.city_list[$i].length; $j++) 
-          {
-            var that = this;
-            var up = "city_list_displayed[" + $j + "].city";
-            that.setData({ [up]: this.data.city_list[$i][$j].city })
-            
-          }
-        }
-      }
+      const that=this
+      //**********************
+               wx.request({
+                url: app.data._preUrl + '/school/city',
+                header: {
+                  "content-type": "application/json",
+                  "Authorization": 'Bearer ' + app.data._jwt,
+                },
+                method: 'GET',
+                data:
+                {
+                  'province': $current_province
+                },
+                success: function (res) {
+                  for ($j = 0; $j < res.data.length; $j++) {
+                    var cit = {city:''}
+                    cit.city = res.data[$j]
+                    that.setData({
+                      city_list_displayed: []
+                    }),
+                    that.data.city_list_displayed.push(cit)
+                  }
+                  that.setData({
+                    city_list_displayed: that.data.city_list_displayed
+                  })
+                },
+                fail: function (res) {
+                  console.log("获得城市列表失败！")
+                }
+              })    
     }
     else if (this.data.state == 'province_chosen')
     {
       var $i,$j
+      const that=this
       var $current_city = e.currentTarget.dataset.city;
       app.data._schoolCity = e.currentTarget.dataset.city;
       this.setData({
         city: { id: 'city', text: $current_city },
         state: "city_chosen"
       });
-      for ($i = 0; $i < this.data.school_list.length; $i++) {
-        if (this.data.school_list[$i][0].city == $current_city) {
-          for ($j = 0; $j < this.data.school_list[$i].length; $j++) {
-            var that = this;
-            var up = "school_list_displayed[" + $j + "].school";
-            that.setData({ [up]: this.data.school_list[$i][$j].school })
+      wx.request({
+        url: app.data._preUrl + '/school',
+        header: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer ' + app.data._jwt,
+        },
+        method: 'GET',
+        data:
+        {
+          'city': $current_city
+        },
+        success: function (res) {
+          for ($j = 0; $j < res.data.length; $j++) {
+            var shl = {school: '' }
+            shl.school = res.data[$j].name
+            that.setData({
+              school_list_displayed: []
+            }),
+            that.data.school_list_displayed.push(shl)
           }
+          that.setData({
+            school_list_displayed: that.data.school_list_displayed
+          })
+        },
+        fail: function (res) {
+          console.log("获得学校列表失败！")
         }
-      }
+      })
     }
     else if (this.data.state == 'city_chosen')
     {
