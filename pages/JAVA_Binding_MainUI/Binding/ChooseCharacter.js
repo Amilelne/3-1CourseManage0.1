@@ -121,8 +121,11 @@ Page({
         } else {
           console.log('获取用户登录失败：' + res.errMsg);
         }
+      },
+      fail:function(res){
+        console.log(res);
       }
-    })
+    });
     // 获取用户信息
     wx.getSetting({
       success: res => {

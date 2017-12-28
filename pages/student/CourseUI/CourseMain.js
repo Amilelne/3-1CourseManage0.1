@@ -109,8 +109,17 @@ Page({
           console.log('lists-a', lists);
           var curDate = new Date();
           for (var i = 0; i < lists.length; i++) {
-            var myDate = new Date(lists[i].startTime);
-            lists[i].status = myDate < curDate;
+            var myDateStart = new Date(lists[i].startTime);
+            var myDateEnd = new Date(lists[i].endTime);
+            if (myDateStart > curDate){
+              lists[i].status = 2;//seminar未开始
+            }
+            if (myDateEnd < curDate){
+              lists[i].status = 1;//seminar已结束
+            }
+            if (myDateStart <= curDate && myDateEnd > curDate){
+              lists[i].status = 0;//seminar正在进行
+            }
           }
           that.setData({
             listSeminarAndGradeVO: lists,
@@ -177,7 +186,7 @@ Page({
     var index = e.currentTarget.dataset.index;
     var groupingMethod = this.data.listSeminarAndGradeVO[index].groupingMethod;
     var seminarId = this.data.listSeminarAndGradeVO[index].id;
-    wx.navigateTo({ url: '../CourseUI/seminarHome?classId='+this.data.classId+'&seminarId=' + seminarId + '&groupingMethod=' + groupingMethod + '&courseName=' + this.data.getCourseVO.name + '&seminarName=' + this.data.listSeminarAndGradeVO[index].name});
+    wx.navigateTo({ url: '../CourseUI/seminarHome?classId=' + this.data.classId + '&seminarId=' + seminarId + '&groupingMethod=' + groupingMethod + '&courseName=' + this.data.getCourseVO.name + '&seminarName=' + this.data.listSeminarAndGradeVO[index].name + '&seminarStatus=' + this.data.listSeminarAndGradeVO[index].status});
     
   }
 })

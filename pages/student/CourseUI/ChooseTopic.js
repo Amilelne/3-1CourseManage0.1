@@ -23,6 +23,7 @@ Page({
     }],
 
     show:-1,
+    groupId:''
     //getTopicVOS:'',
   },
   //buttonShow事件处理函数
@@ -41,14 +42,32 @@ Page({
       content:'确定选择此话题吗(一旦选择，不可修改)?',
       success:function(res){
         if(res.confirm){
-          console.log('choose')
+          console.log('choose');
+          wx.request({
+            url: app.data._preUrl + '/group/' + that.data.groupId + '/topic',
+            data:{
+              id:that.data.topic[that.data.show].id
+            },
+            header: {
+              "content-type": "application/json",
+              "Authorization": 'Bearer ' + app.data._jwt,
+            },
+            method: 'GET',
+            success: function (res) {
+              console.log(res)
+              // var show;
+              // for(var i= 0;i<res.data.length;i++){
+              //   show[i]=false;
+              // }
+              that.setData({
+                topic: res.data
+              })
+            },
+            fail: function (res) {
+              console.log(res)
+            }
+          })
         }
-        var $value=that.data.topic[1].groupLeft;
-        $value=$value-1
-        that.data.topic[1].groupLeft=$value
-        that.setData({
-          topic:that.data.topic
-        })
       }
     })
   },
@@ -56,8 +75,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var app=getApp()
-    const that=this
+    var app=getApp();
+    const that=this;
+    that.setData({
+      groupId:options.groupId
+    });
     //app.data._seminarID=1,//赋值一个变量
     //获取topics相关数据
     wx.request({

@@ -4,7 +4,8 @@ Page({
       seminarName:'',
       classId:'',
       seminarId:'',
-      groupingMethod:''
+      groupingMethod:'',
+      status:''//0表示在打分，1表示结束，2表示未到打分时间
     },
 
     signup:function(){
@@ -20,9 +21,23 @@ Page({
     },
 
     score: function () {
-      wx.navigateTo({
-        url: './grade?seminarId=' + this.data.seminarId,
-      })
+      if(this.data.status==2){
+        wx.showModal({
+          title: '提示',
+          content: '未到打分时间',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('确定');
+            } else if (res.cancel) {
+              console.log('取消');
+            }
+          }
+        });
+      }else{
+        wx.navigateTo({
+          url: './grade?seminarId=' + this.data.seminarId + '&status=' + this.data.status,
+        });
+      }
     },
 
     onLoad: function (options) {
@@ -36,7 +51,8 @@ Page({
           seminarId:seminarId,
           groupingMethod:groupingMethod,
           courseName:courseName,
-          seminarName:seminarName
+          seminarName:seminarName,
+          status:options.status
         });
 
         var app = getApp();

@@ -50,5 +50,11 @@
     <view>
       <button wx:if="{{isLeader}}" class="btnBeLeader" catchtap='topic' >选题</button>
     </view>
+
+    <view>
+      <block wx:for-items="{{myGroupVO.topics}}" data-index="{{index}}" wx:key="this">
+      <span class="WhiteText">已选:{{item.name}}</span>
+      </block>
+    </view>
   </block>
 </view>

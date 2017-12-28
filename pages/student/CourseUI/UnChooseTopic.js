@@ -28,7 +28,7 @@ Page({
       wx.request({
         url: app.data._preUrl+'/group/' + this.data.myGroupVO.id + '/resign',
         data: {
-          id:app.data._userID
+          id:app.data._userId
         },
         header: {
           "content-type": "application/json",
@@ -51,7 +51,7 @@ Page({
       wx.request({
         url: app.data._preUrl + '/group/' + this.data.myGroupVO.id + '/assign',
         data: {
-          id: app.data._userID
+          id: app.data._userId
         },
         header: {
           "content-type": "application/json",
@@ -74,7 +74,7 @@ Page({
   //topic事件监听
   topic: function () {
     wx.redirectTo({
-      url: './ChooseTopic?seminarId='+this.data.seminarId,
+      url: './ChooseTopic?seminarId='+this.data.seminarId+'&groupId='+this.data.myGroupVO.id,
     })
   },
 
