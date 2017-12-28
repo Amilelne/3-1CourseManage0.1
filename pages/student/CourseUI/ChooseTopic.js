@@ -5,22 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    topic: [{id: 257,
-      serial: 'A',
-      name: "领域模型与模块",
-      description: "Domain model与模块划分",
-      groupLimit: 5,
-      groupMemberLimit: 6,
-      groupLeft: 0
-    }, {
-      id: 257,
-      serial: 'B',
-      name: "领域模型与模块",
-      description: "Domain model与模块划分",
-      groupLimit: 5,
-      groupMemberLimit: 6,
-      groupLeft: 2
-    }],
+    topic: '',
 
     show:-1,
     groupId:''
@@ -35,41 +20,80 @@ Page({
     })
   },
   //showMessage事件处理函数
-  showMessage1:function(){//*************************需要一个controller的调用 */
-    const that=this
-    wx.showModal({
-      title: '提示',
-      content:'确定选择此话题吗(一旦选择，不可修改)?',
-      success:function(res){
-        if(res.confirm){
-          console.log('choose');
-          wx.request({
-            url: app.data._preUrl + '/group/' + that.data.groupId + '/topic',
-            data:{
-              id:that.data.topic[that.data.show].id
-            },
-            header: {
-              "content-type": "application/json",
-              "Authorization": 'Bearer ' + app.data._jwt,
-            },
-            method: 'GET',
-            success: function (res) {
-              console.log(res)
-              // var show;
-              // for(var i= 0;i<res.data.length;i++){
-              //   show[i]=false;
-              // }
-              that.setData({
-                topic: res.data
-              })
-            },
-            fail: function (res) {
-              console.log(res)
-            }
-          })
+  showMessage1:function(e){//*************************需要一个controller的调用 */
+    const that=this;
+    var app=getApp();
+    var index = parseInt(e.currentTarget.dataset.index);
+    console.log(that.data.topic[index]);
+    if (that.data.topic[index].leftnum<=0){
+      wx.showModal({
+        title: '提示',
+        content: '该选题已被抢完，请选择其它的话题',
+        success: function (res) {
+          if (res.confirm) {
+            console.log('确定');
+          } else if (res.cancel) {
+            console.log('取消');
+          }
         }
-      }
-    })
+      });
+    }else if (that.data.topic[index].mySelect==true){
+      wx.showModal({
+        title: '提示',
+        content: '您已经选择了该话题，请勿重复选题',
+        success: function (res) {
+          if (res.confirm) {
+            console.log('确定');
+          } else if (res.cancel) {
+            console.log('取消');
+          }
+        }
+      });
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '确定选择此话题吗(一旦选择，不可修改)?',
+        success: function (res) {
+          if (res.confirm) {
+            console.log('choose');
+            wx.request({
+              url: app.data._preUrl + '/group/' + that.data.groupId + '/topic',
+              data: {
+                id: that.data.topic[index].id
+              },
+              header: {
+                "content-type": "application/json",
+                "Authorization": 'Bearer ' + app.data._jwt,
+              },
+              method: 'POST',
+              success: function (res) {
+                console.log(res)
+                var newtopic = that.data.topic;
+                newtopic[index].leftnum--;
+                newtopic[index].mySelect=true;
+                that.setData({
+                  topic: newtopic
+                })
+                wx.showModal({
+                  title: '提示',
+                  content: '选题成功',
+                  success: function (res) {
+                    if (res.confirm) {
+                      console.log('确定');
+                    } else if (res.cancel) {
+                      console.log('取消');
+                    }
+                  }
+                });
+              },
+              fail: function (res) {
+                console.log(res)
+              }
+            })
+          }
+        }
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -80,7 +104,6 @@ Page({
     that.setData({
       groupId:options.groupId
     });
-    //app.data._seminarID=1,//赋值一个变量
     //获取topics相关数据
     wx.request({
       url:app.data._preUrl+'/seminar/'+options.seminarId+'/topic',
@@ -91,13 +114,17 @@ Page({
       method:'GET',
       success:function(res)
       {
-        console.log(res)
-        // var show;
-        // for(var i= 0;i<res.data.length;i++){
-        //   show[i]=false;
-        // }
+        console.log(res);
+        var getTopicVO=res.data;
+        for(var i= 0;i<getTopicVO.length;i++){
+          getTopicVO[i].leftnum = getTopicVO[i].groupLimit - getTopicVO[i].groupList.length;
+          if (that.data.groupId in getTopicVO[i].groupList){
+            getTopicVO[i].mySelect=true
+          }
+        }
+        console.log("getTopicVO", getTopicVO);
         that.setData({
-          topic: res.data
+          topic: getTopicVO
         })
       },
       fail:function(res){
