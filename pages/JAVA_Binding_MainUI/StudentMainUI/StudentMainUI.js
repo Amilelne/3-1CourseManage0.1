@@ -92,7 +92,7 @@ Page({
       method: 'GET',
       success: function (res) {
         console.log('选课信息',res);
-        if(res.statusCode==200){
+        if (res.statusCode == 200 && res.data instanceof Array){
           that.setData({ studentClassVOS: res.data });
         }
       },          

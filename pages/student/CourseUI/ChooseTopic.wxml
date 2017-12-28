@@ -11,7 +11,7 @@
   </view>
 
   <!--当选题未选完时框是蓝色的，要增加新框就直接复制-->
-  <block wx:for="{{topic}}" wx:for-item="t" data-index="{{index}}">
+  <block wx:for="{{topic}}" wx:key="this" wx:for-item="t" data-index="{{index}}">
   <block wx:if='{{t.groupLeft!=0}}'>
   <view class='blueTopicView' >
     <span class="topic" catchtap="showMessage1">话题{{t.serial}}</span>

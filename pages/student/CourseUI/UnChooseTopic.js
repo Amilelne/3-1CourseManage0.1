@@ -12,6 +12,7 @@ Page({
       { "name": "轩辕朗", studentId: 24320152202788 }],
     showLeader: false,*/
     isLeader: '',
+    hasLeader:'',
 
     seminarName:'',
     groupingMethod:'',
@@ -23,6 +24,7 @@ Page({
   //toBeLeader事件函数*****************************成为队长，存入数据库
   toBeLeader: function () {
     var app=getApp();
+    var that=this;
     if (this.data.isLeader) {
       //修改数据库-去队长
       wx.request({
@@ -37,14 +39,15 @@ Page({
         method:'PUT',
         success: function (res) {
           console.log(res);
+          that.setData({
+            isLeader:false,
+            hasLeader:false
+          });
         },
         fail:function(res){
           console.log(res);
         }
       });
-      this.setData({
-        isLeader: false
-      })
     }
     else {
       //修改数据库-加队长
@@ -60,14 +63,15 @@ Page({
         method: 'PUT',
         success: function (res) {
           console.log(res);
+          that.setData({
+            isLeader: true,
+            hasLeader: true,
+          });
         },
         fail: function (res) {
           console.log(res);
         }
       });
-      this.setData({
-        isLeader: true
-      })
     }
   },
 
@@ -105,9 +109,22 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        console.log('course相关数据', res.data);
-        if(res.data.leader==null){
-          that.setData({isLeader:false});//初始化界面标记量
+        console.log('队伍相关数据', res.data);
+        if (res.data.leader != null && res.data.leader.id==app.data._userId){
+          that.setData({isLeader:true});//初始化界面标记量
+        }else{
+          that.setData({ isLeader: false });//初始化界面标记量
+        }
+        if (res.data.leader != null){
+          that.setData({ 
+            canBeLeader: false,
+            hasLeader:true
+        })
+        }else{
+          that.setData({
+            canBeLeader: true,
+            hasLeader:false
+        })
         }
         that.setData({
           myGroupVO: res.data,
