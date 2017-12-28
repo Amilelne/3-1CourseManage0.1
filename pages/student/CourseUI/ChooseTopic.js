@@ -20,7 +20,7 @@ Page({
     })
   },
   //showMessage事件处理函数
-  showMessage1:function(e){//*************************需要一个controller的调用 */
+  showMessage1:function(e){
     const that=this;
     var app=getApp();
     var index = parseInt(e.currentTarget.dataset.index);

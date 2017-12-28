@@ -54,7 +54,7 @@ Page({
               }
             })*/
             wx.request({
-              url: app.data._preUrl + '/group/' + $i + '/grade/presentation/' + 1,
+              url: app.data._preUrl + '/group/' + that.data.groups[$i].id + '/grade/presentation/' + app.data._userId,
               method: 'PUT',
               data: {
                 topicId:$i,
@@ -95,7 +95,9 @@ Page({
         method:'GET',
         success:function(res)
         {
-          that.data.group=res.data
+          that.setData({
+            group:res.data
+          })
           console.log(res.data)
         }
       })
