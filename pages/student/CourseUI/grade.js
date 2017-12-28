@@ -34,7 +34,8 @@ Page({
           var app = getApp()
           var $i;
           for ($i = 0; $i < that.data.groups.length; $i++) {
-            var topiciiid/*
+            var topiciiid
+            /*
             wx.request({
               url:app.data._preUrl+'/group/'+that.data.groups[$i].id,
               method:"GET",
@@ -79,23 +80,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //*****************获得数据库中获得小组
-    var app=getApp();
-    options.seminarId=1
-    const that=this;
-    for(var i=0;i<5;i++)that.data.groups[i]
-    wx.request({
-      url:app.data._preUrl+'/seminar/'+options.seminarId+'/group',
-      header: {
-        'Authorization': 'Bearer ' + app.data._jwt
-      },
-      method:'GET',
-      success:function(res)
-      {
-        that.data.group=res.data
-        console.log(res.data)
-      }
-    })
+    if(options.status==0)
+    {
+      //*****************获得数据库中获得小组
+      var app=getApp();
+      options.seminarId=1
+      const that=this;
+      for(var i=0;i<5;i++)that.data.groups[i]
+      wx.request({
+        url:app.data._preUrl+'/seminar/'+options.seminarId+'/group',
+        header: {
+          'Authorization': 'Bearer ' + app.data._jwt
+        },
+        method:'GET',
+        success:function(res)
+        {
+          that.data.group=res.data
+          console.log(res.data)
+        }
+      })
+    }
   },
 
   /**

@@ -45,12 +45,96 @@ Page(
       ]
     ]
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    const that=this
+    var $i,$j,$k
+    /*获取省份列表
+      wx.request({
+        url: app.data._preUrl+'/school/province',
+        header: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer ' + app.data._jwt,
+        },
+        method: 'GET',
+        success:function(res)
+        {
+            var pro={}
+            for($i=0;$i<res.data.length;$i++)
+            {
+              pro.province=res.data[$i]
+              that.data.provinces_list.push(pro)
+            }
+        },
+        fail:function(res)
+        {
+          console.log("获得省份列表失败！")
+        }
+      })*/
+
+      /*获得城市列表
+      for($i=0;$i<that.data.provinces_list.length;$i++)
+      {
+        var pro = []
+        wx.request({
+          url: app.data._preUrl + '/school/city',
+          header: {
+            "content-type": "application/json",
+            "Authorization": 'Bearer ' + app.data._jwt,
+          },
+          method: 'GET',
+          data:
+          {
+            province: that.data.provinces_list[$i]
+          },
+          success: function (res) {
+            
+            for ($j = 0; $j < res.data.length; $j++) {
+              var cit={}
+              cit.province = that.data.provinces_list[$i]
+              cit.city=res.data[$j]
+              pro.push(city)
+            }
+          },
+          fail: function (res) {
+            console.log("获得城市列表失败！")
+          }
+        })
+        that.data.city_list.push(pro) 
+      }*/
+
+      /*获取学校列表
+      for($i=0;$i<that.data.city_list.length;$i++)
+      {
+        var schools=[]
+        wx.request({
+          url: app.data._preUrl + '/school',
+          header: {
+            "content-type": "application/json",
+            "Authorization": 'Bearer ' + app.data._jwt,
+          },
+          method: 'GET',
+          data:
+          {
+            province: that.data.city_list[$i]
+          },
+          success: function (res) {
+
+            for ($j = 0; $j < res.data.length; $j++) {
+              var sch = {}
+              sch.city=that.data.city_list[$i]
+              sch.school= res.data[$j].name
+              schools.push(sch)
+            }
+          },
+          fail: function (res) {
+            console.log("获得城市列表失败！")
+          }
+        })
+        school_list.push(schools)
+      }*/
   },
 
   /**
