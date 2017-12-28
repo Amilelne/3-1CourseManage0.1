@@ -4,8 +4,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    classNode: { id: 23, name: '班级1', numStudent: 40, time: [{ week: 1, day: 1, lessons: [1, 2], site: '海韵201' }, { week: 0, day: 3, lessons: [3, 4], site: '公寓405' }], calling: true, roster: '/roster/周三12班.xlsx', proportions: { '3': 20, '4': 60, '5': 20, report: 50, presentation: 50 } },
-    roster: { id: 132, calling: 0, classid: 23, attend: { num: 0, list: [] }, late: { num: 0, list: [] } },
+    classNode: '',
+    roster: '',
     groupingMethod:"random",
     status:"calling",
     className:'一班',
@@ -93,9 +93,7 @@ Page({
       },
       success: function (res) {
         console.log(res.data);
-        var ros = that.data.roster;
-        ros.attend.num = res.data.numPresent;
-        that.setData({ roster: ros });
+        that.setData({ roster: res.data });
       }
     });
     this.setData({

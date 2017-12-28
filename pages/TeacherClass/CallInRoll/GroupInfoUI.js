@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    groups: [{ id: "1031A1", topic: "A", name: "1A1", list: [{ id: "001", name: "学生1" }, { id: "002", name: "学生2" }, { id: "003", name: "学生3" }, { id: "004", name: "学生4" }, { id: "005", name: "学生5" }] }, { id: "1031A2", topic: "A", name: "1A2", list: [{ id: "006", name: "学生6" }, { id: "007", name: "学生7" }, { id: "008", name: "学生8" }, { id: "009", name: "学生9" }, { id: "010", name: "学生10" }] }, { id: "1031B1", topic: "B", name: "1B1", list: [{ id: "011", name: "学生11" }, { id: "012", name: "学生12" }, { id: "013", name: "学生13" }, { id: "014", name: "学生14" }, { id: "015", name: "学生15" }] }, { id: "1031B2", topic: "B", name: "1B2", list: [{ id: "016", name: "学生16" }, { id: "017", name: "学生17" }, { id: "018", name: "学生18" }, { id: "019", name: "学生19" }, { id: "020", name: "学生20" }] }],
+    groups:'',
     roster:[],
     groupingMethod: "random",
     status: "calling",
@@ -13,7 +13,6 @@ Page({
     curgroup: 0,
     absentList:[],
     curselect:-1,
-
     showModal: false,
   },
 
@@ -118,14 +117,9 @@ Page({
             },
             success:function(res){
               if(res.data.members){
-                wx.setStorage({
-                  key: res.data.id,
-                  data: res.data.members,
-                })
                 that.setData({
-                  ['roster['+i+']']:res.data.members
+                  roster:that.data.roster.concat(res.data)
                 })
-                console.log(that.data.roster[i])
               } 
             },
           })
