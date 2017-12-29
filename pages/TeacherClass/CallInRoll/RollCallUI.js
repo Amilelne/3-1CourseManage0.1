@@ -8,14 +8,12 @@ Page({
     roster: '',
     groupingMethod:"random",
     status:"calling",
-    className:'一班',
+    className:'',
     latitude:'112',
     longitude:'221',
     elevation:'50',
     attendanceNum:'0',
   },
-
-  
 
   endModal: function () {
     var that=this;
@@ -29,19 +27,6 @@ Page({
       success: function (res) {
         if (res.confirm) {
           console.log("Teacher confirm endRollCall");
-          wx.request({
-            url: app.data._preUrl + '/seminar/' + app.data._seminarID + '/class/' + app.data._classID + '/attendance/end',
-            header: {
-              'Authorization': 'Bearer ' + app.data._jwt
-            },
-            method: "GET",
-            success: function (res) {
-              console.log(res.data);
-              var ros = that.data.roster;
-              ros.attend.num = res.data.numPresent;
-              that.setData({ roster: ros });
-            }
-          });
           wx.request({
             url: app.data._preUrl + '/seminar/' + app.data._seminarID + '/class/' + app.data._classID + '/attendance/present' ,
             header: {
@@ -96,6 +81,20 @@ Page({
         that.setData({ roster: res.data });
       }
     });
+    wx.request({
+      url: app.data._preUrl + '/seminar/' + app.data._seminarID + '/class/' + app.data._classID + '/attendance/present',
+      header: {
+        'Authorization': 'Bearer ' + app.data._jwt
+      },
+      method: "GET",
+      success: function (res) {
+        console.log(res.data);
+        that.setData({
+          roster: res.data,
+          attendanceNum: res.data.length
+        });
+      }
+    });
     this.setData({
       status:"calling"
     });
@@ -143,19 +142,6 @@ Page({
       success: function (res) {
         console.log(res.data);
         that.setData({ classNode: res.data });
-      }
-    });
-    wx.request({
-      url: app.data._preUrl +'/seminar/'+app.data._seminarID+'/class/'+app.data.classID+'/attendance',
-      header: {
-        'Authorization': 'Bearer ' + app.data._jwt
-      },
-      method: "GET",
-      success: function (res) {
-        console.log(res.data);
-        var ros = that.data.roster;
-        ros.attend.num = 0;
-        that.setData({ roster: ros });
       }
     });
   },

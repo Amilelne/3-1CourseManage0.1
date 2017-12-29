@@ -12,6 +12,7 @@ Page({
     groupLists:'',
     curgroup: 0,
     absentList:[],
+    latelist:[],
     curselect:-1,
     showModal: false,
   },
@@ -97,7 +98,12 @@ Page({
   onLoad: function (options) {
     var app = getApp();
     var that = this; 
-    var groupRoster = [];   
+    var groupRoster = [];
+    wx.showToast({
+      title:'加载中',
+      icon:'loading',
+      duration:4000
+    });
     wx.request({
       url: app.data._preUrl + '/seminar/' + app.data._seminarID + '/group',
       method: "GET",
@@ -123,8 +129,7 @@ Page({
               } 
             },
           })
-        }
-        
+        }  
       }
     });
     wx.request({
@@ -139,6 +144,7 @@ Page({
         }
       }
     });
+    
   },
 
   /**
