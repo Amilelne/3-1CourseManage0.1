@@ -83,15 +83,17 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        console.log('自己组选择的topics', res.data.topics);
+        console.log('自己选择的topic', res.data.topics);
         that.setData({
           myTopics: res.data.topics,
         });
+        that.getAllTopics();
       },
       fail: function (res) {
         console.log(res);
       }
     });
+    /*
     //获取所有topic
     wx.request({
       url: app.data._preUrl + '/seminar/' + options.seminarId + '/topic',
@@ -101,15 +103,64 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        console.log(res);
+        console.log('所有topics',res);
         that.setData({
           allTopics: res.data
-        })
+        });
+        //计算自己需要打分的topic(先做差集再做交集)
+        var gradeTopics;
+        var k = 0;
+        for (var i = 0; i < this.data.myTopics; i++) {
+          for (var j = 0; j < this.data.allTopics; j++) {
+            if (this.data.allTopics[j].id != this.data.myTopics[i].id) {
+              var l = 0;
+              for (l = 0; l < k; l++) {
+                if (gradeTopics[l].id == this.data.allTopics[j].id) break;
+              }
+              if (l >= k) {
+                gradeTopics[k] = this.data.allTopics[j].id;
+                k++;
+              }
+            }
+          }
+        }
+        that.setData({
+          gradeTopics: gradeTopics
+        });
+        //获取需要打分的组
+        var gradeGroups;
+        k = 0;
+        for (var i = 0; i < gradeTopics.length; i++) {
+          wx.request({
+            url: app.data._preUrl + '/topic/' + gradeTopics[i] + '/group',
+            header: {
+              "content-type": "application/json",
+              "Authorization": 'Bearer ' + app.data._jwt,
+            },
+            method: 'GET',
+            success: function (res) {
+              console.log(res);
+              for (var j = 0; j < res.data.length; j++) {
+                for (var l = 0; l < that.data.myTopics.length; l++) {
+                  if (res.data[j].id != that.data.myTopics[j].id) {
+                    gradeGroups[k] = res.data[j];
+                    k++;
+                  }
+                }
+              }
+            },
+            fail: function (res) {
+              console.log(res)
+            }
+          })
+        }
       },
       fail: function (res) {
         console.log(res)
       }
     })
+    */
+    /*
     //计算自己需要打分的topic(先做差集再做交集)
     var gradeTopics;
     var k=0;
@@ -157,7 +208,7 @@ Page({
         }
       })
     }
-    
+    */
 
     if(options.status==0)
     {
@@ -167,7 +218,7 @@ Page({
       const that=this;
       for(var i=0;i<5;i++)that.data.groups[i]
       wx.request({
-        url:app.data._preUrl+'/seminar/'+options.seminarId+'/group',
+        url:app.data._preUrl+'/seminar/'+that.data.seminarId+'/group',
         header: {
           'Authorization': 'Bearer ' + app.data._jwt
         },
@@ -230,5 +281,94 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
-})
+  },
+
+  /**
+   * 自己定义的函数
+   */
+  getAllTopics:function(){
+    var that=this;
+    var app=getApp();
+    //获取所有topic
+    wx.request({
+      url: app.data._preUrl + '/seminar/' + that.data.seminarId + '/topic',
+      header: {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log('所有topics', res);
+        that.setData({
+          allTopics: res.data
+        });
+        that.calGradeTopic();
+      }
+    });
+    return 0;
+  },
+  calGradeTopic:function(){//计算需要打分的组选的话题,先做差集再做并集
+    var that=this;
+    var app=getApp();
+    var gradeTopics=[];
+    var k = 0;
+    for (var i = 0; i < that.data.myTopics.length; i++) {
+      for (var j = 0; j < that.data.allTopics.length; j++) {
+        console.log("calGradeTopic loop "+i+" "+j);
+        if (that.data.allTopics[j].id != that.data.myTopics[i].id) {
+          var l = 0;
+          for (l = 0; l < k; l++) {
+            if (gradeTopics[l].id == that.data.allTopics[j].id) break;
+          }
+          if (l >= k) {
+            //gradeTopics[k] = that.data.allTopics[j].id;
+            k++;
+            gradeTopics.push(that.data.allTopics[j].id);
+          }
+        }
+      }
+    }
+    console.log("gradeTopics",gradeTopics);
+    that.setData({
+      gradeTopics: gradeTopics
+    });
+    that.calGradeGroup();
+    return 0;
+  },
+  calGradeGroup: function () {//计算需要打分的组
+    var that=this;
+    var app=getApp();
+    var gradeGroups;
+    var k = 0;
+    for (var i = 0; i < that.data.gradeTopics.length; i++) {
+      wx.request({
+        url: app.data._preUrl + '/topic/' + that.data.gradeTopics[i] + '/group',
+        header: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer ' + app.data._jwt,
+        },
+        method: 'GET',
+        success: function (res) {
+          console.log(res);
+          for (var j = 0; j < res.data.length; j++) {
+            for (var l = 0; l < that.data.myTopics.length; l++) {
+              if (res.data[j].id != that.data.myTopics[l].id) {
+                gradeGroups[k] = res.data[j];
+                k++;
+              }
+            }
+          }
+          console.log("gradeGroups", gradeGroups);
+        },
+        fail: function (res) {
+          console.log(res)
+        }
+      })
+    }
+    that.setData({
+      gradeGroups:gradeGroups
+    });
+    return 0;
+  },
+});
+
