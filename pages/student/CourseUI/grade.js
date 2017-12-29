@@ -16,7 +16,8 @@ Page({
     status:'',
     allTopics:'',
     gradeTopics:'',
-    gradeGroups:''
+    gradeGroups:'',
+    groupId:''
   },
   selectHeart: function (e) {
     const groupIndex = e.currentTarget.id;
@@ -88,6 +89,24 @@ Page({
           myTopics: res.data.topics,
         });
         that.getAllTopics();
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    });
+    //获取队伍信息
+    wx.request({
+      url: app.data._preUrl + '/seminar/' + this.data.seminarId + '/group/my',
+      header: {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log('队伍相关数据', res.data);
+        that.setData({
+          groupId:res.data.id
+        });
       },
       fail: function (res) {
         console.log(res);
@@ -312,6 +331,7 @@ Page({
     var app=getApp();
     var gradeTopics=[];
     var k = 0;
+    var myTopicsTemp = that.data.myTopics;
     for (var i = 0; i < that.data.myTopics.length; i++) {
       for (var j = 0; j < that.data.allTopics.length; j++) {
         console.log("calGradeTopic loop "+i+" "+j);
@@ -321,28 +341,29 @@ Page({
             if (gradeTopics[l].id == that.data.allTopics[j].id) break;
           }
           if (l >= k) {
-            //gradeTopics[k] = that.data.allTopics[j].id;
             k++;
             gradeTopics.push(that.data.allTopics[j].id);
           }
         }
       }
+      myTopicsTemp[i].groupnum=k;
     }
+    that.setData({ myTopics: myTopicsTemp});
     console.log("gradeTopics",gradeTopics);
-    that.setData({
-      gradeTopics: gradeTopics
-    });
-    that.calGradeGroup();
+    // that.setData({
+    //   gradeTopics: gradeTopics
+    // });
+    that.calGradeGroup(gradeTopics);
     return 0;
   },
-  calGradeGroup: function () {//计算需要打分的组
+  calGradeGroup: function (gradeTopics) {//计算需要打分的组
     var that=this;
     var app=getApp();
-    var gradeGroups;
-    var k = 0;
-    for (var i = 0; i < that.data.gradeTopics.length; i++) {
+    var gradeGroups=[];
+    for (var i = 0; i < gradeTopics.length; i++) {
+      console.log("calGradeGroup loop " + i);
       wx.request({
-        url: app.data._preUrl + '/topic/' + that.data.gradeTopics[i] + '/group',
+        url: app.data._preUrl + '/topic/' + gradeTopics[i] + '/group',
         header: {
           "content-type": "application/json",
           "Authorization": 'Bearer ' + app.data._jwt,
@@ -351,11 +372,9 @@ Page({
         success: function (res) {
           console.log(res);
           for (var j = 0; j < res.data.length; j++) {
-            for (var l = 0; l < that.data.myTopics.length; l++) {
-              if (res.data[j].id != that.data.myTopics[l].id) {
-                gradeGroups[k] = res.data[j];
-                k++;
-              }
+            if (res.data[j].id != that.data.groupId) {
+              var agroup = res.data[j];
+              gradeGroups.push(res.data[j]);
             }
           }
           console.log("gradeGroups", gradeGroups);
