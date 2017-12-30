@@ -18,7 +18,7 @@
           <span>组号:{{item.groupName}}</span>
           <span class="groupTopics">选题：{{item.seminarName}}</span>
         </view>
-        <view wx:if="{{roster[index]}}" class = 'studentView'>
+        <view wx:if="{{roster[index].toggle}}" class = 'studentView'>
           <view wx:for-items="{{roster[index].members}}">
             <view class='studentBlock'>
               <image src="../../images/user.png" mode='widthFix' class='userIcon' />
@@ -48,12 +48,10 @@
         <span>未签到学生</span>
       </view>
       <view wx:for="{{absentList}}" wx:key="this" class='studentView'>
-        <block wx:if="{{!item.grouped}}">
           <view class='studentBlock'>
             <image src="../../images/user.png" mode="widthFix" class='userIcon' />
-            <span class="studentName">{{item.name}}</span>
+            <span class="studentName">{{item}}</span>
           </view>
-        </block>
       </view>
     </view>
   </block>
@@ -64,8 +62,8 @@
     <view class="modal-title">添加学生</view>
     <view class="modal-content">
     <scroll-view scroll-y style="height: 100px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="red" scroll-top="100">
-      <view wx:for="{{roster.late.list}}" wx:key="this" class='modal-list'>
-        <block wx:if="{{!item.grouped}}">
+      <view wx:for="{{lateList}}" wx:key="this" class='modal-list'>
+        <block>
           <block wx:if="{{index==curselect}}">
             <span class='input-holder-select'>{{item.name}}</span>
           </block>

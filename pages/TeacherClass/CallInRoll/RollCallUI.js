@@ -38,7 +38,17 @@ Page({
                 attendanceNum:res.data.length
               })
             }
-          })
+          });
+          /**
+           * 结束签到
+           */
+          wx.request({
+            url: app.data._preUrl + '/seminar/' + app.data._seminarID + '/class/' + app.data._classID + '/attendance/end',
+            header: {
+              'Authorization': 'Bearer ' + app.data._jwt
+            },
+            method: "GET"
+          });
           that.setData({ status: "called" });
         } else {
           console.log("Teacher cancel endRollCall");
@@ -116,7 +126,7 @@ Page({
 
   bigbtn2: function () {
     console.log("Teacher will go to the GroupInfoUI page");
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../CallInRoll/GroupInfoUI?groupingMethod=' + this.data.groupingMethod + '&status=' + this.data.status,
     })
   },

@@ -12,16 +12,16 @@ Page({
     groupLists:'',
     curgroup: 0,
     absentList:[],
-    latelist:[],
+    lateList:[],
     curselect:-1,
     showModal: false,
   },
 
   chooseToggle: function (e) {
     let index = e.currentTarget.dataset.index,
-      nowToggle = this.data.groups[index].toggle;
+      nowToggle = this.data.roster[index].toggle;
     this.setData({
-      ['groups[' + index + '].toggle']: !nowToggle
+      ['roster[' + index + '].toggle']: !nowToggle
     })
   },
 
@@ -62,14 +62,16 @@ Page({
     this.hideModal();
     var datas = this.data;
     var index = datas.curselect;
-    datas.roster.late.list[index].grouped = true;
-    var obj = {
-      islate: true,
-      id: datas.roster.late.list[index].id,
-      name: datas.roster.late.list[index].name,
-    };
-    datas.groups[datas.curgroup].list.push(obj);
-    this.setData(datas);
+    var curgroup = datas.curgroup;
+    var lateStudent = {
+      "name": datas.lateList[index].name
+    }
+    console.log(lateStudent)
+    //给相应的组添加迟到的学生
+    // this.setData({
+    //   roster:datas.roster[curgroup].members.concat(lateStudent)
+    // })
+    console.log(datas.lateList[index].name+':'+index+",curgroup:"+datas.curgroup);
     console.log("Teacher adds a late student to a group");
   },
 
@@ -83,12 +85,6 @@ Page({
     var datas = this.data;
     var deleteid = datas.groups[datas.curgroup].list[index].id;
     datas.groups[datas.curgroup].list.splice(index,1);
-    for (let i = 0; i < datas.roster.late.list.length;i++){
-      if (datas.roster.late.list[i].id==deleteid){
-        datas.roster.late.list[i].grouped=false;
-      }
-    }
-    this.setData(datas);
     console.log("Teacher removes a late student from a group");
   },
 
@@ -102,7 +98,7 @@ Page({
     wx.showToast({
       title:'加载中',
       icon:'loading',
-      duration:4000
+      duration:6000
     });
     wx.request({
       url: app.data._preUrl + '/seminar/' + app.data._seminarID + '/group',
@@ -141,6 +137,21 @@ Page({
       success: function (res) {
         if(res.data){
           that.setData({ absentList: res.data });
+        }
+      }
+    });
+    /**
+     * 获取迟到学生列表
+     */
+    wx.request({
+      url: app.data._preUrl + '/seminar/' + app.data._seminarID + '/class/' + app.data._classID + '/attendance/late',
+      method: "GET",
+      header: {
+        'Authorization': 'Bearer ' + app.data._jwt
+      },
+      success: function (res) {
+        if (res.data) {
+          that.setData({ lateList: res.data });
         }
       }
     });
