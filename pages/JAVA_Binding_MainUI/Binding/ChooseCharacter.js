@@ -22,11 +22,11 @@ Page({
         app.data._openid = res.data.openid;
         app.data._userId = res.data.userId;
         if (res.data.status=='unbind') {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../Binding/TeacherBindingUI',
           })
         } else {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../TeacherMainUI/TeacherMainUI',
           })
         }
@@ -75,11 +75,11 @@ Page({
         app.data._openid = res.data.openid;
         app.data._userId = res.data.userId;
         if (res.data.status == 'unbind') {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../Binding/StudentBindingUI',
           })
         } else {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../StudentMainUI/StudentMainUI',
           })
         }
@@ -144,9 +144,15 @@ Page({
                 var app = getApp();
                 app.userInfoReadyCallback(res)
               }
+            },
+            fail: function (res) {
+              console.log("wx.getUserInfo失败", res);
             }
           })
         }
+      },
+      fail:function(res){
+        console.log("wx.getSetting失败",res);
       }
     })
   },
