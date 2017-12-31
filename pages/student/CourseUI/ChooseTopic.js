@@ -8,7 +8,8 @@ Page({
     topic: '',
 
     show:-1,
-    groupId:''
+    groupId:'',
+    seminarId:''
   },
 
   /**
@@ -18,10 +19,16 @@ Page({
     var app=getApp();
     var that=this;
     that.setData({
-      groupId:options.groupId
+      groupId:options.groupId,
+      seminarId:options.seminarId
     });
     //获取topics相关数据
     that.getTopicsInfoBySeminarId();
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1200
+    })
   },
 
   /**
