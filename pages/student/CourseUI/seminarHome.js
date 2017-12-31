@@ -8,38 +8,9 @@ Page({
       status:''//0表示在打分，1表示结束，2表示未到打分时间
     },
 
-    signup:function(){
-      wx.navigateTo({
-        url: './signup?classId='+this.data.classId+'&seminarId='+this.data.seminarId,
-      })
-    },
-
-    group: function () {
-      wx.navigateTo({
-        url: './UnChooseTopic?seminarId=' + this.data.seminarId + '&groupingMethod=' + this.data.groupingMethod+'&seminarName='+this.data.seminarName,
-      })
-    },
-
-    score: function () {
-      if(this.data.status==2){
-        wx.showModal({
-          title: '提示',
-          content: '未到打分时间',
-          success: function (res) {
-            if (res.confirm) {
-              console.log('确定');
-            } else if (res.cancel) {
-              console.log('取消');
-            }
-          }
-        });
-      }else{
-        wx.navigateTo({
-          url: './grade?seminarId=' + this.data.seminarId + '&status=' + this.data.status,
-        });
-      }
-    },
-
+  /**
+   * 生命周期函数--监听页面加载
+   */
     onLoad: function (options) {
         console.log(options);
         var seminarId = options.seminarId;
@@ -54,60 +25,99 @@ Page({
           seminarName:seminarName,
           status:options.status
         });
-
-        var app = getApp();
-        var that = this;
-        //可以避免session-key过期的情况
-        // wx.getUserInfo({
-        //   success: function (res) {
-        //     console.log(res);
-        //     wx.request({
-        //       url: app.data._preUrl + '/auth/refresh',
-        //       header: {
-        //         "content-type": "application/json",
-        //         "Authorization": 'Bearer ' + app.data._jwt,
-        //       },
-        //       method: 'GET',
-        //       success: function (res) {
-        //         console.log('更新成功', res);
-        //         if (res.statusCode == 200) {
-        //           app.data._jwt = res.data;
-        //         }
-        //         console.log(app.data._jwt);
-        //       },
-        //       fail: function (res) {
-        //         console.log('用户拒绝', res.data);
-        //       }
-        //     })
-        //   }
-        // })
-        // if (app.globalData.userInfo) {
-        //   this.setData({
-        //     userInfo: app.globalData.userInfo,
-        //     hasUserInfo: true
-        //   })
-        // } else if (this.data.canIUse) {
-        //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-        //   // 所以此处加入 callback 以防止这种情况
-        //   app.userInfoReadyCallback = res => {
-        //     this.setData({
-        //       userInfo: res.userInfo,
-        //       hasUserInfo: true
-        //     })
-        //   }
-        // } else {
-        //   // 在没有 open-type=getUserInfo 版本的兼容处理
-        //   wx.getUserInfo({
-        //     success: res => {
-        //       app.globalData.userInfo = res.userInfo
-        //       this.setData({
-        //         userInfo: res.userInfo,
-        //         hasUserInfo: true
-        //       })
-        //     }
-        //   })
-        // }
     },
 
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () {
+
+    },
+
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function () {
+
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
+
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () {
+
+    },
+
+    /**
+     * 自定义函数
+     * 签到跳转的button事件
+     */
+    signup: function () {
+      wx.navigateTo({
+        url: './signup?classId=' + this.data.classId + '&seminarId=' + this.data.seminarId,
+      })
+    },
+
+    /**
+     * 自定义函数
+     * 组队和选题跳转的button事件
+     */
+    group: function () {
+      wx.navigateTo({
+        url: './UnChooseTopic?seminarId=' + this.data.seminarId + '&groupingMethod=' + this.data.groupingMethod + '&seminarName=' + this.data.seminarName,
+      })
+    },
+
+    /**
+     * 自定义函数
+     * 打分跳转的button事件
+     */
+    score: function () {
+      if (this.data.status == 2) {
+        wx.showModal({
+          title: '提示',
+          content: '未到打分时间',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('确定');
+            } else if (res.cancel) {
+              console.log('取消');
+            }
+          }
+        });
+      } else {
+        wx.navigateTo({
+          url: './grade?seminarId=' + this.data.seminarId + '&status=' + this.data.status,
+        });
+      }
+    },
 });
 
