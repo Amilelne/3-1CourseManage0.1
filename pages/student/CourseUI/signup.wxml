@@ -42,7 +42,7 @@
         <!--签到成功-->
         <view class="successCall">
           <image src="../../images/clock.png" class='courseInfoIcon'/>
-          <strong>签到成功</strong>
+          <strong>已签到</strong>
         </view>
       </block>
     </view>

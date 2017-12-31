@@ -44,11 +44,11 @@
 
   <block>
     <view>
-      <button wx:if="{{!hasLeader}}" class="btnBeLeader" bindtap="toBeLeader">成为队长</button>
+      <button wx:if="{{hasLeader==false}}" class="btnBeLeader" bindtap="toBeLeader">成为队长</button>
     </view>
 
     <view>
-      <button wx:if="{{hasLeader==true&&isLeader==true}}" class="btnBeLeader" catchtap='topic' >选题</button>
+      <button wx:if="{{isLeader==true}}" class="btnBeLeader" catchtap='topic' >选题</button>
     </view>
 
     <view>
