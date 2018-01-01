@@ -11,13 +11,21 @@ Page({
     heart_empty: "../../images/heart_empty.png",
     key: 0, //评分
     groupId: 0, //第一组
-    seminarId:'',
-    myTopics:'',
+    
+    
     status:'',
-    allTopics:'',
-    gradeTopics:'',
-    gradeGroups:'',
-    groupId:''
+    
+    
+    
+
+    //重写
+    groupId: '',
+
+    myTopics: '',
+    allTopics: '',
+    seminarId: '',
+    gradeTopics: '',
+    gradeGroups: '',
   },
   selectHeart: function (e) {
     const groupIndex = e.currentTarget.id;
@@ -69,11 +77,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showToast({
-      title: '加载中',
-      icon: 'loading',
-      duration: 5000
-    })
+    // wx.showToast({
+    //   title: '加载中',
+    //   icon: 'loading',
+    //   duration: 1200
+    // })
 
     var that=this;
     var app=getApp();
@@ -82,158 +90,9 @@ Page({
       status:options.status
     });
     //获取自己选择的topic
-    wx.request({
-      url: app.data._preUrl + '/seminar/' + this.data.seminarId + '/group/my',
-      header: {
-        "content-type": "application/json",
-        "Authorization": 'Bearer ' + app.data._jwt,
-      },
-      method: 'GET',
-      success: function (res) {
-        console.log('自己选择的topic', res.data.topics);
-        that.setData({
-          myTopics: res.data.topics,
-        });
-        that.getAllTopics();
-      },
-      fail: function (res) {
-        console.log(res);
-      }
-    });
-    //获取队伍信息
-    wx.request({
-      url: app.data._preUrl + '/seminar/' + this.data.seminarId + '/group/my',
-      header: {
-        "content-type": "application/json",
-        "Authorization": 'Bearer ' + app.data._jwt,
-      },
-      method: 'GET',
-      success: function (res) {
-        console.log('队伍相关数据', res.data);
-        that.setData({
-          groupId:res.data.id
-        });
-      },
-      fail: function (res) {
-        console.log(res);
-      }
-    });
-    /*
-    //获取所有topic
-    wx.request({
-      url: app.data._preUrl + '/seminar/' + options.seminarId + '/topic',
-      header: {
-        "content-type": "application/json",
-        "Authorization": 'Bearer ' + app.data._jwt,
-      },
-      method: 'GET',
-      success: function (res) {
-        console.log('所有topics',res);
-        that.setData({
-          allTopics: res.data
-        });
-        //计算自己需要打分的topic(先做差集再做交集)
-        var gradeTopics;
-        var k = 0;
-        for (var i = 0; i < this.data.myTopics; i++) {
-          for (var j = 0; j < this.data.allTopics; j++) {
-            if (this.data.allTopics[j].id != this.data.myTopics[i].id) {
-              var l = 0;
-              for (l = 0; l < k; l++) {
-                if (gradeTopics[l].id == this.data.allTopics[j].id) break;
-              }
-              if (l >= k) {
-                gradeTopics[k] = this.data.allTopics[j].id;
-                k++;
-              }
-            }
-          }
-        }
-        that.setData({
-          gradeTopics: gradeTopics
-        });
-        //获取需要打分的组
-        var gradeGroups;
-        k = 0;
-        for (var i = 0; i < gradeTopics.length; i++) {
-          wx.request({
-            url: app.data._preUrl + '/topic/' + gradeTopics[i] + '/group',
-            header: {
-              "content-type": "application/json",
-              "Authorization": 'Bearer ' + app.data._jwt,
-            },
-            method: 'GET',
-            success: function (res) {
-              console.log(res);
-              for (var j = 0; j < res.data.length; j++) {
-                for (var l = 0; l < that.data.myTopics.length; l++) {
-                  if (res.data[j].id != that.data.myTopics[j].id) {
-                    gradeGroups[k] = res.data[j];
-                    k++;
-                  }
-                }
-              }
-            },
-            fail: function (res) {
-              console.log(res)
-            }
-          })
-        }
-      },
-      fail: function (res) {
-        console.log(res)
-      }
-    })
-    */
-    /*
-    //计算自己需要打分的topic(先做差集再做交集)
-    var gradeTopics;
-    var k=0;
-    for(var i=0;i<this.data.myTopics;i++){
-      for(var j=0;j<this.data.allTopics;j++){
-        if(this.data.allTopics[j].id!=this.data.myTopics[i].id){
-          var l=0;
-          for(l=0;l<k;l++){
-            if (gradeTopics[l].id == this.data.allTopics[j].id)break;
-          }
-          if(l>=k){
-            gradeTopics[k] = this.data.allTopics[j].id;
-            k++;
-          }
-        }
-      }
-    }
-    that.setData({
-      gradeTopics:gradeTopics
-    });
-    //获取需要打分的组
-    var gradeGroups;
-    k=0;
-    for(var i=0;i<gradeTopics.length;i++){
-      wx.request({
-        url: app.data._preUrl + '/topic/' + gradeTopics[i] + '/group',
-        header: {
-          "content-type": "application/json",
-          "Authorization": 'Bearer ' + app.data._jwt,
-        },
-        method: 'GET',
-        success: function (res) {
-          console.log(res);
-          for(var j=0;j<res.data.length;j++){
-            for(var l=0;l<that.data.myTopics.length;l++){
-              if (res.data[j].id != that.data.myTopics[j].id){
-                gradeGroups[k] = res.data[j];
-                k++;
-              }
-            }
-          }
-        },
-        fail: function (res) {
-          console.log(res)
-        }
-      })
-    }
-    */
+    that.getMyTopics();
+
+    //------------------------------------------
 
     if(options.status==0)
     {
@@ -309,12 +168,103 @@ Page({
   },
 
   /**
-   * 自己定义的函数
+   * 自定义函数
+   * 获取自己选择的topic
+   * 成功后调用getTopicsInfoBySeminarId()获取所有topic
    */
-  getAllTopics:function(){
-    var that=this;
+  getMyTopics:function(){
     var app=getApp();
-    //获取所有topic
+    var that=this;
+    wx.request({
+      url: app.data._preUrl + '/seminar/' + that.data.seminarId + '/group/my',
+      header: {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log('自己选择的topic', res.data.topics);
+        if(res.statusCode==200){
+          that.setData({
+            myTopics: res.data.topics,//list:id+name(1，话题1)
+            groupId:res.data.id//我所在的小组的id
+          });
+          that.getTopicsInfoBySeminarId();//调用函数，获取所有topic
+        }else if(res.statusCode=404){
+          wx.showModal({
+            title: '提示',
+            content: '未找到小组或未找到讨论课',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('确定');
+              } else if (res.cancel) {
+                console.log('取消');
+              }
+            }
+          })
+        } else if (res.statusCode == 403) {
+          wx.showModal({
+            title: '提示',
+            content: '没有权限',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('确定');
+              } else if (res.cancel) {
+                console.log('取消');
+              }
+            }
+          })
+        } else if (res.statusCode == 500) {
+          wx.showModal({
+            title: '提示',
+            content: '服务器内部错误',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('确定');
+              } else if (res.cancel) {
+                console.log('取消');
+              }
+            }
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '获取信息失败',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('确定');
+              } else if (res.cancel) {
+                console.log('取消');
+              }
+            }
+          })
+        }
+        
+      },
+      fail: function (res) {
+        console.log(res);
+        wx.showModal({
+          title: '提示',
+          content: '请求失败',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('确定');
+            } else if (res.cancel) {
+              console.log('取消');
+            }
+          }
+        })
+      }
+    });
+  },
+
+  /**
+   * 自定义函数
+   * 获取某个seminar下的所有话题
+   */
+  getTopicsInfoBySeminarId: function () {
+    var app = getApp();
+    var that = this;
     wx.request({
       url: app.data._preUrl + '/seminar/' + that.data.seminarId + '/topic',
       header: {
@@ -323,64 +273,133 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        console.log('所有topics', res);
-        that.setData({
-          allTopics: res.data
-        });
-        that.calGradeTopic();
+        console.log("所有话题", res);
+        if (res.statusCode == 200) {
+          console.log("getTopicVO", res.data);
+          that.setData({
+            allTopics: res.data//list: id+serial+name+description+groupLimit+groupMemberLimit+groupList(is.tostring)
+          })
+        } else if (res.statusCode == 404) {
+          wx.showModal({
+            title: '提示',
+            content: '未找到话题或非法输入',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('确定');
+              } else if (res.cancel) {
+                console.log('取消');
+              }
+            }
+          })
+        } else if (res.statusCode == 403) {
+          wx.showModal({
+            title: '提示',
+            content: '没有权限',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('确定');
+              } else if (res.cancel) {
+                console.log('取消');
+              }
+            }
+          })
+        } else if (res.statusCode == 500) {
+          wx.showModal({
+            title: '提示',
+            content: '服务器内部错误',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('确定');
+              } else if (res.cancel) {
+                console.log('取消');
+              }
+            }
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '获取信息失败',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('确定');
+              } else if (res.cancel) {
+                console.log('取消');
+              }
+            }
+          })
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+        wx.showModal({
+          title: '提示',
+          content: '请求失败',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('确定');
+            } else if (res.cancel) {
+              console.log('取消');
+            }
+          }
+        })
       }
-    });
-    return 0;
+    })
   },
-  calGradeTopic:function(){//计算需要打分的组选的话题,先做差集再做并集
-    var that=this;
+
+  /**
+   * 自定义函数
+   * 计算需要打分的组的topics（先做差集再做并集）
+   */
+  calGradeTopic:function(){
     var app=getApp();
-    var gradeTopics=[];
+    var that=this;
+    var gradeTopics;//存的是topic
     var k = 0;
-    var myTopicsTemp = that.data.myTopics;
-    for (var i = 0; i < that.data.myTopics.length; i++) {
-      for (var j = 0; j < that.data.allTopics.length; j++) {
-        console.log("calGradeTopic loop "+i+" "+j);
+    for (var i = 0; i < that.data.myTopics; i++) {
+      for (var j = 0; j < that.data.allTopics; j++) {
         if (that.data.allTopics[j].id != that.data.myTopics[i].id) {
           var l = 0;
           for (l = 0; l < k; l++) {
             if (gradeTopics[l].id == that.data.allTopics[j].id) break;
           }
           if (l >= k) {
+            gradeTopics[k] = that.data.allTopics[j];
             k++;
-            gradeTopics.push(that.data.allTopics[j].id);
           }
         }
       }
-      myTopicsTemp[i].groupnum=k;
     }
-    that.setData({ myTopics: myTopicsTemp});
-    console.log("gradeTopics",gradeTopics);
-    // that.setData({
-    //   gradeTopics: gradeTopics
-    // });
-    that.calGradeGroup(gradeTopics);
-    return 0;
+    that.setData({
+      gradeTopics: gradeTopics
+    });
   },
-  calGradeGroup: function (gradeTopics) {//计算需要打分的组
+
+  /**
+   * 自定义函数
+   * 计算需要打分的组（根据topics查找相应的组）
+   */
+  calGradeGroup: function () {
     var that=this;
     var app=getApp();
     var gradeGroups=[];
-    for (var i = 0; i < gradeTopics.length; i++) {
+    for (var i = 0; i < that.data.gradeTopics.length; i++) {
       console.log("calGradeGroup loop " + i);
       wx.request({
-        url: app.data._preUrl + '/topic/' + gradeTopics[i] + '/group',
+        url: app.data._preUrl + '/topic/' + that.data.gradeTopics[i].id + '/group',
         header: {
           "content-type": "application/json",
           "Authorization": 'Bearer ' + app.data._jwt,
         },
         method: 'GET',
         success: function (res) {
-          console.log(res);
+          console.log(res);//res=id+name
           for (var j = 0; j < res.data.length; j++) {
             if (res.data[j].id != that.data.groupId) {
               var agroup = res.data[j];
-              gradeGroups.push(res.data[j]);
+              agroup.topicSerial = that.data.gradeTopics[i].serial;//将topic信息存入
+              agroup.topicId = that.data.gradeTopics[i].id;
+              agroup.topicName = that.data.gradeTopics[i].name;
+              gradeGroups.push(agroup);
             }
           }
           console.log("gradeGroups", gradeGroups);
