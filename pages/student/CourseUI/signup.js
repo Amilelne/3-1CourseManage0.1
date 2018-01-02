@@ -148,55 +148,56 @@ Page({
           that.setData({
             SeminarDetailVO: res.data,
           });
-        }else if(res.statusCode == 404){
-          wx.showModal({
-            title: '提示',
-            content: '未找到讨论课',
-            success: function (res) {
-              if (res.confirm) {
-                console.log('确定');
-              } else if (res.cancel) {
-                console.log('取消');
-              }
-            }
-          })
-        } else if (res.statusCode == 403) {
-          wx.showModal({
-            title: '提示',
-            content: '没有权限',
-            success: function (res) {
-              if (res.confirm) {
-                console.log('确定');
-              } else if (res.cancel) {
-                console.log('取消');
-              }
-            }
-          })
-        } else if (res.statusCode == 500) {
-          wx.showModal({
-            title: '提示',
-            content: '服务器内部错误',
-            success: function (res) {
-              if (res.confirm) {
-                console.log('确定');
-              } else if (res.cancel) {
-                console.log('取消');
-              }
-            }
-          })
-        } else {
-          wx.showModal({
-            title: '提示',
-            content: '获取信息失败',
-            success: function (res) {
-              if (res.confirm) {
-                console.log('确定');
-              } else if (res.cancel) {
-                console.log('取消');
-              }
-            }
-          })
         }
+        // }else if(res.statusCode == 404){
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '未找到讨论课',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   })
+        // } else if (res.statusCode == 403) {
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '没有权限',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   })
+        // } else if (res.statusCode == 500) {
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '服务器内部错误',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   })
+        // } else {
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '获取信息失败',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   })
+        // }
         
       },
       fail: function (res) {
@@ -292,43 +293,44 @@ Page({
               stateseminar: 2,//正在签到
             });
           }
-        } else if (res.statusCode == 403) {
-          wx.showModal({
-            title: '提示',
-            content: '没有权限',
-            success: function (res) {
-              if (res.confirm) {
-                console.log('确定');
-              } else if (res.cancel) {
-                console.log('取消');
-              }
-            }
-          })
-        } else if (res.statusCode == 500) {
-          wx.showModal({
-            title: '提示',
-            content: '服务器内部错误',
-            success: function (res) {
-              if (res.confirm) {
-                console.log('确定');
-              } else if (res.cancel) {
-                console.log('取消');
-              }
-            }
-          })
-        } else {
-          wx.showModal({
-            title: '提示',
-            content: '课堂状态信息获取失败',
-            success: function (res) {
-              if (res.confirm) {
-                console.log('确定');
-              } else if (res.cancel) {
-                console.log('取消');
-              }
-            }
-          });
         }
+        // } else if (res.statusCode == 403) {
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '没有权限',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   })
+        // } else if (res.statusCode == 500) {
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '服务器内部错误',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   })
+        // } else {
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '课堂状态信息获取失败',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   });
+        // }
       },
       fail: function (res) {
         console.log(res);

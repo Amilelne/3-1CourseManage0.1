@@ -108,67 +108,68 @@ Page({
               isLeader: false,
               hasLeader: false
             });
-          }else if(res.statusCode==400){
-            wx.showModal({
-              title: '提示',
-              content: '未找到该用户',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('确定');
-                } else if (res.cancel) {
-                  console.log('取消');
-                }
-              }
-            })
-          } else if (res.statusCode == 404){
-            wx.showModal({
-              title: '提示',
-              content: '未找到小组',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('确定');
-                } else if (res.cancel) {
-                  console.log('取消');
-                }
-              }
-            })
-          } else if (res.statusCode == 403) {
-            wx.showModal({
-              title: '提示',
-              content: '没有权限',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('确定');
-                } else if (res.cancel) {
-                  console.log('取消');
-                }
-              }
-            })
-          } else if (res.statusCode == 500) {
-            wx.showModal({
-              title: '提示',
-              content: '服务器内部错误',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('确定');
-                } else if (res.cancel) {
-                  console.log('取消');
-                }
-              }
-            })
-          } else {
-            wx.showModal({
-              title: '提示',
-              content: '获取信息失败',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('确定');
-                } else if (res.cancel) {
-                  console.log('取消');
-                }
-              }
-            })
           }
+          // }else if(res.statusCode==400){
+          //   wx.showModal({
+          //     title: '提示',
+          //     content: '未找到该用户',
+          //     success: function (res) {
+          //       if (res.confirm) {
+          //         console.log('确定');
+          //       } else if (res.cancel) {
+          //         console.log('取消');
+          //       }
+          //     }
+          //   })
+          // } else if (res.statusCode == 404){
+          //   wx.showModal({
+          //     title: '提示',
+          //     content: '未找到小组',
+          //     success: function (res) {
+          //       if (res.confirm) {
+          //         console.log('确定');
+          //       } else if (res.cancel) {
+          //         console.log('取消');
+          //       }
+          //     }
+          //   })
+          // } else if (res.statusCode == 403) {
+          //   wx.showModal({
+          //     title: '提示',
+          //     content: '没有权限',
+          //     success: function (res) {
+          //       if (res.confirm) {
+          //         console.log('确定');
+          //       } else if (res.cancel) {
+          //         console.log('取消');
+          //       }
+          //     }
+          //   })
+          // } else if (res.statusCode == 500) {
+          //   wx.showModal({
+          //     title: '提示',
+          //     content: '服务器内部错误',
+          //     success: function (res) {
+          //       if (res.confirm) {
+          //         console.log('确定');
+          //       } else if (res.cancel) {
+          //         console.log('取消');
+          //       }
+          //     }
+          //   })
+          // } else {
+          //   wx.showModal({
+          //     title: '提示',
+          //     content: '获取信息失败',
+          //     success: function (res) {
+          //       if (res.confirm) {
+          //         console.log('确定');
+          //       } else if (res.cancel) {
+          //         console.log('取消');
+          //       }
+          //     }
+          //   })
+          // }
         },
         fail: function (res) {
           console.log(res);
@@ -207,79 +208,80 @@ Page({
               isLeader: true,
               hasLeader: true,
             });
-          }else if(res.statusCode==400){
-            wx.showModal({
-              title: '提示',
-              content: '未找到该用户',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('确定');
-                } else if (res.cancel) {
-                  console.log('取消');
-                }
-              }
-            })
-          } else if (res.statusCode == 404) {
-            wx.showModal({
-              title: '提示',
-              content: '未找到小组',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('确定');
-                } else if (res.cancel) {
-                  console.log('取消');
-                }
-              }
-            })
-          } else if (res.statusCode == 409) {
-            wx.showModal({
-              title: '提示',
-              content: '非法操作',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('确定');
-                } else if (res.cancel) {
-                  console.log('取消');
-                }
-              }
-            })
-          } else if (res.statusCode == 403) {
-            wx.showModal({
-              title: '提示',
-              content: '没有权限',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('确定');
-                } else if (res.cancel) {
-                  console.log('取消');
-                }
-              }
-            })
-          } else if (res.statusCode == 500) {
-            wx.showModal({
-              title: '提示',
-              content: '服务器内部错误',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('确定');
-                } else if (res.cancel) {
-                  console.log('取消');
-                }
-              }
-            })
-          } else {
-            wx.showModal({
-              title: '提示',
-              content: '获取信息失败',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('确定');
-                } else if (res.cancel) {
-                  console.log('取消');
-                }
-              }
-            })
-          }    
+          }
+          // }else if(res.statusCode==400){
+          //   wx.showModal({
+          //     title: '提示',
+          //     content: '未找到该用户',
+          //     success: function (res) {
+          //       if (res.confirm) {
+          //         console.log('确定');
+          //       } else if (res.cancel) {
+          //         console.log('取消');
+          //       }
+          //     }
+          //   })
+          // } else if (res.statusCode == 404) {
+          //   wx.showModal({
+          //     title: '提示',
+          //     content: '未找到小组',
+          //     success: function (res) {
+          //       if (res.confirm) {
+          //         console.log('确定');
+          //       } else if (res.cancel) {
+          //         console.log('取消');
+          //       }
+          //     }
+          //   })
+          // } else if (res.statusCode == 409) {
+          //   wx.showModal({
+          //     title: '提示',
+          //     content: '非法操作',
+          //     success: function (res) {
+          //       if (res.confirm) {
+          //         console.log('确定');
+          //       } else if (res.cancel) {
+          //         console.log('取消');
+          //       }
+          //     }
+          //   })
+          // } else if (res.statusCode == 403) {
+          //   wx.showModal({
+          //     title: '提示',
+          //     content: '没有权限',
+          //     success: function (res) {
+          //       if (res.confirm) {
+          //         console.log('确定');
+          //       } else if (res.cancel) {
+          //         console.log('取消');
+          //       }
+          //     }
+          //   })
+          // } else if (res.statusCode == 500) {
+          //   wx.showModal({
+          //     title: '提示',
+          //     content: '服务器内部错误',
+          //     success: function (res) {
+          //       if (res.confirm) {
+          //         console.log('确定');
+          //       } else if (res.cancel) {
+          //         console.log('取消');
+          //       }
+          //     }
+          //   })
+          // } else {
+          //   wx.showModal({
+          //     title: '提示',
+          //     content: '获取信息失败',
+          //     success: function (res) {
+          //       if (res.confirm) {
+          //         console.log('确定');
+          //       } else if (res.cancel) {
+          //         console.log('取消');
+          //       }
+          //     }
+          //   })
+          // }    
         },
         fail: function (res) {
           console.log(res);
@@ -347,55 +349,56 @@ Page({
         });
         if(res.statusCode==200){
           //进行上述处理
-        } else if(res.statusCode==404){
-          wx.showModal({
-            title: '提示',
-            content: '未找到小组或未找到讨论课',
-            success: function (res) {
-              if (res.confirm) {
-                console.log('确定');
-              } else if (res.cancel) {
-                console.log('取消');
-              }
-            }
-          })
-        } else if (res.statusCode == 403) {
-          wx.showModal({
-            title: '提示',
-            content: '没有权限',
-            success: function (res) {
-              if (res.confirm) {
-                console.log('确定');
-              } else if (res.cancel) {
-                console.log('取消');
-              }
-            }
-          })
-        } else if (res.statusCode == 500) {
-          wx.showModal({
-            title: '提示',
-            content: '服务器内部错误',
-            success: function (res) {
-              if (res.confirm) {
-                console.log('确定');
-              } else if (res.cancel) {
-                console.log('取消');
-              }
-            }
-          })
-        } else {
-          wx.showModal({
-            title: '提示',
-            content: '获取信息失败',
-            success: function (res) {
-              if (res.confirm) {
-                console.log('确定');
-              } else if (res.cancel) {
-                console.log('取消');
-              }
-            }
-          })
         }
+        // } else if(res.statusCode==404){
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '未找到小组或未找到讨论课',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   })
+        // } else if (res.statusCode == 403) {
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '没有权限',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   })
+        // } else if (res.statusCode == 500) {
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '服务器内部错误',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   })
+        // } else {
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '获取信息失败',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   })
+        // }
       },
       fail: function (res) {
         console.log(res);
