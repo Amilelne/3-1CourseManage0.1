@@ -90,7 +90,7 @@ Page({
     })
     //导航到下一页
     wx.redirectTo({
-      url: '../TeacherMainUI/TeacherMainUI',
+      url: '../StudentMainUI/StudentMainUI',
     })
   },
   chooseSchool: function () {
