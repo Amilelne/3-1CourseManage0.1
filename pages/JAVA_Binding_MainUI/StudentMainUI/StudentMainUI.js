@@ -74,6 +74,7 @@ Page({
           });
           app.data._userName = res.data.name;
           app.data._userNum = res.data.number;
+          app.data._userSchool=res.data.school.name;
           console.log('页面数据', that.data);
         }else if(res.statusCode==404||res.statusCode==400){
           wx.showModal({
