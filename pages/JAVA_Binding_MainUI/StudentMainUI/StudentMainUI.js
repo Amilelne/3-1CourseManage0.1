@@ -20,11 +20,22 @@ Page({
     var app=getApp();
     var that = this;
     console.log("StudentMain");
-    //获取选课数据
-    that.getCoursesInfo();
     //获取学生信息
     that.getUserInfo();
-    
+    //获取选课数据
+    that.getCoursesInfo();
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {//下拉刷新数据
+    var app = getApp();
+    var that = this;
+    //获取学生信息
+    that.getUserInfo();
+    //获取选课数据
+    that.getCoursesInfo();
   },
 
   /**
