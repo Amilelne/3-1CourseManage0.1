@@ -56,6 +56,11 @@ data: {
         'Authorization': 'Bearer ' + app.data._jwt
       },
       success:function(res){
+        var app = getApp()
+        app.data._userName =res.data.name
+        app.data._userID = res.data.number
+        app.data._userPhone=res.data.phone
+        app.data._userSchool=res.data.school.name
         if(res.data.name){
           that.setData({
             userName: res.data.name

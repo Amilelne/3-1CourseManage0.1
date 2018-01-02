@@ -23,7 +23,7 @@ App({
     _seminarID:1,
     _signUp:0,
     _grade:[0,0,0,0,0],
-    _preUrl: 'http://localhost:8080',
+    _preUrl: 'http://10.30.176.131:8080',
 
     _code:'',
     _jwt:'',
