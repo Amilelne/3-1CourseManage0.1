@@ -68,16 +68,16 @@ Page({
     wx.request({
       url: app.data._preUrl + '/me',
       data: {
-        name: app.data._userName,
-        id: app.data._userNum,
-        phone: app.data._userPhone,
-        email: '',
-        gender: '男',
-        avatar: '',
-        title: '',
-        type: 0,
-        number: app.data._userNum,
-        password: that.userPassword
+        "name": app.data._userName,
+        "id": app.data._userNum,
+        "phone": app.data._userPhone,
+        "gender": '男',
+        "avatar": '',
+        "title": '',
+        "type": 0,
+        "email": '',
+        "school":app.data. _userSchool,
+        "password": that.userPassword
       },
       header:
       {

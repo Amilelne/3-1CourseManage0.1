@@ -246,15 +246,12 @@ Page(
         key: 'school',
         data: e.currentTarget.dataset.school,
       })
-      wx.getStorage({
-        key: 'student_or_teacher',
-        success: function(res) {
-          if(res.data==1)
+      var app=getApp()
+      if(app.data._userType==0)
           wx.navigateTo({ url: './StudentBindingUI', })
           else
             wx.navigateTo({ url: './TeacherBindingUI', })
-        },
-      })
+
       
     }
   },
