@@ -74,20 +74,21 @@ Page({
       key: 'info',
       data: userInfo,
     })
+    //console.log(that.userPassword)
     //***********************************将个人信息存储到数据库
     wx.request({
       url: app.data._preUrl+'/me',
       data: {
-        name: app.data._userName,
-        id:app.data._userNum,
-        phone:app.data._userPhone,
-        email:'',
-        gender:'男',
-        avatar:'',
-        title:'',
-        type:1,
-        number:app.data._userNum,
-        password: that.userPassword
+        "name": app.data._userName,
+        "id":app.data._userNum,
+        "phone":app.data._userPhone,
+        "email":'',
+        "gender":'男',
+        "avatar":'',
+        "title":'',
+        "type":1,
+        "number":app.data._userNum,
+        "password": that.userPassword
       },
       header:
       {
