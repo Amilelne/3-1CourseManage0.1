@@ -87,6 +87,7 @@ Page({
         title:'',
         type:1,
         number:app.data._userNum,
+        password: that.userPassword
       },
       header:
       {
