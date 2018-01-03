@@ -13,9 +13,9 @@
         <!--id is index of group in the array, because groupId may not start with 0-->
         <!--<block wx:if="{{index<=gradeTopics[i]}}">-->
         <view id="{{index}}" bindtap='selectHeart'>
-            <label class='text'>{{group.topic.serial}}{{group.groupId}}</label>
+            <label class='text'>{{group.topic.serial}}-{{group.groupId}}</label>
             <block wx:for="{{[1,2,3,4,5]}}" wx:key="this">
-                <image class='heart' data-score="{{item}}" src="{{item<=group.score?heart_chosen:heart_empty}}"/>
+                <image class='heart' data-score="{{item}}" src="{{item<=group.userGrade?heart_chosen:heart_empty}}"/>
             </block>
         </view>
         <!--</block>-->

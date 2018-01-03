@@ -23,7 +23,7 @@ Page({
           groupingMethod:groupingMethod,
           courseName:courseName,
           seminarName:seminarName,
-          status:options.status
+          status:options.seminarStatus
         });
     },
 
