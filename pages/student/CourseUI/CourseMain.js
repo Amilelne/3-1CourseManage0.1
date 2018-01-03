@@ -26,7 +26,8 @@ Page({
     //获取course的相关数据
     that.getCourseInfoByCourseId();
     //获取course下的seminars
-    that.getSeminarsInfoByCourseId();
+    //that.getSeminarsInfoByCourseId();
+    that.getSeminarTeacher();
   },
 
   /**
@@ -287,5 +288,104 @@ Page({
       }
     });
   },
+
+ /**
+   * 自定义函数
+   * 先获取seminars的基本信息(不包含分数)
+   */
+  getSeminarTeacher: function () {
+    var app = getApp();
+    var that = this;
+    wx.request({
+      url: app.data._preUrl + '/course/' + that.data.courseId + '/teacher/seminar',
+      header: {
+        "content-type": "application/json",
+        "Authorization": 'Bearer ' + app.data._jwt,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log('seminars相关数据', res.data)
+        if (res.statusCode == 200) {
+          //获取seminar的status
+          var lists = res.data;
+          console.log('lists-a', lists);
+          var curDate = new Date();
+          for (var i = 0; i < lists.length; i++) {
+            var myDateStart = new Date(lists[i].startTime);
+            var myDateEnd = new Date(lists[i].endTime);
+            if (myDateStart > curDate) {
+              lists[i].status = 2;//seminar未开始
+            }
+            if (myDateEnd < curDate) {
+              lists[i].status = 1;//seminar已结束
+            }
+            if (myDateStart <= curDate && myDateEnd > curDate) {
+              lists[i].status = 0;//seminar正在进行
+            }
+            if(lists[i].fixed){
+              lists[i].groupingMethod = "fixed"
+            }else{
+              lists[i].groupingMethod = "random"
+            }
+          }
+          that.setData({
+            listSeminarAndGradeVO: lists,
+          });
+          console.log('lists-f', lists);
+        }
+        // } else if (res.statusCode == 403) {
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '没有权限',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   })
+        // } else if (res.statusCode == 500) {
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '服务器内部错误',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   })
+        // } else {
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '获取信息失败',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         console.log('确定');
+        //       } else if (res.cancel) {
+        //         console.log('取消');
+        //       }
+        //     }
+        //   })
+        // }
+      },
+      fail: function (res) {
+        console.log(res);
+        wx.showModal({
+          title: '提示',
+          content: '请求失败',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('确定');
+            } else if (res.cancel) {
+              console.log('取消');
+            }
+          }
+        })
+      }
+    });
+  }
 })
 
