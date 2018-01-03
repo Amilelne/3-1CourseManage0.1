@@ -7,7 +7,7 @@ Page({
   data: {
     course: { id: 23, name: 'OOAD', description: '面向对象设计与分析' },
     courseName:'',
-    seminar: { id: 29, name: '讨论课1', description: '界面原型设计', groupingMethod: 'random', startTime: '2017-10-09', endTime: '2017-10-24' },
+    seminar:'',
     classes: [],
     status:"tocall",
   },
@@ -22,7 +22,7 @@ Page({
     getApp().data._classID = this.data.classes[index].id;
     var text = this.data.seminar.groupingMethod;
     wx.navigateTo({
-    url: '../CallInRoll/RollCallUI?classid=' + classId + '&groupingMethod='+text+'&status='+this.data.status+'&className='+this.data.classes[index].name,
+    url: '../CallInRoll/RollCallUI?classid=' + classId + '&groupingMethod='+text+'&status='+this.data.status+'&className='+this.data.classes[index].name+'&seminarID='+this.data.seminar[0].id,
     })
   },
 
@@ -37,6 +37,25 @@ Page({
     that.setData({
       courseName:options.courseName
     })
+    /**
+     * 获取seminarID
+     */
+    wx.request({
+      url: app.data._preUrl + '/course/' + app.data._courseID + '/teacher/seminar',
+      header: {
+        'Authorization': 'Bearer ' + app.data._jwt
+      },
+      method: "GET",
+      success: function (res) {
+        that.setData({
+          seminar:res.data
+        })
+        app.data._seminarID = res.data[0].id;
+      }
+    })
+    /**
+     * 获取班级列表
+     */
     wx.request({
       url: app.data._preUrl+'/course/'+app.data._courseID+'/class',
       method: "GET",

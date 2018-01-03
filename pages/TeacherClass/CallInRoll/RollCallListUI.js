@@ -5,8 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    classNode: { id: 23, name: '班级1', numStudent: 40, time: [{ week: 1, day: 1, lessons: [1, 2], site: '海韵201' }, { week: 0, day: 3, lessons: [3, 4], site: '公寓405' }], calling: true, roster: '/roster/周三12班.xlsx', proportions: { '3': 20, '4': 60, '5': 20, report: 50, presentation: 50 } },
-    roster: { id: 132, calling: 0, classid: 23, attend: { num: 37, list: [{ id: "111", name: "杨xx" }, { id: "112", name: "周xx" }, { id: "113", name: "孙xx" }] }, late: { num: 0, list: [{ id: "111", name: "杨xx" }, { id: "112", name: "周xx" }, { id: "113", name: "孙xx" }] } },
+    classNode: '',
     groupingMethod:"random",
     status:"calling",
     className:'',
@@ -28,6 +27,10 @@ Page({
     });
     console.log("Teacher enters the RollCallListUI page "+options.className+" under a "+options.groupingMethod+" method and a "+this.data.status+" status");
     var that = this;
+    
+    /**
+     * 获取具体的签到信息
+     */
     wx.request({
       url: app.data._preUrl + '/seminar/' + app.data._seminarID + '/class/' + app.data._classID + '/attendance/present',
       header: {

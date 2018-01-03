@@ -3,18 +3,18 @@
   <!--设置蓝色上方-->
   <view class='blueHeader'>
     <span>{{courseName}}</span>
-    <span class="seminarText">{{seminar.name}}</span>
+    <span class="seminarText">{{seminar[0].name}}</span>
   </view>
   <!--讨论课的时间和分组方式-->
  <view class="ourcontainer">
   <view class="clockAndGroupView">
     <image src="../../images/clock.png"  mode='widthFix'  class='clockAndGroupIcon'/>
-    <text class='clockAndGroupText'>{{seminar.startTime}} - {{seminar.endTime}}</text> 
+    <text class='clockAndGroupText'>{{seminar[0].startTime}} - {{seminar[0].endTime}}</text> 
   </view>
 
   <view class="clockAndGroupView">
     <image src="../../images/clip.png"  mode='widthFix' class="clockAndGroupIcon" />
-    <text class='clockAndGroupText'>{{seminar.groupingMethod}}</text>
+    <text class='clockAndGroupText'>{{seminar[0].fixed}}</text>
   </view>
   </view>
 
