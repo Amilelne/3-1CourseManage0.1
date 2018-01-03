@@ -366,8 +366,10 @@ Page({
         wx.request({
           url: app.data._preUrl + '/seminar/' + that.data.seminarId + '/class/' + that.data.classId + '/attendance/' + app.data._userId,
           data: {
-            longitude: res.longitude,
-            latitude: res.latitude,
+            //longitude: res.longitude,
+            //latitude: res.latitude,
+            longitude: 0.0,
+            latitude: 0.0,
             elevation: 0.0
           },
           header: {
