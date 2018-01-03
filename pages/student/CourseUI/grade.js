@@ -117,7 +117,17 @@ Page({
       success:function(res){
         console.log("getGradeGroups",res);
         if(res.statusCode==200){
-          that.setData({ gradeGroups: res.data});
+          var groups=res.data;
+          for(var i=0;i<groups.length;i++){
+            if(groups[i].userGrade<0){
+              groups[i].userGrade = 0;
+            }else{
+              that.setData({
+                showView:false
+              });
+            }
+          }
+          that.setData({ gradeGroups: groups});
         }
       }
     })
