@@ -61,10 +61,10 @@ Page({
       app.data._hasSetPassword=true
       app.data._userPassword=that.userPassword
     }
-    // console.log(app.data._userID)
-    // console.log(app.data._userName)
-    // console.log(app.data._userPhone)
-    // console.log(app.data._userPassword)
+    console.log(app.data._userID)
+    console.log(app.data._userName)
+    console.log(app.data._userPhone)
+    console.log(app.data._userPassword)
     var userInfo = {
       ID: this.userID,
       Name: this.userName,
@@ -79,15 +79,15 @@ Page({
     wx.request({
       url: app.data._preUrl+'/me',
       data: {
-        "name": app.data._userName,
-        "id":app.data._userNum,
-        "phone":app.data._userPhone,
+        "name": that.userName,
+        "id":that.userID,
+        "phone":that.userPhone,
         "email":'',
         "gender":'男',
         "avatar":'',
         "title":'',
         "type":1,
-        "number":app.data._userNum,
+        "number":that.userID,
         "password": that.userPassword
       },
       header:
